@@ -1,4 +1,4 @@
-package org.example.Entities;
+package org.example.entities;
 
 import jakarta.persistence.*;
 
@@ -15,7 +15,9 @@ public abstract class Person
     @Column(nullable = false, unique = true)
     protected String username;
     @Column(nullable = false, unique = true)
-    protected String password;
+    protected String password; //hash-иране
+    //окей ли е да дърпаме обекта и да го автентикираме по паролата?
+    //role
 
     public String getEGN() {
         return EGN;
