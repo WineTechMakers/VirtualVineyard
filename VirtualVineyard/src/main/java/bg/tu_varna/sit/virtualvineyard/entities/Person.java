@@ -42,6 +42,15 @@ public abstract class Person
         return EGN;
     }
 
+    public void setEGN(String EGN) {
+        if (EGN == null || EGN.length() != 10) {
+            throw new IllegalArgumentException("EGN must be exactly 10 characters");
+        }
+        else {
+            this.EGN = EGN;
+        }
+    }
+
     public String getName() {
         return name;
     }
