@@ -12,6 +12,7 @@
         <class>bg.tu_varna.sit.virtualvineyard.entities.Wine</class>
         <class>bg.tu_varna.sit.virtualvineyard.entities.WineGrape</class>
         <class>bg.tu_varna.sit.virtualvineyard.entities.Bottle</class>
+        <class>bg.tu_varna.sit.virtualvineyard.entities.Warehouse</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
