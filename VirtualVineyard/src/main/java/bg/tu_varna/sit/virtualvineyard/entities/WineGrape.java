@@ -30,4 +30,28 @@ public class WineGrape
         this.grape = grape;
         this.percentage = percentage;
     }
+
+    public Wine getWine() {
+        return wine;
+    }
+
+    public void setWine(Wine wine) {
+        this.wine = wine;
+    }
+
+    public Grape getGrape() {
+        return grape;
+    }
+
+    public void setGrape(Grape grape) {
+        this.grape = grape;
+    }
+
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+    }
 }

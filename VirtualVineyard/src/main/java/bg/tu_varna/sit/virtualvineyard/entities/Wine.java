@@ -11,7 +11,7 @@ public class Wine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wine_id;
 
-    @Column (nullable = false)
+    @Column (length = 60, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "wine")
@@ -28,5 +28,13 @@ public class Wine {
     }
     public void setWineGrapes(List<WineGrape> wineGrapes) {
         this.wineGrapes = wineGrapes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -14,6 +14,22 @@ public class WineGrapeID implements Serializable {
         this.grape = grape;
     }
 
+    public Long getWine() {
+        return wine;
+    }
+
+    public void setWine(Long wine) {
+        this.wine = wine;
+    }
+
+    public Long getGrape() {
+        return grape;
+    }
+
+    public void setGrape(Long grape) {
+        this.grape = grape;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

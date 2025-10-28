@@ -11,7 +11,7 @@ public class Grape {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long grape_id;
 
-    @Column (nullable = false)
+    @Column (length = 50, nullable = false)
     private String name;//Name of grape
 
     @Column (nullable = false)
@@ -44,5 +44,45 @@ public class Grape {
     }
     public void setWineGrapes(List<WineGrape> wineGrapes) {
         this.wineGrapes = wineGrapes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public boolean isBlack() {
+        return isBlack;
+    }
+
+    public void setBlack(boolean black) {
+        isBlack = black;
+    }
+
+    public int getProduct() {
+        return product;
+    }
+
+    public void setProduct(int product) {
+        this.product = product;
+    }
+
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public void setWarehouse(Warehouse warehouse) {
+        this.warehouse = warehouse;
     }
 }

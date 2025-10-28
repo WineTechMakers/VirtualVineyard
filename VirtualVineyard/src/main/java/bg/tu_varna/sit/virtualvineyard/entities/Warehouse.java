@@ -11,7 +11,7 @@ public class Warehouse {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long warehouse_id;
 
-    @Column (nullable = false)
+    @Column (length = 60, nullable = false)
     private String name;
 
     @OneToMany(mappedBy = "warehouse")

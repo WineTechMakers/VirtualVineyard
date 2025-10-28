@@ -3,23 +3,24 @@ package bg.tu_varna.sit.virtualvineyard.entities;
 import bg.tu_varna.sit.virtualvineyard.enums.RoleType;
 import jakarta.persistence.*;
 
-@MappedSuperclass
+@Entity
+@Table (name = "Person")
 public abstract class Person
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long person_id;
 
-    @Column(nullable = false)
+    @Column(length = 50, nullable = false)
     protected String name;
 
-    @Column(nullable = false,unique = true)
+    @Column(length = 10, nullable = false, unique = true)
     protected String EGN;
 
-    @Column(nullable = false, unique = true)
+    @Column(length = 60, nullable = false, unique = true)
     protected String username;
 
-    @Column(nullable = false, unique = true)
+    @Column(length = 15, nullable = false, unique = true)
     protected String password; //hash-иране
     //окей ли е да дърпаме обекта и да го автентикираме по паролата?
 
@@ -31,6 +32,10 @@ public abstract class Person
         this.EGN = EGN;
         this.username = username;
         this.password = password;
+    }
+
+    public Person() {
+
     }
 
     public String getEGN() {
