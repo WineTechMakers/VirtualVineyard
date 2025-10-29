@@ -3,6 +3,7 @@ module bg.tu_varna.sit.virtualvineyard {
     requires javafx.fxml;
     requires jakarta.persistence;
     requires org.hibernate.orm.core;
+    requires spring.security.crypto;
 
     opens bg.tu_varna.sit.virtualvineyard to javafx.fxml;
     exports bg.tu_varna.sit.virtualvineyard;

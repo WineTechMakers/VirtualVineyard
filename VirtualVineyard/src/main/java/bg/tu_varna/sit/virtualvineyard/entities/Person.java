@@ -2,9 +2,13 @@ package bg.tu_varna.sit.virtualvineyard.entities;
 
 import bg.tu_varna.sit.virtualvineyard.enums.RoleType;
 import jakarta.persistence.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Table (name = "Person")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "PERSON_TYPE")
 public abstract class Person
 {
     @Id
@@ -20,18 +24,20 @@ public abstract class Person
     @Column(length = 60, nullable = false, unique = true)
     protected String username;
 
-    @Column(length = 15, nullable = false, unique = true)
-    protected String password; //hash-иране
+    @Column(nullable = false, unique = true)
+    private String password; //hash-иране
     //окей ли е да дърпаме обекта и да го автентикираме по паролата?
 
     @Column(nullable = false)
     protected RoleType role;
 
-    public Person(String name, String EGN, String username, String password) {
+    public Person(String name, String EGN, String username, String password, RoleType role) {
         this.name = name;
         this.EGN = EGN;
         this.username = username;
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
+        this.role = role;
     }
 
     public Person() {
@@ -65,6 +71,7 @@ public abstract class Person
 
     public boolean passwordMatch(String password)
     {
-        return this.password.equals(password);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(password, this.password);
     }
 }
