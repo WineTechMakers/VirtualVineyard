@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @DiscriminatorColumn(name = "PERSON_TYPE")
 public abstract class Person
 {
+    //рефлекция - директно ползва без нужда от getter, setter и параметризирани конструктури
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long person_id;
@@ -67,6 +68,18 @@ public abstract class Person
 
     public void setRole(RoleType role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Person: ");
+        sb.append("person_id=").append(person_id);
+        sb.append(", name='").append(name);
+        sb.append(", EGN='").append(EGN);
+        sb.append(", username='").append(username);
+        sb.append(", password='").append(password);
+        sb.append(", role=").append(role);
+        return sb.toString();
     }
 
     public boolean passwordMatch(String password)

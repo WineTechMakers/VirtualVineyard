@@ -12,6 +12,6 @@ public class Main {
         //a.authenticate("John Doe", "f");
 
         Person lol = PersonDAO.authenticate("johndoeoperator", "1234567");
-        System.out.println(lol instanceof Operator);
+        System.out.println(lol);
     }
 }

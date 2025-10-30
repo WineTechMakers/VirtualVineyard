@@ -25,7 +25,7 @@ public class PersonDAO {
             sus.getTransaction().commit();
         } catch (Exception e) {
             System.out.println("NOpie");
-            System.out.println(e.toString());
+            System.out.println(e.getMessage());
         }
     }
     public static Person testreading(String user, String pass)
@@ -49,8 +49,7 @@ public class PersonDAO {
         }
         catch(Exception e)
         {
-            System.out.println(e.toString());
-            System.out.println("KUR");
+            System.out.println(e.getMessage());
         }
         return null;
     }
