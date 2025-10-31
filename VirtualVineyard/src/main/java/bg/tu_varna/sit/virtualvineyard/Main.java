@@ -1,8 +1,7 @@
 package bg.tu_varna.sit.virtualvineyard;
 
-import bg.tu_varna.sit.virtualvineyard.entities.Person;
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
-import bg.tu_varna.sit.virtualvineyard.models.Operator;
+import bg.tu_varna.sit.virtualvineyard.entities.Person;
 
 public class Main {
     public static void main(String[] args)
