@@ -29,16 +29,12 @@ public abstract class Person
     private String password; //hash-иране
     //окей ли е да дърпаме обекта и да го автентикираме по паролата?
 
-    @Column(nullable = false)
-    protected RoleType role;
-
-    public Person(String name, String EGN, String username, String password, RoleType role) {
+    public Person(String name, String EGN, String username, String password) {
         this.name = name;
         this.EGN = EGN;
         this.username = username;
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
-        this.role = role;
     }
 
     public Person() {
@@ -62,14 +58,6 @@ public abstract class Person
         return name;
     }
 
-    public RoleType getRole() {
-        return role;
-    }
-
-    public void setRole(RoleType role) {
-        this.role = role;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Person: ");
@@ -78,7 +66,6 @@ public abstract class Person
         sb.append(", EGN='").append(EGN);
         sb.append(", username='").append(username);
         sb.append(", password='").append(password);
-        sb.append(", role=").append(role);
         return sb.toString();
     }
 

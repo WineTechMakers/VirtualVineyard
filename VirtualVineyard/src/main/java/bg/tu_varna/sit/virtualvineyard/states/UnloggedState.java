@@ -1,10 +1,10 @@
 package bg.tu_varna.sit.virtualvineyard.states;
 
-public class UnlockedState implements SystemState
+public class UnloggedState implements SystemState
 {
     @Override
     public void control(String input)
     {
-        System.out.println("Unlocked");
+        System.out.println("Locked");
     }
 }

@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 public class Administrator extends Person
 {
     public Administrator(String name, String EGN, String username, String password) {
-        super(name, EGN, username, password, RoleType.ADMIN);
+        super(name, EGN, username, password);
     }
     public Administrator()
     {

@@ -9,7 +9,7 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("OPERATOR")
 public class Operator extends Person {
     public Operator(String name, String EGN, String username, String password) {
-        super(name, EGN, username, password, RoleType.OPERATOR);
+        super(name, EGN, username, password);
     }
 
     public Operator()
