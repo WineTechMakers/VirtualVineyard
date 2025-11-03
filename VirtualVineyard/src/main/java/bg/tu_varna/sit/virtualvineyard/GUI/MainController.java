@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.GUI.controllers;
+package bg.tu_varna.sit.virtualvineyard.GUI;
 
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.Person;

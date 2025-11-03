@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.GUI.controllers;
+package bg.tu_varna.sit.virtualvineyard.GUI;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
