@@ -1,6 +1,8 @@
 package bg.tu_varna.sit.virtualvineyard.dao;
 
 import bg.tu_varna.sit.virtualvineyard.entities.Person;
+import bg.tu_varna.sit.virtualvineyard.models.Administrator;
+import bg.tu_varna.sit.virtualvineyard.models.Host;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
@@ -46,24 +48,24 @@ public class PersonDAO extends AbstractDAO<Person> {
         return null;
     }
 
-//    public static void testwriting() {
-//        try {
-//            EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
-//            EntityManager sus = susf.createEntityManager();
-//            if (sus == null) {
-//                System.out.println("didnt work");
-//                return;
-//            }
-//            sus.getTransaction().begin();
-//            //Person person = new Administrator("John Doe", "1375707735", "johndoen", "1234");
-//            Person person = new Operator("John Doe", "1375707737", "johndoeoperator", "1234567");
-//            sus.persist(person);
-//            sus.getTransaction().commit();
-//        } catch (Exception e) {
-//            System.out.println("NOpie");
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    public static void testwriting() {
+        try {
+            EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
+            EntityManager sus = susf.createEntityManager();
+            if (sus == null) {
+                System.out.println("didnt work");
+                return;
+            }
+            sus.getTransaction().begin();
+            Person person = new Administrator("admin", "1234567890", "admin", "1234");
+            //Person person = new Host("Jane Doe", "1212121212", "janedoehost", "1234567");
+            sus.persist(person);
+            sus.getTransaction().commit();
+        } catch (Exception e) {
+            System.out.println("NOpie");
+            System.out.println(e.getMessage());
+        }
+    }
 //    public static Person testreading(String user, String pass)
 //    {
 //        try {

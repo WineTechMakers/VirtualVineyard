@@ -62,10 +62,10 @@ public abstract class Person
     public String toString() {
         final StringBuilder sb = new StringBuilder("Person: ");
         sb.append("person_id=").append(person_id);
-        sb.append(", name='").append(name);
-        sb.append(", EGN='").append(EGN);
-        sb.append(", username='").append(username);
-        sb.append(", password='").append(password);
+        sb.append(", name=").append(name);
+        sb.append(", EGN=").append(EGN);
+        sb.append(", username=").append(username);
+        sb.append(", password=").append(password);
         return sb.toString();
     }
 
