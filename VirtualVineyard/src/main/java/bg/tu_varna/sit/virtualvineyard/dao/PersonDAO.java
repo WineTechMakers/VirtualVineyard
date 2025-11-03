@@ -24,7 +24,6 @@ public class PersonDAO extends AbstractDAO<Person> {
             CriteriaBuilder cb = sus.getCriteriaBuilder();
             CriteriaQuery<Person> cq = cb.createQuery(Person.class);
             Root<Person> Root = cq.from(Person.class);
-
             cq.select(Root).where(cb.equal(Root.get("username"), username));
             Person retrieved = sus.createQuery(cq).getSingleResult();
             if(!retrieved.passwordMatch(password)) {

@@ -10,8 +10,11 @@ public abstract class AbstractDAO<T> { // extends Serializable?
     @PersistenceContext
     private EntityManager entityManager;
 
-    public final void setEntityClass(Class<T> entityClassToSet){
+    public final void setEntityClass(Class<T> entityClassToSet)
+    {
         this.entityClass = entityClassToSet;
+        EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
+        entityManager = susf.createEntityManager();
     }
 
     public T findOne(long id){
@@ -23,18 +26,37 @@ public abstract class AbstractDAO<T> { // extends Serializable?
     }
 
     public void create(T entity){
-        entityManager.persist(entity);
+        if(entity==null)
+            throw new IllegalArgumentException("Entity can't be null");
+        completeAction(() -> entityManager.persist(entity));
     }
 
-    public T update(T entity){
-        return entityManager.merge(entity);
+    public void update(T entity){
+        if(entity == null)
+            throw new IllegalArgumentException("Entity must not be null");
+        completeAction(() -> entityManager.merge(entity));
     }
 
     public void delete(T entity){
-        entityManager.remove(entity);
+        if(entity==null)
+            throw new IllegalArgumentException("Entity can't be null");
+        completeAction(() -> entityManager.remove(entity));
     }
     public void deleteById(long entityId){
         T entity = findOne(entityId);
         delete(entity);
+    }
+
+    private void completeAction(Runnable action)
+    {
+        EntityTransaction transaction = entityManager.getTransaction();
+        try
+        {
+            transaction.begin();
+            action.run();
+            transaction.commit();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
