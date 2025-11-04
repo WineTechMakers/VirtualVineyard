@@ -20,27 +20,33 @@ public abstract class AbstractDAO<T> { // extends Serializable?
     public T findOne(long id){
         return entityManager.find(entityClass, id);
     }
+
     public List<T> findAll(){
         return entityManager.createQuery("from " + entityClass.getName())
                 .getResultList();
     }
 
-    public void create(T entity){
+    public boolean create(T entity){
         if(entity==null)
-            throw new IllegalArgumentException("Entity can't be null");
+            throw new IllegalArgumentException("Entity cannot be null");
         completeAction(() -> entityManager.persist(entity));
+        return true;
     }
 
-    public void update(T entity){
+    public boolean update(T entity){
         if(entity == null)
-            throw new IllegalArgumentException("Entity must not be null");
+            throw new IllegalArgumentException("Entity cannot be null");
         completeAction(() -> entityManager.merge(entity));
+        return true;
     }
 
     public void delete(T entity){
         if(entity==null)
-            throw new IllegalArgumentException("Entity can't be null");
-        completeAction(() -> entityManager.remove(entity));
+            throw new IllegalArgumentException("Entity cannot be null");
+        completeAction(() -> {
+            T managed = entityManager.contains(entity) ? entity : entityManager.merge(entity);
+            entityManager.remove(managed);
+        });
     }
     public void deleteById(long entityId){
         T entity = findOne(entityId);
@@ -56,6 +62,8 @@ public abstract class AbstractDAO<T> { // extends Serializable?
             action.run();
             transaction.commit();
         } catch (Exception e) {
+            if (transaction.isActive())
+                transaction.rollback();
             throw new RuntimeException(e);
         }
     }

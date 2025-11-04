@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="328.0" prefWidth="286.0" spacing="20.0" style="-fx-background-color: BC7979;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.MainController">
+<VBox alignment="CENTER" prefHeight="250.0" prefWidth="250.0" spacing="20.0" style="-fx-background-color: #BC7979;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.MainController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -19,7 +19,7 @@
    <TextField fx:id="passwordTextField" promptText="Password" />
 
     <Label fx:id="loggedText" alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="240.0" />
-    <Button defaultButton="true" ellipsisString="" onAction="#onLogInButtonClick" style="-fx-background-color: A80E0E;" text="Log in" textFill="#ffecec">
+    <Button defaultButton="true" ellipsisString="" onAction="#onLogInButtonClick" style="-fx-background-color: #a40a0a;" text="Log in" textFill="#ffecec">
       <font>
          <Font name="SansSerif Regular" size="12.0" />
       </font></Button>

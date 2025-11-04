@@ -1,26 +1,37 @@
 package bg.tu_varna.sit.virtualvineyard.GUI;
 
+import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
 public class AdminController {
     @FXML
-    public void onRegisterUserClick() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("register-user-view.fxml"));
-            Parent root = loader.load();
+    public Label adminLabel;
 
-            Stage stage = new Stage();
-            stage.setTitle("Register New User");
-            stage.setScene(new Scene(root));
-            stage.show();
+    @FXML
+    public void onRegisterUserButtonClick() {
+        NavigationManager.openNewWindow(ViewType.REGISTER_USER);
+    }
+
+    @FXML
+    public void onEditUsersButtonClick() {
+        NavigationManager.openNewWindow(ViewType.EDIT_USERS);
+    }
+
+    @FXML
+    public void onListUsersButtonClick() {
+        NavigationManager.openNewWindow(ViewType.LIST_USERS);
+    }
+
+    @FXML
+    public void onBackButtonClick() {
+        try {
+            NavigationManager.closeWindow(adminLabel);
+            NavigationManager.openNewWindow(ViewType.LOGIN);
         } catch (Exception e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Error loading register-user-view.fxml").showAndWait();
+            System.out.println(e.getMessage());
+            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Cannot open Login panel!");
         }
     }
 }

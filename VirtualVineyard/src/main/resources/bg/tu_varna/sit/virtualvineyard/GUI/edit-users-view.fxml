@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="420.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: #EBD6D6;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.EditUsersController">
+   <Label text="Choose user to edit:" />
+   <ComboBox fx:id="userComboBox" onAction="#onUserSelected" prefWidth="200.0" promptText="User..." style="-fx-background-color: white;" />
+   <Label text="Edit user information:" />
+   <ComboBox fx:id="roleComboBox" prefWidth="150.0" promptText="Role..." style="-fx-background-color: white;" />
+   <TextField fx:id="nameTextField" promptText="Name">
+      <VBox.margin>
+         <Insets left="40.0" right="40.0" />
+      </VBox.margin>
+   </TextField>
+   <TextField fx:id="EGNTextField" promptText="EGN">
+      <VBox.margin>
+         <Insets left="40.0" right="40.0" />
+      </VBox.margin>
+   </TextField>
+   <TextField fx:id="usernameTextField" promptText="Username">
+      <VBox.margin>
+         <Insets left="40.0" right="40.0" />
+      </VBox.margin>
+   </TextField>
+   <TextField fx:id="passwordTextField" promptText="Password">
+      <VBox.margin>
+         <Insets left="40.0" right="40.0" />
+      </VBox.margin>
+   </TextField>
+   <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
+      <Button mnemonicParsing="false" onAction="#onEditButtonClick" prefWidth="40.0" style="-fx-background-color: #5e1818;" text="Edit" textFill="WHITE" />
+      <Button mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-background-color: #a40a0a;" text="Back" textFill="WHITE" />
+   </HBox>
+</VBox>

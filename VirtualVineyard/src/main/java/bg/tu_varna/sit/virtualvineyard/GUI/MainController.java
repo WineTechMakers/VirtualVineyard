@@ -2,8 +2,10 @@ package bg.tu_varna.sit.virtualvineyard.GUI;
 
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.Person;
+import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import bg.tu_varna.sit.virtualvineyard.models.Administrator;
 import bg.tu_varna.sit.virtualvineyard.models.Host;
+import bg.tu_varna.sit.virtualvineyard.models.Operator;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,20 +21,25 @@ public class MainController {
     private Label loggedText;
 
     @FXML
+    public void initialize() {
+        usernameTextField.setText("admin");
+        passwordTextField.setText("1234");
+    }
+
+    @FXML
     protected void onLogInButtonClick() {
         Person user = PersonDAO.authenticate(usernameTextField.getText(), passwordTextField.getText());
         //Person user = PersonDAO.authenticate("johndoeoperator", "1234567");
         if(user != null) {
-            loggedText.setText("Welcome to our Virtual Vineyard!");
-            if (user instanceof Administrator) {
-                openAdminWindow();
-            } else if (user instanceof Host) {
-                openUserWindow();
+            //loggedText.setText("Welcome to our Virtual Vineyard!");
+            switch (user) {
+                case Administrator administrator -> openAdminWindow();
+                case Host host -> openHostWindow();
+                case Operator operator -> openOperatorWindow();
+                default -> {
+                }
             }
-            else{
-                //
-            }
-            ((Stage) usernameTextField.getScene().getWindow()).close(); // close login window
+            ((Stage) usernameTextField.getScene().getWindow()).close(); //close login window
         }
         else {
             loggedText.setText("Invalid username or password!");
@@ -40,19 +47,14 @@ public class MainController {
     }
 
     private void openAdminWindow() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("admin-view.fxml"));
-            Parent root = loader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Admin Panel");
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        NavigationManager.openNewWindow(ViewType.ADMIN);
     }
 
-    private void openUserWindow() {
+    private void openHostWindow() {
+
+    }
+
+    private void openOperatorWindow() {
 
     }
 }

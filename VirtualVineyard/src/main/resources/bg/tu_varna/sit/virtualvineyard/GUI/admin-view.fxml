@@ -3,14 +3,19 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.AdminController">
-   <children>
-      <Label text="Hello Admin!" />
-      <Button mnemonicParsing="false" onAction="#onRegisterUserClick" text="Register User" />
-      <Button mnemonicParsing="false" text="Edit Users" />
-   </children>
+<VBox alignment="CENTER" prefHeight="250.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #C9F1FF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.AdminController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
+   <Label fx:id="adminLabel" text="Hello Admin!" textFill="#0a5061">
+      <font>
+         <Font name="High Tower Text" size="18.0" />
+      </font>
+   </Label>
+   <Button mnemonicParsing="false" onAction="#onRegisterUserButtonClick" style="-fx-background-color: #0a5061;" text="Register User" textFill="WHITE" />
+   <Button mnemonicParsing="false" onAction="#onEditUsersButtonClick" style="-fx-background-color: #0a5061;" text="Edit Users" textFill="WHITE" />
+   <Button mnemonicParsing="false" onAction="#onListUsersButtonClick" style="-fx-background-color: #0a5061;" text="List Users" textFill="WHITE" />
+   <Button mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-background-color: #a40a0a;" text="Back" textFill="WHITE" />
 </VBox>

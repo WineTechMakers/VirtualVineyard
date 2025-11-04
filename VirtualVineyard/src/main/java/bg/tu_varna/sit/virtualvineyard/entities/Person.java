@@ -1,9 +1,7 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
-import bg.tu_varna.sit.virtualvineyard.enums.RoleType;
 import jakarta.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
 @Table (name = "Person")
@@ -29,6 +27,10 @@ public abstract class Person
     private String password; //hash-иране
     //окей ли е да дърпаме обекта и да го автентикираме по паролата?
 
+    public Person() {
+
+    }
+
     public Person(String name, String EGN, String username, String password) {
         this.name = name;
         this.EGN = EGN;
@@ -37,12 +39,37 @@ public abstract class Person
         this.password = passwordEncoder.encode(password);
     }
 
-    public Person() {
+    public Person(Person other) {
+        this.person_id = other.person_id;
+        this.name = other.name;
+        this.EGN = other.EGN;
+        this.username = other.username;
+        this.password = other.password;
+    }
 
+    public Long getPerson_id() {
+        return person_id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getEGN() {
         return EGN;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setEGN(String EGN) {
@@ -54,8 +81,12 @@ public abstract class Person
         }
     }
 
-    public String getName() {
-        return name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override

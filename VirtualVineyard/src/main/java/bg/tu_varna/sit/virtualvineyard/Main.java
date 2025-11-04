@@ -16,11 +16,6 @@ public class Main {
         //dao.create(admin);
         admin = dao.findOne(18L);
 
-
-
-
-//        Person lol = PersonDAO.authenticate("admin", "1234");
-
         //Person lol = PersonDAO.authenticate("admin", "1234");
         //System.out.println(admin);
     }

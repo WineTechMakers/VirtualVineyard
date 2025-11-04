@@ -1,7 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.models;
 
 import bg.tu_varna.sit.virtualvineyard.entities.Person;
-import bg.tu_varna.sit.virtualvineyard.enums.RoleType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
@@ -15,5 +14,9 @@ public class Operator extends Person {
     public Operator()
     {
 
+    }
+
+    public Operator(Person other) {
+        super(other);
     }
 }
