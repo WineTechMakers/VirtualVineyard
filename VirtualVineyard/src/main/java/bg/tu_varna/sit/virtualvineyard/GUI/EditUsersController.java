@@ -55,7 +55,7 @@ public class EditUsersController {
             nameTextField.setText(selected.getName());
             EGNTextField.setText(selected.getEGN());
             usernameTextField.setText(selected.getUsername());
-            passwordTextField.setText(selected.getPassword());
+            //no need to show encoded password
             roleComboBox.setValue(selected instanceof Operator ? "Operator" : "Host");
         }
     }
@@ -100,7 +100,7 @@ public class EditUsersController {
             selected.setName(name);
             selected.setEGN(egn);
             selected.setUsername(username);
-            selected.setPassword(password); //хеширай!
+            selected.setPassword(password);
 
             personDAO.update(selected);
 

@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="250.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #C9F1FF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.AdminController">
+<VBox alignment="CENTER" prefHeight="250.0" prefWidth="300.0" spacing="20.0" style="-fx-background-color: #C9F1FF;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.AdminController">
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
    </padding>
@@ -14,8 +14,28 @@
          <Font name="High Tower Text" size="18.0" />
       </font>
    </Label>
-   <Button mnemonicParsing="false" onAction="#onRegisterUserButtonClick" style="-fx-background-color: #0a5061;" text="Register User" textFill="WHITE" />
-   <Button mnemonicParsing="false" onAction="#onEditUsersButtonClick" style="-fx-background-color: #0a5061;" text="Edit Users" textFill="WHITE" />
-   <Button mnemonicParsing="false" onAction="#onListUsersButtonClick" style="-fx-background-color: #0a5061;" text="List Users" textFill="WHITE" />
+   <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0" spacing="20.0" style="-fx-background-color: #8CD0D5;">
+      <children>
+         <HBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0" spacing="20.0">
+            <children>
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#onRegisterUserButtonClick" style="-fx-background-color: #0a5061;" text="Register User" textFill="WHITE" />
+               <Button alignment="CENTER" mnemonicParsing="false" onAction="#onEditUsersButtonClick" style="-fx-background-color: #0a5061;" text="Edit Users" textFill="WHITE" />
+            </children>
+         </HBox>
+         <Button alignment="CENTER" mnemonicParsing="false" onAction="#onListUsersButtonClick" style="-fx-background-color: #0a5061;" text="List Users" textFill="WHITE" />
+      </children>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+   </VBox>
+   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" style="-fx-background-color: #C6A0A0;">
+      <children>
+         <Button mnemonicParsing="false" onAction="#onRunHostButtonClick" style="-fx-background-color: #000000;" text="Run as Host" textFill="WHITE" />
+         <Button layoutX="100.0" layoutY="12.0" mnemonicParsing="false" onAction="#onRunOperatorButtonClick" style="-fx-background-color: #000000;" text="Run as Operator" textFill="WHITE" />
+      </children>
+      <padding>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+      </padding>
+   </HBox>
    <Button mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-background-color: #a40a0a;" text="Back" textFill="WHITE" />
 </VBox>

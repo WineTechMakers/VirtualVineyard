@@ -25,6 +25,16 @@ public class AdminController {
     }
 
     @FXML
+    public void onRunHostButtonClick() {
+        NavigationManager.openNewWindow(ViewType.HOST);
+    }
+
+    @FXML
+    public void onRunOperatorButtonClick() {
+        NavigationManager.openNewWindow(ViewType.OPERATOR);
+    }
+
+    @FXML
     public void onBackButtonClick() {
         try {
             NavigationManager.closeWindow(adminLabel);

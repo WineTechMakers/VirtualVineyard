@@ -23,8 +23,8 @@ public class PersonDAO extends AbstractDAO<Person> {
             entityManager.createNativeQuery(
                             "UPDATE person SET person_type = :newType WHERE person_id = :id"
                     )
-                    .setParameter("newType", newType.toUpperCase())
-                    .setParameter("id", personId)
+                    .setParameter("newType", newType.toUpperCase()) //ignore red
+                    .setParameter("id", personId) //ignore red
                     .executeUpdate();
         });
         return true;
@@ -32,32 +32,20 @@ public class PersonDAO extends AbstractDAO<Person> {
 
     public static Person authenticate(String username, String password)
     {
-        EntityManagerFactory susf = null;
-        EntityManager sus = null;
-        try {
-            susf = Persistence.createEntityManagerFactory("myPU");
-            sus = susf.createEntityManager();
+        try (EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU"); EntityManager sus = susf.createEntityManager()) {
             CriteriaBuilder cb = sus.getCriteriaBuilder();
             CriteriaQuery<Person> cq = cb.createQuery(Person.class);
             Root<Person> Root = cq.from(Person.class);
             cq.select(Root).where(cb.equal(Root.get("username"), username));
             Person retrieved = sus.createQuery(cq).getSingleResult();
-            if(!retrieved.passwordMatch(password)) {
+            if (!retrieved.passwordMatch(password)) {
                 throw new Exception("wrong password");
             }
             return retrieved;
-        }
-        catch (NoResultException e)
-        {
+        } catch (NoResultException e) {
             System.out.println("No such user found");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        }
-        finally {
-
-            if(sus!=null) sus.close();
-            if(susf!=null) susf.close();
         }
         return null;
     }

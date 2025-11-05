@@ -35,8 +35,7 @@ public abstract class Person
         this.name = name;
         this.EGN = EGN;
         this.username = username;
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
+        setPassword(password);
     }
 
     public Person(Person other) {
@@ -86,7 +85,8 @@ public abstract class Person
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 
     @Override
