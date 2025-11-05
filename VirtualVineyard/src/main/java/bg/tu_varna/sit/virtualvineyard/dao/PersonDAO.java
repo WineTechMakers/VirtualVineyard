@@ -2,7 +2,6 @@ package bg.tu_varna.sit.virtualvineyard.dao;
 
 import bg.tu_varna.sit.virtualvineyard.entities.Person;
 import bg.tu_varna.sit.virtualvineyard.models.Administrator;
-import bg.tu_varna.sit.virtualvineyard.models.Host;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
@@ -14,6 +13,21 @@ import jakarta.persistence.criteria.Root;
 public class PersonDAO extends AbstractDAO<Person> {
     public PersonDAO() {
         setEntityClass(Person.class);
+    }
+
+    public boolean updatePersonType(Long personId, String newType) {
+        if(personId == null || newType == null)
+            throw new IllegalArgumentException("Arguments cannot be null");
+
+        completeAction(() -> {
+            entityManager.createNativeQuery(
+                            "UPDATE person SET person_type = :newType WHERE person_id = :id"
+                    )
+                    .setParameter("newType", newType.toUpperCase())
+                    .setParameter("id", personId)
+                    .executeUpdate();
+        });
+        return true;
     }
 
     public static Person authenticate(String username, String password)

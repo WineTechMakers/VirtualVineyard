@@ -51,10 +51,10 @@ public class MainController {
     }
 
     private void openHostWindow() {
-
+        NavigationManager.openNewWindow(ViewType.HOST);
     }
 
     private void openOperatorWindow() {
-
+        NavigationManager.openNewWindow(ViewType.OPERATOR);
     }
 }

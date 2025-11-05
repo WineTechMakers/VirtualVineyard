@@ -74,53 +74,56 @@ public class EditUsersController {
         String password = passwordTextField.getText();
         String newRole = roleComboBox.getValue();
 
-        if (newRole == null){
-            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Please select a role!");
-            return;
-        }
-
-        PersonDAO personDAO = new PersonDAO();
-
-        if ((selected instanceof Host && "Host".equalsIgnoreCase(newRole)) ||
-                (selected instanceof Operator && "Operator".equalsIgnoreCase(newRole))) {
-            selected.setName(name);
-            selected.setEGN(egn);
-            selected.setUsername(username);
-            selected.setPassword(password);
-            personDAO.update(selected);
-            NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "User updated successfully!");
-            return;
-        }
-
-        if (name.isEmpty() || egn.isEmpty() || username.isEmpty() || password.isEmpty()) {
+        if (name.isEmpty() || egn.isEmpty() || username.isEmpty() || password.isEmpty() || newRole == null) {
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "All fields must be filled!");
             return;
         }
 
-        Person newPerson;
-        if ("Host".equalsIgnoreCase(newRole))
-            newPerson = new Host();
-        else if ("Operator".equalsIgnoreCase(newRole))
-            newPerson = new Operator();
-        else {
-            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Invalid role!");
+        PersonDAO personDAO = new PersonDAO();
+        boolean roleChanged = false;
+
+        String currentRole;
+        switch (selected) {
+            case Host host -> currentRole = "Host";
+            case Operator operator -> currentRole = "Operator";
+            default -> {
+                NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Unsupported current user role!");
+                return;
+            }
+        }
+
+        if (!currentRole.equalsIgnoreCase(newRole)) {
+            roleChanged = true;
+        }
+
+        try {
+            selected.setName(name);
+            selected.setEGN(egn);
+            selected.setUsername(username);
+            selected.setPassword(password); //хеширай!
+
+            personDAO.update(selected);
+
+        } catch (Exception e) {
+            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Failed to update user fields: " + e.getMessage());
             return;
         }
 
-        // set updated data
-        newPerson.setName(name);
-        newPerson.setEGN(egn);
-        newPerson.setUsername(username);
-        newPerson.setPassword(password);
+        if (roleChanged) {
+            try {
+                boolean typeUpdated = personDAO.updatePersonType(selected.getPerson_id(), newRole);
 
-        // delete old record and save new one
-        personDAO.delete(selected);
-        boolean saved = personDAO.create(newPerson);
+                if (typeUpdated) {
+                    NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "User fields and role updated successfully!");
+                } else {
+                    NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "User fields updated, but role change failed.");
+                }
+            } catch (Exception e) {
+                NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Failed to change user role (type): " + e.getMessage());
+            }
 
-        if (saved) {
-            NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "User updated successfully!");
         } else {
-            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Could not update user.");
+            NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "User fields updated successfully.");
         }
     }
 

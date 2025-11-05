@@ -8,7 +8,7 @@ public abstract class AbstractDAO<T> { // extends Serializable?
     private Class<T> entityClass;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    public static EntityManager entityManager;
 
     public final void setEntityClass(Class<T> entityClassToSet)
     {
@@ -53,7 +53,7 @@ public abstract class AbstractDAO<T> { // extends Serializable?
         delete(entity);
     }
 
-    private void completeAction(Runnable action)
+    public static void completeAction(Runnable action)
     {
         EntityTransaction transaction = entityManager.getTransaction();
         try
