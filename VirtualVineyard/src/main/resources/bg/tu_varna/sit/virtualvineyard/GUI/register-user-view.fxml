@@ -37,10 +37,5 @@
             <Insets left="20.0" />
          </HBox.margin>
       </Button>
-      <Button mnemonicParsing="false" onAction="#onBackButtonClick" prefHeight="20.0" prefWidth="58.0" style="-fx-background-color: #a40a0a;" text="Back" textFill="WHITE">
-         <HBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </HBox.margin>
-      </Button>
    </HBox>
 </VBox>

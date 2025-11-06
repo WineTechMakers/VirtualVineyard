@@ -55,13 +55,13 @@ public class EditUsersController {
             nameTextField.setText(selected.getName());
             EGNTextField.setText(selected.getEGN());
             usernameTextField.setText(selected.getUsername());
-            //no need to show encoded password
+            passwordTextField.setText(""); //no need to show encoded password
             roleComboBox.setValue(selected instanceof Operator ? "Operator" : "Host");
         }
     }
 
     @FXML
-    public void onEditButtonClick() {
+    public void onSaveButtonClick() {
         Person selected = userComboBox.getValue();
         if (selected == null) {
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Please select a user to edit!");
@@ -124,16 +124,6 @@ public class EditUsersController {
 
         } else {
             NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "User fields updated successfully.");
-        }
-    }
-
-    @FXML
-    public void onBackButtonClick() {
-        try {
-            NavigationManager.closeWindow(nameTextField);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Cannot open Admin panel!");
         }
     }
 }

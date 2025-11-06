@@ -29,7 +29,6 @@ public class MainController {
     @FXML
     protected void onLogInButtonClick() {
         Person user = PersonDAO.authenticate(usernameTextField.getText(), passwordTextField.getText());
-        //Person user = PersonDAO.authenticate("johndoeoperator", "1234567");
         if(user != null) {
             //loggedText.setText("Welcome to our Virtual Vineyard!");
             switch (user) {

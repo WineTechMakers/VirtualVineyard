@@ -7,7 +7,10 @@ public enum ViewType {
     HOST("host-view.fxml", "Host Panel"),
     REGISTER_USER("register-user-view.fxml", "Register User"),
     EDIT_USERS("edit-users-view.fxml", "Edit Users Panel"),
-    LIST_USERS("list-users-view.fxml", "List Users Panel");
+    LIST_USERS("list-users-view.fxml", "List Users Panel"),
+    ADD_GRAPES("add_grapes-view.fxml", "Add Grapes Panel"),
+    ADD_BOTTLES("add-bottles-view.fxml", "Add Bottles Panel"),
+    CHECK_HOST_INVENTORY("check-host-inventory-view.fxml", "Check Inventory Panel");
 
     private final String fxmlFile;
     private final String title;

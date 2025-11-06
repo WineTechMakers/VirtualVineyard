@@ -30,7 +30,6 @@
       </VBox.margin>
    </TextField>
    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
-      <Button mnemonicParsing="false" onAction="#onEditButtonClick" prefWidth="40.0" style="-fx-background-color: #5e1818;" text="Edit" textFill="WHITE" />
-      <Button mnemonicParsing="false" onAction="#onBackButtonClick" style="-fx-background-color: #a40a0a;" text="Back" textFill="WHITE" />
+      <Button mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="43.0" style="-fx-background-color: #5e1818;" text="Save" textFill="WHITE" />
    </HBox>
 </VBox>

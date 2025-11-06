@@ -4,38 +4,41 @@ import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 
 public class AdminController {
+    @FXML
+    private StackPane contentPane;
     @FXML
     public Label adminLabel;
 
     @FXML
-    public void onRegisterUserButtonClick() {
-        NavigationManager.openNewWindow(ViewType.REGISTER_USER);
+    private void onRegisterUserClick() {
+        NavigationManager.loadView(ViewType.REGISTER_USER, contentPane);
     }
 
     @FXML
-    public void onEditUsersButtonClick() {
-        NavigationManager.openNewWindow(ViewType.EDIT_USERS);
+    private void onEditUsersClick() {
+        NavigationManager.loadView(ViewType.EDIT_USERS, contentPane);
     }
 
     @FXML
-    public void onListUsersButtonClick() {
-        NavigationManager.openNewWindow(ViewType.LIST_USERS);
+    private void onListUsersClick() {
+        NavigationManager.loadView(ViewType.LIST_USERS, contentPane);
     }
 
     @FXML
-    public void onRunHostButtonClick() {
-        NavigationManager.openNewWindow(ViewType.HOST);
+    private void onRunHostClick() {
+        NavigationManager.loadView(ViewType.HOST, contentPane);
     }
 
     @FXML
-    public void onRunOperatorButtonClick() {
-        NavigationManager.openNewWindow(ViewType.OPERATOR);
+    private void onRunOperatorClick() {
+        NavigationManager.loadView(ViewType.OPERATOR, contentPane);
     }
 
     @FXML
-    public void onBackButtonClick() {
+    private void onLogoutClick() {
         try {
             NavigationManager.closeWindow(adminLabel);
             NavigationManager.openNewWindow(ViewType.LOGIN);

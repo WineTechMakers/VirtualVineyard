@@ -61,14 +61,4 @@ public class RegisterUserController {
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Username or EGN already exists!");
         }
     }
-
-    @FXML
-    public void onBackButtonClick() {
-        try {
-            NavigationManager.closeWindow(nameTextField);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Cannot open Admin panel!");
-        }
-    }
 }
