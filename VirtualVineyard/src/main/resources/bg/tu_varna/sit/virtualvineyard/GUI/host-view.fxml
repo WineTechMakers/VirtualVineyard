@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.HostController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<VBox alignment="CENTER" prefHeight="300.0" prefWidth="250.0" spacing="20.0" style="-fx-background-color: #D4BEEE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.HostController">
+   <children>
+      <Label text="Hello Host!" textFill="#5f25a1">
+         <font>
+            <Font name="High Tower Text" size="24.0" />
+         </font>
+      </Label>
+      <Button mnemonicParsing="false" style="-fx-background-color: #5F25A1;" text="Add Grapes" textFill="WHITE" />
+      <Button mnemonicParsing="false" style="-fx-background-color: #5F25A1;" text="Add Bottles" textFill="WHITE" />
+      <Button mnemonicParsing="false" style="-fx-background-color: #5F25A1;" text="Check Inventory" textFill="WHITE" />
+      <Button mnemonicParsing="false" style="-fx-background-color: #a40a0a;" text="Back" textFill="WHITE" />
+   </children>
 </VBox>
