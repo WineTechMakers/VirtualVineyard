@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: #D8EEF0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.RegisterUserController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: #D8EEF0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.Controllers.RegisterUserController">
    <Label text="Choose role:" />
    <ComboBox fx:id="roleComboBox" prefWidth="150.0" style="-fx-background-color: white;" />
    <Label text="Enter new user information:" />

@@ -1,5 +1,6 @@
-package bg.tu_varna.sit.virtualvineyard.GUI;
+package bg.tu_varna.sit.virtualvineyard.GUI.Controllers;
 
+import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.Person;
 import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
@@ -7,9 +8,6 @@ import bg.tu_varna.sit.virtualvineyard.models.Administrator;
 import bg.tu_varna.sit.virtualvineyard.models.Host;
 import bg.tu_varna.sit.virtualvineyard.models.Operator;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;

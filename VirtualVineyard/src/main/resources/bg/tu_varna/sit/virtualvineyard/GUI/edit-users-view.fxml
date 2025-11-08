@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" prefHeight="420.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: #EBD6D6;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.EditUsersController">
+<VBox alignment="CENTER" prefHeight="420.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: #EBD6D6;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.Controllers.EditUsersController">
    <Label text="Choose user to edit:" />
    <ComboBox fx:id="userComboBox" onAction="#onUserSelected" prefWidth="200.0" promptText="User..." style="-fx-background-color: white;" />
    <Label text="Edit user information:" />
