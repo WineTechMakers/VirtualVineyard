@@ -58,7 +58,6 @@ public abstract class Person
         return EGN;
     }
 
-
     public String getUsername() {
         return username;
     }
@@ -66,6 +65,8 @@ public abstract class Person
     public String getPassword() {
         return password;
     }
+
+    public String getPersonType() { return this.getClass().getSimpleName(); }
 
     public void setName(String name) {
         this.name = name;

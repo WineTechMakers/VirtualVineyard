@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.GUI.Controllers;
+package bg.tu_varna.sit.virtualvineyard.GUI.admin;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
@@ -11,7 +11,7 @@ public class AdminController {
     @FXML
     private StackPane contentPane;
     @FXML
-    public Label adminLabel;
+    private Label adminLabel;
 
     @FXML
     private void onRegisterUserClick() {

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.Controllers.HostController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.host.HostController">
    <top>
       <HBox spacing="10" style="-fx-background-color: #84973B; -fx-padding: 15;">
          <Label fx:id="hostLabel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Hello Host!">
@@ -20,8 +20,9 @@
    </top>
    <left>
       <VBox spacing="15" style="-fx-background-color: #B7D018; -fx-padding: 20;">
-         <Button maxWidth="Infinity" onAction="#onAddGrapesClick" style="-fx-background-color: #84973B;" text="Add Grapes" textFill="WHITE" />
-         <Button maxWidth="Infinity" onAction="#onAddBottlesClick" style="-fx-background-color: #84973B;" text="Add Bottles" textFill="WHITE" />
+         <Button maxWidth="Infinity" onAction="#onAddWarehouseClick" style="-fx-background-color: #84973B;" text="Add Warehouse" textFill="WHITE" />
+         <Button maxWidth="Infinity" onAction="#onAddGrapeClick" style="-fx-background-color: #84973B;" text="Add Grape" textFill="WHITE" />
+         <Button maxWidth="Infinity" onAction="#onAddBottleClick" style="-fx-background-color: #84973B;" text="Add Bottle" textFill="WHITE" />
          <Button maxWidth="Infinity" onAction="#onCheckInventoryClick" style="-fx-background-color: #84973B;" text="Check Inventory" textFill="WHITE" />
          <Separator />
       </VBox>

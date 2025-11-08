@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.GUI.Controllers;
+package bg.tu_varna.sit.virtualvineyard.GUI.admin;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.entities.*;

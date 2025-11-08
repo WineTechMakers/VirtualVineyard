@@ -11,10 +11,10 @@ public class Bottle {
     private Long bottle_id;
 
     @Column(nullable = false)
-    protected BottleType quantity;
+    protected BottleType volume;
 
     @Column(nullable = false)
-    protected int count;
+    protected int quantity;
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
@@ -24,9 +24,9 @@ public class Bottle {
 
     }
 
-    public Bottle(BottleType quantity, int count) {
+    public Bottle(BottleType volume, int quantity) {
+        this.volume = volume;
         this.quantity = quantity;
-        this.count = count;
     }
 
     public Warehouse getWarehouse() {

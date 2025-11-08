@@ -21,7 +21,7 @@ public class Grape {
     private boolean isBlack;//either black-0 or white-1
 
     @Column (nullable = false)
-    private int product;//how much wine can be made per 1kg of grape
+    private int wineYield;//how much wine can be made per 1kg of grape (in liters)
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
@@ -32,11 +32,11 @@ public class Grape {
 
     public Grape() {}
 
-    public Grape(String name, int quantity, boolean isBlack, int product) {
+    public Grape(String name, int quantity, boolean isBlack, int wineYield) {
         this.name = name;
         this.quantity = quantity;
         this.isBlack = isBlack;
-        this.product = product;
+        this.wineYield = wineYield;
     }
 
     public List<WineGrape> getWineGrapes() {
@@ -70,12 +70,12 @@ public class Grape {
         isBlack = black;
     }
 
-    public int getProduct() {
-        return product;
+    public int getWineYield() {
+        return wineYield;
     }
 
-    public void setProduct(int product) {
-        this.product = product;
+    public void setWineYield(int wineYield) {
+        this.wineYield = wineYield;
     }
 
     public Warehouse getWarehouse() {

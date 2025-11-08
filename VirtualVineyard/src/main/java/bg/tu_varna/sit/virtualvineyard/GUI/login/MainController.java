@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.GUI.Controllers;
+package bg.tu_varna.sit.virtualvineyard.GUI.login;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
@@ -13,8 +13,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class MainController {
-    public TextField usernameTextField;
-    public TextField passwordTextField;
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private TextField passwordTextField;
     @FXML
     private Label loggedText;
 

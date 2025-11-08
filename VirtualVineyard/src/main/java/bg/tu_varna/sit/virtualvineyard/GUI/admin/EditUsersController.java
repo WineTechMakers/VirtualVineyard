@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.GUI.Controllers;
+package bg.tu_varna.sit.virtualvineyard.GUI.admin;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
@@ -7,6 +7,7 @@ import bg.tu_varna.sit.virtualvineyard.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 
 public class EditUsersController {
@@ -31,7 +32,7 @@ public class EditUsersController {
         roleComboBox.getItems().addAll("Host", "Operator");
 
         //displayed in the dropdown -> show usernames instead of toString()
-        userComboBox.setCellFactory(cb -> new javafx.scene.control.ListCell<>() {
+        userComboBox.setCellFactory(cb -> new ListCell<>() {
             @Override
             protected void updateItem(Person person, boolean empty) {
                 super.updateItem(person, empty);
@@ -40,7 +41,7 @@ public class EditUsersController {
         });
 
         //displayed when selected
-        userComboBox.setButtonCell(new javafx.scene.control.ListCell<>() {
+        userComboBox.setButtonCell(new ListCell<>() {
             @Override
             protected void updateItem(Person person, boolean empty) {
                 super.updateItem(person, empty);
@@ -75,7 +76,7 @@ public class EditUsersController {
         String password = passwordTextField.getText();
         String newRole = roleComboBox.getValue();
 
-        if (name.isEmpty() || egn.isEmpty() || username.isEmpty() || password.isEmpty() || newRole == null) {
+        if (name.isEmpty() || egn.isEmpty() || username.isEmpty() || newRole == null) { //|| password.isEmpty()
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "All fields must be filled!");
             return;
         }
@@ -101,8 +102,9 @@ public class EditUsersController {
             selected.setName(name);
             selected.setEGN(egn);
             selected.setUsername(username);
-            selected.setPassword(password);
-
+            if(!password.isEmpty()) {
+                selected.setPassword(password);
+            }
             personDAO.update(selected);
 
         } catch (Exception e) {

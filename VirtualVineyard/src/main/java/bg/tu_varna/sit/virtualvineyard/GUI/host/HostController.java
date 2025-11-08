@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.GUI.Controllers;
+package bg.tu_varna.sit.virtualvineyard.GUI.host;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
@@ -9,22 +9,27 @@ import javafx.scene.layout.StackPane;
 
 public class HostController {
     @FXML
-    public Label hostLabel;
+    private Label hostLabel;
     @FXML
-    public StackPane contentPane;
+    private StackPane contentPane;
 
     @FXML
-    public void onAddGrapesClick() {
-        NavigationManager.loadView(ViewType.ADD_GRAPES, contentPane);
+    private void onAddWarehouseClick() {
+        NavigationManager.loadView(ViewType.ADD_WAREHOUSE, contentPane);
     }
 
     @FXML
-    public void onAddBottlesClick() {
-        NavigationManager.loadView(ViewType.ADD_BOTTLES, contentPane);
+    private void onAddGrapeClick() {
+        NavigationManager.loadView(ViewType.ADD_GRAPE, contentPane);
     }
 
     @FXML
-    public void onCheckInventoryClick() {
+    private void onAddBottleClick() {
+        NavigationManager.loadView(ViewType.ADD_BOTTLE, contentPane);
+    }
+
+    @FXML
+    private void onCheckInventoryClick() {
         NavigationManager.loadView(ViewType.CHECK_HOST_INVENTORY, contentPane);
     }
 
