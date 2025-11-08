@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.AdminController">
    <top>
        <HBox spacing="10" style="-fx-background-color: #0a5061; -fx-padding: 15;">
            <Label fx:id="adminLabel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Hello Admin!">
@@ -29,6 +29,6 @@
        </VBox>
    </left>
    <center>
-       <StackPane fx:id="contentPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #C9F1FF;" BorderPane.alignment="CENTER" />
+       <StackPane fx:id="contentPane" prefHeight="479.0" prefWidth="610.0" style="-fx-background-color: #C9F1FF;" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

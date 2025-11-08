@@ -2,29 +2,39 @@ package bg.tu_varna.sit.virtualvineyard.GUI;
 
 import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
 
 public class HostController {
     @FXML
     public Label hostLabel;
+    @FXML
+    public StackPane contentPane;
 
     @FXML
-    public void onAddGrapesButtonClick() {
-        NavigationManager.openNewWindow(ViewType.ADD_GRAPES);
+    public void onAddGrapesClick() {
+        NavigationManager.loadView(ViewType.ADD_GRAPES, contentPane);
     }
 
     @FXML
-    public void onAddBottlesButtonClick() {
-        NavigationManager.openNewWindow(ViewType.ADD_BOTTLES);
+    public void onAddBottlesClick() {
+        NavigationManager.loadView(ViewType.ADD_BOTTLES, contentPane);
     }
 
     @FXML
-    public void onCheckInventoryButtonClick() {
-        NavigationManager.openNewWindow(ViewType.CHECK_HOST_INVENTORY);
+    public void onCheckInventoryClick() {
+        NavigationManager.loadView(ViewType.CHECK_HOST_INVENTORY, contentPane);
     }
 
     @FXML
-    public void onBackButtonClick() {
-        NavigationManager.closeWindow(hostLabel);
+    private void onLogoutClick() {
+        try {
+            NavigationManager.closeWindow(hostLabel);
+            NavigationManager.openNewWindow(ViewType.LOGIN);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Cannot open Login panel!");
+        }
     }
 }
