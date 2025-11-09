@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
+import bg.tu_varna.sit.virtualvineyard.dao.WarehouseDAO;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -45,5 +46,20 @@ public class Warehouse {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public Warehouse(String name, String address) {
+        this.name = name;
+        this.address = address;
+    }
+
+    public void addGrape(Grape grape)
+    {
+        grapes.add(grape);
+    }
+
+    public void addBottle(Bottle bottle)
+    {
+        bottles.add(bottle);
     }
 }
