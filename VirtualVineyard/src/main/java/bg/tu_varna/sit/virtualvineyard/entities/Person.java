@@ -73,7 +73,7 @@ public abstract class Person
     }
 
     public void setEGN(String EGN) {
-        if (EGN == null || EGN.length() != 10) {
+        if (EGN == null || EGN.length() != 10 || !EGN.matches("\\d+")) {
             throw new IllegalArgumentException("EGN must be exactly 10 characters");
         }
         else {
