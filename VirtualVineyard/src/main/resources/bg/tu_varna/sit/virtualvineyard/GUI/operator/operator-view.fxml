@@ -4,15 +4,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.operator.OperatorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.operator.OperatorController">
 <top>
     <HBox spacing="10" style="-fx-background-color: #5F25A1; -fx-padding: 15;">
-        <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Hello Operator!">
+        <Label fx:id="operatorLabel" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="Hello Operator!">
             <font>
                 <Font name="High Tower Text" size="12.0" />
             </font></Label>
         <Pane HBox.hgrow="ALWAYS" />
-        <Button style="-fx-font-size: 14px; -fx-background-color: #a40a0a;" text="Logout" textFill="WHITE">
+        <Button onAction="#onLogoutClick" style="-fx-font-size: 14px; -fx-background-color: #a40a0a;" text="Logout" textFill="WHITE">
             <font>
                 <Font name="System Bold Italic" size="12.0" />
             </font></Button>
@@ -20,9 +20,8 @@
 </top>
 <left>
     <VBox spacing="15" style="-fx-background-color: #B07FD1; -fx-padding: 20;">
-        <Button maxWidth="Infinity" style="-fx-background-color: #5F25A1;" textFill="WHITE" />
-        <Button maxWidth="Infinity" style="-fx-background-color: #5F25A1;" textFill="WHITE" />
-        <Button maxWidth="Infinity" style="-fx-background-color: #5F25A1;" textFill="WHITE" />
+        <Button maxWidth="Infinity" onAction="#onAddWineClick" style="-fx-background-color: #5F25A1;" text="Add Wine" textFill="WHITE" />
+        <Button maxWidth="Infinity" onAction="#onEditWineClick" style="-fx-background-color: #5F25A1;" text="Edit Wine" textFill="WHITE" />
         <Separator />
     </VBox>
 </left>
