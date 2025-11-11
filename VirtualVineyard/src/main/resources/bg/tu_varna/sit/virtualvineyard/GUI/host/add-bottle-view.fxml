@@ -9,14 +9,14 @@
       <Insets left="40.0" right="40.0" top="20.0" />
    </padding>
    <Label text="Choose warehouse:" />
-   <ComboBox prefWidth="150.0" style="-fx-background-color: white;" />
+   <ComboBox fx:id="warehouseComboBox" prefWidth="150.0" style="-fx-background-color: white;" />
    <Label text="Choose bottle volume:" />
-   <ComboBox layoutX="95.0" layoutY="152.0" prefWidth="150.0" style="-fx-background-color: white;" />
+   <ComboBox fx:id="volumeComboBox" layoutX="95.0" layoutY="152.0" prefWidth="150.0" style="-fx-background-color: white;" />
 
-    <TextField promptText="Quantity">
+    <TextField fx:id="quantityField" promptText="Quantity">
       <VBox.margin>
          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
       </VBox.margin></TextField>
 
-    <Button style="-fx-background-color: #BABA4E; -fx-text-fill: white;" text="Save" />
+    <Button onAction="#onAddBottleClick" style="-fx-background-color: #BABA4E; -fx-text-fill: white;" text="Add Bottle" />
 </VBox>

@@ -2,26 +2,26 @@
 
 <?import javafx.scene.control.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="623.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="623.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.host.CheckInventoryController">
     <Tab style="-fx-background-color: #E7EEBA;" text="Grapes">
-        <TableView prefHeight="371.0" prefWidth="793.0" style="-fx-background-color: #E7EEBA;">
+        <TableView fx:id="grapesTable" prefHeight="371.0" prefWidth="793.0" style="-fx-background-color: #E7EEBA;">
             <columns>
-                <TableColumn prefWidth="40.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="ID" />
-                <TableColumn prefWidth="150.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Name" />
-                <TableColumn prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Quantity" />
-                <TableColumn prefWidth="70.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Color" />
-                <TableColumn prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Wine yield" />
-                <TableColumn prefWidth="160.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Warehouse" />
+                <TableColumn fx:id="grapeIdColumn" prefWidth="40.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="ID" />
+                <TableColumn fx:id="grapeNameColumn" prefWidth="150.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Name" />
+                <TableColumn fx:id="grapeQuantityColumn" prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Quantity" />
+                <TableColumn fx:id="grapeColorColumn" prefWidth="70.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Color" />
+                <TableColumn fx:id="grapeYieldColumn" prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Wine yield" />
+                <TableColumn fx:id="grapeWarehouseColumn" prefWidth="160.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Warehouse" />
             </columns>
         </TableView>
     </Tab>
     <Tab style="-fx-background-color: #F0F0A7;" text="Bottles">
-        <TableView prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #F0F0A7;">
+        <TableView fx:id="bottlesTable" prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #F0F0A7;">
             <columns>
-                <TableColumn prefWidth="40.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="ID" />
-                <TableColumn prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Volume" />
-                <TableColumn prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Quantity" />
-                <TableColumn prefWidth="160.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Warehouse" />
+                <TableColumn fx:id="bottleIdColumn" prefWidth="40.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="ID" />
+                <TableColumn fx:id="bottleVolumeColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Volume" />
+                <TableColumn fx:id="bottleQuantityColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Quantity" />
+                <TableColumn fx:id="bottleWarehouseColumn" prefWidth="160.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Warehouse" />
             </columns>
         </TableView>
     </Tab>

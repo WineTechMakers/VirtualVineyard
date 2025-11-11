@@ -17,4 +17,9 @@ public enum BottleType
     {
         return volume;
     }
+
+    @Override
+    public String toString() {
+        return String.valueOf(volume); //+ "ml" ?
+    }
 }

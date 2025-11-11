@@ -8,8 +8,6 @@ import jakarta.persistence.*;
 @IdClass(WineGrapeID.class)
 public class WineGrape
 {
-    //private List<Wine> wines; //collection of wine recipes
-
     @Id
     @ManyToOne
     @JoinColumn(name = "wine_id", nullable = false)

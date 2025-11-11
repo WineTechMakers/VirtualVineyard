@@ -21,7 +21,7 @@
 <left>
     <VBox spacing="15" style="-fx-background-color: #B07FD1; -fx-padding: 20;">
         <Button maxWidth="Infinity" onAction="#onAddWineClick" style="-fx-background-color: #5F25A1;" text="Add Wine" textFill="WHITE" />
-        <Button maxWidth="Infinity" onAction="#onEditWineClick" style="-fx-background-color: #5F25A1;" text="Edit Wine" textFill="WHITE" />
+        <Button maxWidth="Infinity" onAction="#onListWinesClick" style="-fx-background-color: #5F25A1;" text="List Wines" textFill="WHITE" />
         <Separator />
     </VBox>
 </left>

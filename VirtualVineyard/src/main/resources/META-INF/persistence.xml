@@ -11,6 +11,7 @@
         <class>bg.tu_varna.sit.virtualvineyard.entities.Grape</class>
         <class>bg.tu_varna.sit.virtualvineyard.entities.Wine</class>
         <class>bg.tu_varna.sit.virtualvineyard.entities.WineGrape</class>
+        <class>bg.tu_varna.sit.virtualvineyard.entities.BottledWine</class>
         <class>bg.tu_varna.sit.virtualvineyard.entities.Bottle</class>
         <class>bg.tu_varna.sit.virtualvineyard.entities.Warehouse</class>
         <class>bg.tu_varna.sit.virtualvineyard.models.Operator</class>

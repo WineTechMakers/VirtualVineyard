@@ -17,17 +17,21 @@ public class Wine {
     @OneToMany(mappedBy = "wine")
     private List<WineGrape> wineGrapes;
 
+    @OneToMany(mappedBy = "wine") //CascadeType.PERSIST?
+    private List<BottledWine> bottledWines;
+
     public Wine() {}
 
     public Wine(String name) {
         this.name = name;
     }
 
-    public List<WineGrape> getWineGrapes() {
-        return wineGrapes;
+    public Long getWine_id() {
+        return wine_id;
     }
-    public void setWineGrapes(List<WineGrape> wineGrapes) {
-        this.wineGrapes = wineGrapes;
+
+    public void setWine_id(Long wine_id) {
+        this.wine_id = wine_id;
     }
 
     public String getName() {
@@ -36,5 +40,21 @@ public class Wine {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<WineGrape> getWineGrapes() {
+        return wineGrapes;
+    }
+
+    public void setWineGrapes(List<WineGrape> wineGrapes) {
+        this.wineGrapes = wineGrapes;
+    }
+
+    public List<BottledWine> getBottledWines() {
+        return bottledWines;
+    }
+
+    public void setBottledWines(List<BottledWine> bottledWines) {
+        this.bottledWines = bottledWines;
     }
 }

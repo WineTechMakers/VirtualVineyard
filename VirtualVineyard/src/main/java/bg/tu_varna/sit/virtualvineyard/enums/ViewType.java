@@ -13,7 +13,7 @@ public enum ViewType {
     ADD_BOTTLE("/bg/tu_varna/sit/virtualvineyard/GUI/host/add-bottle-view.fxml", "Add Bottle Panel"),
     CHECK_HOST_INVENTORY("/bg/tu_varna/sit/virtualvineyard/GUI/host/check-inventory-view.fxml", "Check Inventory Panel"),
     ADD_WINE("/bg/tu_varna/sit/virtualvineyard/GUI/operator/add-wine-view.fxml", "Add Wine Panel"),
-    EDIT_WINE("/bg/tu_varna/sit/virtualvineyard/GUI/operator/edit-wine-view.fxml", "Edit Wine Panel");
+    LIST_WINES("/bg/tu_varna/sit/virtualvineyard/GUI/operator/list-wines-view.fxml", "List Wines Panel");
 
     private final String fxmlFile;
     private final String title;

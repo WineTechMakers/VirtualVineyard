@@ -11,21 +11,6 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class NavigationManager {
-    public static void switchScene(Node anyNode, ViewType viewType) {
-        try {
-            //closeWindow(anyNode);
-            FXMLLoader loader = new FXMLLoader(NavigationManager.class.getResource(viewType.getFxmlFile()));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) anyNode.getScene().getWindow();
-            stage.setTitle(viewType.getTitle());
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
     public static void openNewWindow(ViewType viewType) {
         try {
             FXMLLoader loader = new FXMLLoader(NavigationManager.class.getResource(viewType.getFxmlFile()));

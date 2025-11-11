@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="320.0" spacing="20.0" style="-fx-background-color: #95A66D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.host.AddWarehouseController">
-   <children>
-      <TextField promptText="Warehouse name">
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin></TextField>
-      <TextField layoutX="50.0" layoutY="197.0" promptText="Address">
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
-      </TextField>
-   </children>
    <padding>
       <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
    </padding>
+   <TextField fx:id="nameTextField" promptText="Warehouse name">
+      <VBox.margin>
+         <Insets left="20.0" right="20.0" />
+      </VBox.margin>
+   </TextField>
+   <TextField fx:id="addressTextField" layoutX="50.0" layoutY="197.0" promptText="Address">
+      <VBox.margin>
+         <Insets left="20.0" right="20.0" />
+      </VBox.margin>
+   </TextField>
+   <Button mnemonicParsing="false" onAction="#onAddWarehouseClick" style="-fx-background-color: #D3F5AD;" text="Add Warehouse" />
 </VBox>

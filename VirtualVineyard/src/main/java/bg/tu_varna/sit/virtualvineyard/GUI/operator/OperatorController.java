@@ -19,8 +19,8 @@ public class OperatorController {
     }
 
     @FXML
-    private void onEditWineClick() {
-        NavigationManager.loadView(ViewType.EDIT_WINE, contentPane);
+    private void onListWinesClick() {
+        NavigationManager.loadView(ViewType.LIST_WINES, contentPane);
     }
 
     @FXML

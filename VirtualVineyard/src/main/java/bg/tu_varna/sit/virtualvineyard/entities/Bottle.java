@@ -1,7 +1,10 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
+import bg.tu_varna.sit.virtualvineyard.GUI.BottleTypeConverter;
 import bg.tu_varna.sit.virtualvineyard.enums.BottleType;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name = "Bottle")
@@ -11,6 +14,7 @@ public class Bottle {
     private Long bottle_id;
 
     @Column(nullable = false)
+    @Convert(converter = BottleTypeConverter.class)
     protected BottleType volume;
 
     @Column(nullable = false)
@@ -20,13 +24,17 @@ public class Bottle {
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
 
+    @OneToMany(mappedBy = "bottle")
+    private List<BottledWine> bottledWines;
+
     public Bottle() {
 
     }
 
-    public Bottle(BottleType volume, int quantity) {
+    public Bottle(BottleType volume, int quantity, Warehouse warehouse) {
         this.volume = volume;
         this.quantity = quantity;
+        this.warehouse = warehouse;
     }
 
     public Warehouse getWarehouse() {
@@ -35,5 +43,37 @@ public class Bottle {
 
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
+    }
+
+    public Long getBottle_id() {
+        return bottle_id;
+    }
+
+    public void setBottle_id(Long bottle_id) {
+        this.bottle_id = bottle_id;
+    }
+
+    public BottleType getVolume() {
+        return volume;
+    }
+
+    public void setVolume(BottleType volume) {
+        this.volume = volume;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public List<BottledWine> getBottledWines() {
+        return bottledWines;
+    }
+
+    public void setBottledWines(List<BottledWine> bottledWines) {
+        this.bottledWines = bottledWines;
     }
 }
