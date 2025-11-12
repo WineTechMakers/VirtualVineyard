@@ -14,6 +14,8 @@ public class Wine {
     @Column (length = 60, nullable = false)
     private String name;
 
+    //add year?
+
     @OneToMany(mappedBy = "wine")
     private List<WineGrape> wineGrapes;
 

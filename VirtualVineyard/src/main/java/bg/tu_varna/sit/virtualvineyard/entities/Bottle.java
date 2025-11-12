@@ -76,4 +76,13 @@ public class Bottle {
     public void setBottledWines(List<BottledWine> bottledWines) {
         this.bottledWines = bottledWines;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("volume= ").append(volume.getVolume());
+        sb.append(", quantity= ").append(quantity);
+        sb.append(", warehouse= ").append(warehouse.getName());
+        return sb.toString();
+    }
 }
