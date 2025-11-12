@@ -57,4 +57,9 @@ public class Wine {
     public void setBottledWines(List<BottledWine> bottledWines) {
         this.bottledWines = bottledWines;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

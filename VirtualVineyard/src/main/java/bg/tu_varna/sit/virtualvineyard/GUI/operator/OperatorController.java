@@ -24,6 +24,11 @@ public class OperatorController {
     }
 
     @FXML
+    private void onBottleWinesClick() {
+        NavigationManager.loadView(ViewType.BOTTLE_WINES, contentPane);
+    }
+
+    @FXML
     private void onLogoutClick() {
         try {
             NavigationManager.closeWindow(operatorLabel);
