@@ -10,6 +10,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 
+import java.util.List;
+
 public class EditUsersController {
     @FXML
     public ComboBox<Person> userComboBox;
@@ -27,6 +29,9 @@ public class EditUsersController {
     @FXML
     public void initialize() {
         PersonDAO personDAO = new PersonDAO();
+        /*List<Person> whatever = personDAO.findAll();
+        whatever.remove( PersonDAO.authenticate("admin","1234") );
+        userComboBox.getItems().addAll( whatever );*/
         userComboBox.getItems().addAll(personDAO.findAll());
 
         roleComboBox.getItems().addAll("Host", "Operator");

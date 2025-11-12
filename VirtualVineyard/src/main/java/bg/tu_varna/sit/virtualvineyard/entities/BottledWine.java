@@ -19,7 +19,7 @@ public class BottledWine {
     private Bottle bottle;
 
     @Column(nullable = false)
-    private int quantity; //how many bottles of each BottleType
+    private int quantity;
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
