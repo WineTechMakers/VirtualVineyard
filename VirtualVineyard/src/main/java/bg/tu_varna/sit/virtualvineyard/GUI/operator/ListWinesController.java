@@ -2,8 +2,7 @@ package bg.tu_varna.sit.virtualvineyard.GUI.operator;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.WineDAO;
-import bg.tu_varna.sit.virtualvineyard.entities.Wine;
-import bg.tu_varna.sit.virtualvineyard.entities.WineGrape;
+import bg.tu_varna.sit.virtualvineyard.entities.*;
 import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,14 +11,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListWinesController {
-    @FXML
-    private TableView<Wine> winesTable;
-    @FXML
-    private TableColumn<Wine, String> wineNameColumn;
-    @FXML
-    private TableColumn<Wine, Void> editColumn;
-    @FXML
-    private TableColumn<Wine, Void> deleteColumn;
+    @FXML private TableView<Wine> winesTable;
+    @FXML private TableColumn<Wine, String> wineNameColumn;
+    @FXML private TableColumn<Wine, Void> editColumn;
+    @FXML private TableColumn<Wine, Void> deleteColumn;
 
     private final WineDAO wineDAO = new WineDAO();
 

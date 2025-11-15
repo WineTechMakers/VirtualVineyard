@@ -3,6 +3,16 @@
 <?import javafx.scene.control.*?>
 
 <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="623.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.host.CheckInventoryController">
+    <Tab style="-fx-background-color: #BDCE8E;" text="Warehouses">
+        <TableView fx:id="warehousesTable" prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #BDCE8E;">
+            <columns>
+                <TableColumn fx:id="warehouseIdColumn" prefWidth="40.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="ID" />
+                <TableColumn fx:id="warehouseTypeColumn" prefWidth="140.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Type" />
+                <TableColumn fx:id="warehouseNameColumn" prefWidth="180.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Name" />
+                <TableColumn fx:id="warehouseAddressColumn" prefWidth="200.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Address" />
+            </columns>
+        </TableView>
+    </Tab>
     <Tab style="-fx-background-color: #E7EEBA;" text="Grapes">
         <TableView fx:id="grapesTable" prefHeight="371.0" prefWidth="793.0" style="-fx-background-color: #E7EEBA;">
             <columns>

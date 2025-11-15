@@ -1,30 +1,26 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.host;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
-import bg.tu_varna.sit.virtualvineyard.dao.BottleDAO;
-import bg.tu_varna.sit.virtualvineyard.dao.WarehouseDAO;
-import bg.tu_varna.sit.virtualvineyard.entities.Bottle;
-import bg.tu_varna.sit.virtualvineyard.entities.Warehouse;
-import bg.tu_varna.sit.virtualvineyard.enums.BottleType;
+import bg.tu_varna.sit.virtualvineyard.dao.*;
+import bg.tu_varna.sit.virtualvineyard.entities.*;
+import bg.tu_varna.sit.virtualvineyard.enums.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class AddBottleController {
-    @FXML
-    private ComboBox<Warehouse> warehouseComboBox;
-    @FXML
-    private ComboBox<BottleType> volumeComboBox;
-    @FXML
-    private TextField quantityField;
+    @FXML private ComboBox<Warehouse> warehouseComboBox;
+    @FXML private ComboBox<BottleType> volumeComboBox;
+    @FXML private TextField quantityField;
 
     private final WarehouseDAO warehouseDAO = new WarehouseDAO();
     private final BottleDAO bottleDAO = new BottleDAO();
 
     @FXML
     public void initialize() {
-        warehouseComboBox.getItems().addAll(warehouseDAO.findAll());
+        ObservableList<Warehouse> bottleWarehouses = FXCollections.observableArrayList(warehouseDAO.findByContentType(WarehouseContentType.BOTTLE_ONLY));
+        warehouseComboBox.setItems(bottleWarehouses);
         volumeComboBox.getItems().addAll(BottleType.values());
     }
 

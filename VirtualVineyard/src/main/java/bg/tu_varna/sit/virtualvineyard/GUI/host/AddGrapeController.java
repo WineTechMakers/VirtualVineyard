@@ -2,24 +2,20 @@ package bg.tu_varna.sit.virtualvineyard.GUI.host;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.*;
-import bg.tu_varna.sit.virtualvineyard.entities.Grape;
-import bg.tu_varna.sit.virtualvineyard.entities.Warehouse;
+import bg.tu_varna.sit.virtualvineyard.entities.*;
+import bg.tu_varna.sit.virtualvineyard.enums.WarehouseContentType;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class AddGrapeController {
-    @FXML
-    public ComboBox<Warehouse> warehouseComboBox;
-    @FXML
-    public TextField nameTextField;
-    @FXML
-    public TextField quantityTextField;
-    @FXML
-    public TextField wineYieldTextField;
-    @FXML
-    public RadioButton blackRadioButton;
-    @FXML
-    public RadioButton whiteRadioButton;
+    @FXML public ComboBox<Warehouse> warehouseComboBox;
+    @FXML public TextField nameTextField;
+    @FXML public TextField quantityTextField;
+    @FXML public TextField wineYieldTextField;
+    @FXML public RadioButton blackRadioButton;
+    @FXML public RadioButton whiteRadioButton;
 
     private final WarehouseDAO warehouseDAO = new WarehouseDAO();
     private final GrapeDAO grapeDAO = new GrapeDAO();
@@ -28,7 +24,8 @@ public class AddGrapeController {
 
     @FXML
     public void initialize() {
-        warehouseComboBox.getItems().addAll(warehouseDAO.findAll());
+        ObservableList<Warehouse> grapeWarehouses = FXCollections.observableArrayList(warehouseDAO.findByContentType(WarehouseContentType.GRAPE_ONLY));
+        warehouseComboBox.setItems(grapeWarehouses);
 
         blackRadioButton.setToggleGroup(colorGroup);
         whiteRadioButton.setToggleGroup(colorGroup);

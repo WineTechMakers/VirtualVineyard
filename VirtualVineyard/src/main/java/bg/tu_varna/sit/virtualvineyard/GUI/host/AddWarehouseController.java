@@ -1,22 +1,16 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.host;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
-import bg.tu_varna.sit.virtualvineyard.dao.WarehouseDAO;
-import bg.tu_varna.sit.virtualvineyard.dao.WarehouseTypeDAO;
-import bg.tu_varna.sit.virtualvineyard.entities.Warehouse;
-import bg.tu_varna.sit.virtualvineyard.entities.WarehouseType;
+import bg.tu_varna.sit.virtualvineyard.dao.*;
+import bg.tu_varna.sit.virtualvineyard.entities.*;
 import bg.tu_varna.sit.virtualvineyard.enums.WarehouseContentType;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class AddWarehouseController {
-    @FXML
-    public TextField nameTextField;
-    @FXML
-    public TextField addressTextField;
-    @FXML
-    public ComboBox<WarehouseContentType> typeComboBox;
+    @FXML public TextField nameTextField;
+    @FXML public TextField addressTextField;
+    @FXML public ComboBox<WarehouseContentType> typeComboBox;
 
     @FXML
     public void initialize() {

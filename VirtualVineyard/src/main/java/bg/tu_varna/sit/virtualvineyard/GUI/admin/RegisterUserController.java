@@ -8,16 +8,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class RegisterUserController {
-    @FXML
-    private TextField nameTextField;
-    @FXML
-    private TextField EGNTextField;
-    @FXML
-    private TextField usernameTextField;
-    @FXML
-    private TextField passwordTextField;
-    @FXML
-    private ComboBox<String> roleComboBox;
+    @FXML private TextField nameTextField;
+    @FXML private TextField EGNTextField;
+    @FXML private TextField usernameTextField;
+    @FXML private TextField passwordTextField;
+    @FXML private ComboBox<String> roleComboBox;
 
     @FXML
     public void initialize() {

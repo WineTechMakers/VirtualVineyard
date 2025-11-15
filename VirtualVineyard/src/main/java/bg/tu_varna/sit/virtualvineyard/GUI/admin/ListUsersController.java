@@ -8,18 +8,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ListUsersController {
-    @FXML
-    public TableView<Person> personTableView;
-    @FXML
-    public TableColumn<Person, Long> idCol;
-    @FXML
-    public TableColumn<Person, String> roleCol;
-    @FXML
-    public TableColumn<Person, String> nameCol;
-    @FXML
-    public TableColumn<Person, String> egnCol;
-    @FXML
-    public TableColumn<Person, String> usernameCol;
+    @FXML public TableView<Person> personTableView;
+    @FXML public TableColumn<Person, Long> idCol;
+    @FXML public TableColumn<Person, String> roleCol;
+    @FXML public TableColumn<Person, String> nameCol;
+    @FXML public TableColumn<Person, String> egnCol;
+    @FXML public TableColumn<Person, String> usernameCol;
 
     @FXML
     public void initialize() {
@@ -37,5 +31,4 @@ public class ListUsersController {
         var people = personDAO.findAll();
         personTableView.getItems().setAll(people);
     }
-
 }

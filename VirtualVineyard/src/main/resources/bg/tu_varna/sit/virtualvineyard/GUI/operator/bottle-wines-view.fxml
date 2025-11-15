@@ -5,26 +5,27 @@
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.operator.BottleWinesController">
-   <HBox alignment="TOP_CENTER" prefHeight="45.0" prefWidth="600.0" spacing="20.0">
-      <children>
-         <ComboBox fx:id="wineComboBox" onAction="#loadBottledWineData" prefWidth="150.0" promptText="Choose wine..." />
-         <ComboBox prefWidth="150.0" />
-      </children>
-   </HBox>
-   <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" spacing="20.0">
-      <children>
-         <ComboBox prefWidth="150.0" />
-         <ComboBox prefWidth="150.0" />
-      </children>
-   </HBox>
-    <TableView fx:id="bottledWinesTable" prefHeight="234.0" prefWidth="555.0">
-      <columns>
-          <TableColumn fx:id="bottleVolumeColumn" prefWidth="91.19999694824219" text="Bottle Volume" />
-          <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
-         <TableColumn fx:id="warehouseNameColumn" prefWidth="140.0" text="Warehouse Name" />
-      </columns>
-        <VBox.margin>
-          <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-        </VBox.margin>
-    </TableView>
+    <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0" spacing="20.0">
+        <ComboBox fx:id="wineComboBox" prefHeight="26.0" prefWidth="173.0" promptText="Choose wine to bottle..." style="-fx-background-color: #FFF5F5;" />
+        <ComboBox fx:id="bottledWineWarehouseComboBox" prefHeight="26.0" prefWidth="216.0" promptText="Choose warehouse for storing..." style="-fx-background-color: #FFF5F5;" />
+    </HBox>
+    <HBox alignment="CENTER" prefHeight="295.0" prefWidth="600.0" spacing="20.0">
+        <TableView fx:id="bottledWinesTable" prefHeight="262.0" prefWidth="247.0">
+          <columns>
+              <TableColumn fx:id="bottleVolumeColumn" prefWidth="91.19999694824219" text="Bottle Volume" />
+              <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+          </columns>
+          <HBox.margin>
+              <Insets top="20.0" />
+          </HBox.margin>
+        </TableView>
+        <VBox alignment="CENTER" prefHeight="295.0" prefWidth="278.0" spacing="50.0">
+            <HBox.margin>
+                <Insets top="20.0" />
+            </HBox.margin>
+            <ComboBox fx:id="bottleWarehouseComboBox" prefHeight="26.0" prefWidth="186.0" promptText="Choose bottle warehouse..." style="-fx-background-color: white;" />
+            <ComboBox fx:id="grapeWarehouseComboBox" prefHeight="26.0" prefWidth="188.0" promptText="Choose grape warehouse..." style="-fx-background-color: white;" />
+            <Button mnemonicParsing="false" onAction="#onBottleWineClick" style="-fx-background-color: #B07FD1;" text="Bottle Wine" textFill="WHITE" />
+        </VBox>
+    </HBox>
 </VBox>

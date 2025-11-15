@@ -3,15 +3,12 @@ package bg.tu_varna.sit.virtualvineyard.GUI.admin;
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 
 public class AdminController {
-    @FXML
-    private StackPane contentPane;
-    @FXML
-    private Label adminLabel;
+    @FXML private StackPane contentPane;
+    @FXML private Label adminLabel;
 
     @FXML
     private void onRegisterUserClick() {

@@ -1,11 +1,7 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.operator;
 
-import bg.tu_varna.sit.virtualvineyard.dao.GrapeDAO;
-import bg.tu_varna.sit.virtualvineyard.dao.WineDAO;
-import bg.tu_varna.sit.virtualvineyard.dao.WineGrapeDAO;
-import bg.tu_varna.sit.virtualvineyard.entities.Grape;
-import bg.tu_varna.sit.virtualvineyard.entities.Wine;
-import bg.tu_varna.sit.virtualvineyard.entities.WineGrape;
+import bg.tu_varna.sit.virtualvineyard.dao.*;
+import bg.tu_varna.sit.virtualvineyard.entities.*;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -16,18 +12,12 @@ import javafx.scene.control.*;
 import java.util.List;
 
 public class AddWineController {
-    @FXML
-    public TextField nameTextField;
-    @FXML
-    public ComboBox<Grape> grapeComboBox;
-    @FXML
-    public Spinner<Integer> percentageSpinner;
-    @FXML
-    public TableView<WineGrape> recipeTable;
-    @FXML
-    public TableColumn<WineGrape, String> grapeCol;
-    @FXML
-    public TableColumn<WineGrape, Integer> percentageCol;
+    @FXML public TextField nameTextField;
+    @FXML public ComboBox<Grape> grapeComboBox;
+    @FXML public Spinner<Integer> percentageSpinner;
+    @FXML public TableView<WineGrape> recipeTable;
+    @FXML public TableColumn<WineGrape, String> grapeCol;
+    @FXML public TableColumn<WineGrape, Integer> percentageCol;
 
     private ObservableList<WineGrape> recipeList = FXCollections.observableArrayList(); //UI updates automatically when we add/remove items
     private int remainingPercentage = 100;
