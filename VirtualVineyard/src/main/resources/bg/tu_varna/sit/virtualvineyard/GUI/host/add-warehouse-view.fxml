@@ -13,6 +13,7 @@
          <Insets left="20.0" right="20.0" />
       </VBox.margin>
    </TextField>
+   <ComboBox fx:id="typeComboBox" prefWidth="150.0" />
    <TextField fx:id="addressTextField" layoutX="50.0" layoutY="197.0" promptText="Address">
       <VBox.margin>
          <Insets left="20.0" right="20.0" />

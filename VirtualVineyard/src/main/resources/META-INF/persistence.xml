@@ -17,6 +17,7 @@
         <class>bg.tu_varna.sit.virtualvineyard.models.Operator</class>
         <class>bg.tu_varna.sit.virtualvineyard.models.Host</class>
         <class>bg.tu_varna.sit.virtualvineyard.models.Administrator</class>
+        <class>bg.tu_varna.sit.virtualvineyard.entities.WarehouseType</class>
 
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>

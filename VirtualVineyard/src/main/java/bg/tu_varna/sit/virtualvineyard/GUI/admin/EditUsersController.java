@@ -29,10 +29,11 @@ public class EditUsersController {
     @FXML
     public void initialize() {
         PersonDAO personDAO = new PersonDAO();
-        /*List<Person> whatever = personDAO.findAll();
-        whatever.remove( PersonDAO.authenticate("admin","1234") );
-        userComboBox.getItems().addAll( whatever );*/
-        userComboBox.getItems().addAll(personDAO.findAll());
+        Person admin = PersonDAO.findByUsername("admin");
+
+        List<Person> users = personDAO.findAll();
+        users.remove(admin);
+        userComboBox.getItems().addAll(users);
 
         roleComboBox.getItems().addAll("Host", "Operator");
 

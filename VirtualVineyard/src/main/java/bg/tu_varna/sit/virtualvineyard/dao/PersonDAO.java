@@ -15,6 +15,22 @@ public class PersonDAO extends AbstractDAO<Person> {
         setEntityClass(Person.class);
     }
 
+    public static Person findByUsername(String username) {
+        try (EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU"); EntityManager sus = susf.createEntityManager()) {
+            CriteriaBuilder cb = sus.getCriteriaBuilder();
+            CriteriaQuery<Person> cq = cb.createQuery(Person.class);
+            Root<Person> Root = cq.from(Person.class);
+            cq.select(Root).where(cb.equal(Root.get("username"), username));
+            Person retrieved = sus.createQuery(cq).getSingleResult();
+            return retrieved;
+        } catch (NoResultException e) {
+            System.out.println("No such user found");
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
+    }
+
     public boolean updatePersonType(Long personId, String newType) {
         if(personId == null || newType == null)
             throw new IllegalArgumentException("Arguments cannot be null");
@@ -32,12 +48,8 @@ public class PersonDAO extends AbstractDAO<Person> {
 
     public static Person authenticate(String username, String password)
     {
-        try (EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU"); EntityManager sus = susf.createEntityManager()) {
-            CriteriaBuilder cb = sus.getCriteriaBuilder();
-            CriteriaQuery<Person> cq = cb.createQuery(Person.class);
-            Root<Person> Root = cq.from(Person.class);
-            cq.select(Root).where(cb.equal(Root.get("username"), username));
-            Person retrieved = sus.createQuery(cq).getSingleResult();
+        try {
+            Person retrieved = findByUsername(username);
             if (!retrieved.passwordMatch(password)) {
                 throw new Exception("wrong password");
             }
@@ -50,24 +62,24 @@ public class PersonDAO extends AbstractDAO<Person> {
         return null;
     }
 
-    public static void testwriting() {
-        try {
-            EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
-            EntityManager sus = susf.createEntityManager();
-            if (sus == null) {
-                System.out.println("didnt work");
-                return;
-            }
-            sus.getTransaction().begin();
-            Person person = new Administrator("admin", "1234567890", "admin", "1234");
-            //Person person = new Host("Jane Doe", "1212121212", "janedoehost", "1234567");
-            sus.persist(person);
-            sus.getTransaction().commit();
-        } catch (Exception e) {
-            System.out.println("NOpie");
-            System.out.println(e.getMessage());
-        }
-    }
+//    public static void testwriting() {
+//        try {
+//            EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
+//            EntityManager sus = susf.createEntityManager();
+//            if (sus == null) {
+//                System.out.println("didnt work");
+//                return;
+//            }
+//            sus.getTransaction().begin();
+//            Person person = new Administrator("admin", "1234567890", "admin", "1234");
+//            //Person person = new Host("Jane Doe", "1212121212", "janedoehost", "1234567");
+//            sus.persist(person);
+//            sus.getTransaction().commit();
+//        } catch (Exception e) {
+//            System.out.println("NOpie");
+//            System.out.println(e.getMessage());
+//        }
+//    }
 //    public static Person testreading(String user, String pass)
 //    {
 //        try {

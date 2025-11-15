@@ -3,6 +3,8 @@ package bg.tu_varna.sit.virtualvineyard.entities;
 import jakarta.persistence.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Objects;
+
 @Entity
 @Table (name = "Person")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -105,5 +107,18 @@ public abstract class Person
     {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(password, this.password);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(username, person.username);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(username);
     }
 }

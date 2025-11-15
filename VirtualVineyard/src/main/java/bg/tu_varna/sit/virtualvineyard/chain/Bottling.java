@@ -1,4 +1,4 @@
-package bg.tu_varna.sit.virtualvineyard.models;
+package bg.tu_varna.sit.virtualvineyard.chain;
 
 import bg.tu_varna.sit.virtualvineyard.entities.Bottle;
 import bg.tu_varna.sit.virtualvineyard.entities.BottledWine;

@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.operator;
 
+import bg.tu_varna.sit.virtualvineyard.chain.BottlingFactory;
 import bg.tu_varna.sit.virtualvineyard.dao.WineDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.BottledWine;
 import bg.tu_varna.sit.virtualvineyard.dao.BottledWineDAO;
@@ -57,6 +58,7 @@ public class BottleWinesController {
         Wine selectedWine = wineComboBox.getSelectionModel().getSelectedItem();
         if (selectedWine != null) {
             List<BottledWine> results = bottledWineDAO.findByWine(selectedWine);
+            //BottlingFactory factory = new BottlingFactory();
             bottledWinesTable.setItems(FXCollections.observableArrayList(results));
         } else {
             bottledWinesTable.getItems().clear();

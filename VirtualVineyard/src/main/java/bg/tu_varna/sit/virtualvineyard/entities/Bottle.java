@@ -13,7 +13,7 @@ public class Bottle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bottle_id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @Convert(converter = BottleTypeConverter.class)
     protected BottleType volume;
 

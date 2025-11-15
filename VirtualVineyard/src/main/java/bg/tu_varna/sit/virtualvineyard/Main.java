@@ -1,9 +1,5 @@
 package bg.tu_varna.sit.virtualvineyard;
 
-import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
-import bg.tu_varna.sit.virtualvineyard.entities.Person;
-import bg.tu_varna.sit.virtualvineyard.models.Administrator;
-
 public class Main {
     public static void main(String[] args)
     {
@@ -15,7 +11,7 @@ public class Main {
 //        PersonDAO dao = new PersonDAO();
 //        //dao.create(admin);
 //        admin = dao.findOne(18L);
-        AdminInit.init();
+        DBInit.init();
         //Person lol = PersonDAO.authenticate("admin", "1234");
         //System.out.println(lol);
     }
