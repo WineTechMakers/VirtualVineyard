@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BottlingFactory {
-    private Warehouse wineWarehouse;
-    private Warehouse bottleWarehouse;
-    private Warehouse grapeWarehouse;
+    private final Warehouse wineWarehouse;
+    private final Warehouse bottleWarehouse;
+    private final Warehouse grapeWarehouse;
 
 
     public BottlingFactory(Warehouse wineWarehouse, Warehouse bottleWarehouse, Warehouse grapeWarehouse) {
@@ -17,14 +17,20 @@ public class BottlingFactory {
         this.grapeWarehouse = grapeWarehouse;
     }
 
-    public void bottleWine(Warehouse warehouse, Wine wine)
+    public void bottleWine(Wine wine)
     {
+        for(WineGrape i: wine.getWineGrapes())
+        {
+            if(i.getGrape().getQuantity()<1)
+                throw new IllegalArgumentException("Not enough grape");
+        }
+
         int wineInML = calcProduct(wine.getWineGrapes());
         BottlingInterface chain = initChain();
         if(chain == null)
             throw new IllegalStateException("No bottles available in warehouse");
         List<BottledWine> bottled = chain.handle(wineInML, wine);
-        warehouse.addBottledWines(bottled);
+        wineWarehouse.addBottledWines(bottled);
     }
 
     private BottlingInterface initChain()
@@ -55,6 +61,7 @@ public class BottlingFactory {
         for(WineGrape i: input)
         {
             res += (int) (i.getPercentage() * i.getGrape().getWineYield() * 10);//*10 is result of *1000/100. *1000 is 'cause wineYield is in liters. /100 is because of the percentage
+            i.getGrape().setQuantity(0);//delete quantity
         }
         return res;
     }

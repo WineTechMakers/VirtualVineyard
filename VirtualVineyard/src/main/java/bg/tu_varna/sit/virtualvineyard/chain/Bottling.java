@@ -26,6 +26,7 @@ public class Bottling implements BottlingInterface
             int resultingBottles = wineinML / bottle.getVolume().getVolume();
             wineinML = wineinML % bottle.getVolume().getVolume();
             res.add( new BottledWine(wine, bottle, resultingBottles) );
+            bottle.setQuantity(bottle.getQuantity()-resultingBottles);
             if(next!=null && wineinML > 0)
                 res.addAll(next.handle(wineinML, wine));
         }

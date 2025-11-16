@@ -21,7 +21,7 @@ public class Grape {
     private boolean isBlack;//either black-0 or white-1
 
     @Column (nullable = false)
-    private double wineYield;//how much wine can be made per 1kg of grape (in liters)
+    private double wineYield;//how much wine can be made per 1kg of grape (in liter)
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
