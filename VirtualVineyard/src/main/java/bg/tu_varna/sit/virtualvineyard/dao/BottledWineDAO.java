@@ -16,4 +16,12 @@ public class BottledWineDAO extends AbstractDAO<BottledWine> {
                 .setParameter("wine", wine)
                 .getResultList();
     }
+
+    public void saveAll(List<BottledWine> list) {
+        completeAction(() -> {
+            for (BottledWine bw : list) {
+                entityManager.persist(bw);
+            }
+        });
+    }
 }

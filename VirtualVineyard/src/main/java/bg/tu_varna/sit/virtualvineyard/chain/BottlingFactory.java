@@ -1,5 +1,8 @@
 package bg.tu_varna.sit.virtualvineyard.chain;
 
+import bg.tu_varna.sit.virtualvineyard.dao.BottledWineDAO;
+import bg.tu_varna.sit.virtualvineyard.dao.GrapeDAO;
+import bg.tu_varna.sit.virtualvineyard.dao.WarehouseDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
 
 import java.util.ArrayList;
@@ -29,8 +32,15 @@ public class BottlingFactory {
         BottlingInterface chain = initChain();
         if(chain == null)
             throw new IllegalStateException("No bottles available in warehouse");
+
         List<BottledWine> bottled = chain.handle(wineInML, wine);
-        wineWarehouse.addBottledWines(bottled);
+
+        for (BottledWine bw : bottled) {
+            bw.setWarehouse(wineWarehouse);
+        }
+
+        BottledWineDAO bottledWineDAO = new BottledWineDAO();
+        bottledWineDAO.saveAll(bottled);
     }
 
     private BottlingInterface initChain()
@@ -62,6 +72,8 @@ public class BottlingFactory {
         {
             res += (int) (i.getPercentage() * i.getGrape().getWineYield() * 10);//*10 is result of *1000/100. *1000 is 'cause wineYield is in liters. /100 is because of the percentage
             i.getGrape().setQuantity(0);//delete quantity
+//            GrapeDAO grapeDAO = new GrapeDAO(); ??
+//            grapeDAO.update(i.getGrape());
         }
         return res;
     }

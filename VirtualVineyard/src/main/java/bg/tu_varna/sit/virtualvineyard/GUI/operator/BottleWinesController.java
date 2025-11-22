@@ -1,5 +1,7 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.operator;
 
+import bg.tu_varna.sit.virtualvineyard.chain.BottlingFactory;
+import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.*;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
 import bg.tu_varna.sit.virtualvineyard.enums.WarehouseContentType;
@@ -47,9 +49,17 @@ public class BottleWinesController {
     @FXML
     public void onBottleWineClick(){
         Wine selectedWine = wineComboBox.getSelectionModel().getSelectedItem();
+        if (bottledWineWarehouseComboBox.getValue() == null ||
+                bottleWarehouseComboBox.getValue() == null ||
+                grapeWarehouseComboBox.getValue() == null)
+        {
+            NavigationManager.showAlert(Alert.AlertType.ERROR,"Error!","You must select all three warehouses!");
+            return;
+        }
         if (selectedWine != null) {
+            BottlingFactory factory = new BottlingFactory(bottledWineWarehouseComboBox.getValue(), bottleWarehouseComboBox.getValue(), grapeWarehouseComboBox.getValue());
+            factory.bottleWine(selectedWine);
             List<BottledWine> results = bottledWineDAO.findByWine(selectedWine);
-            //BottlingFactory factory = new BottlingFactory();
             bottledWinesTable.setItems(FXCollections.observableArrayList(results));
         } else {
             bottledWinesTable.getItems().clear();
