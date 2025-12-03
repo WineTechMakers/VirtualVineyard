@@ -18,18 +18,33 @@ public class Bottling implements BottlingInterface
     }
 
     @Override
-    public List<BottledWine> handle(int wineinML, Wine wine)
+    public List<BottledWine> handle(int wineInML, Wine wine)
     {
         List<BottledWine> res = new ArrayList<>();
-        if(bottle.getVolume().getVolume() <= wineinML)
+
+        int volume = bottle.getVolume().getVolume(); //ml
+        int availableBottles = bottle.getQuantity();
+
+        if(volume <= wineInML && availableBottles > 0)
         {
-            int resultingBottles = wineinML / bottle.getVolume().getVolume();
-            wineinML = wineinML % bottle.getVolume().getVolume();
-            res.add( new BottledWine(wine, bottle, resultingBottles) );
-            bottle.setQuantity(bottle.getQuantity()-resultingBottles);
-            if(next!=null && wineinML > 0)
-                res.addAll(next.handle(wineinML, wine));
+            int possibleBottles = wineInML / volume;
+            int usedBottles = Math.min(possibleBottles, availableBottles);
+
+            int remainingWine = wineInML - usedBottles * volume;
+
+            if (usedBottles > 0) {
+                res.add(new BottledWine(wine, bottle, usedBottles));
+                bottle.setQuantity(availableBottles - usedBottles);
+            }
+
+            if (next != null)
+                res.addAll(next.handle(remainingWine, wine));
+            return res;
         }
+
+        if (next != null)
+            return next.handle(wineInML, wine);
+
         return res;
     }
     @Override

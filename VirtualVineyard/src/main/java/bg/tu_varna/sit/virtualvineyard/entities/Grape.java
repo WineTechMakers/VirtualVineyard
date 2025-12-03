@@ -5,7 +5,10 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table (name = "Grape")
+@Table(
+        name = "Grape",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "warehouse_id"})
+)
 public class Grape {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,13 +18,13 @@ public class Grape {
     private String name;//Name of grape
 
     @Column (nullable = false)
-    private int quantity;//quantity in warehouse
+    private double quantity;//quantity kilograms
 
     @Column (nullable = false)
     private boolean isBlack;//either black-0 or white-1
 
     @Column (nullable = false)
-    private double wineYield;//how much wine can be made per 1kg of grape (in liter)
+    private double wineYield;//how much wine can be made per 1kg of grape (in liters)
 
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
@@ -32,7 +35,7 @@ public class Grape {
 
     public Grape() {}
 
-    public Grape(String name, int quantity, boolean isBlack, double wineYield, Warehouse warehouse) {
+    public Grape(String name, double quantity, boolean isBlack, double wineYield, Warehouse warehouse) {
         this.name = name;
         this.quantity = quantity;
         this.isBlack = isBlack;
@@ -67,11 +70,11 @@ public class Grape {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public double getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
 
@@ -97,5 +100,10 @@ public class Grape {
 
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " - " + (this.isBlack ? "Black" : "White");
     }
 }

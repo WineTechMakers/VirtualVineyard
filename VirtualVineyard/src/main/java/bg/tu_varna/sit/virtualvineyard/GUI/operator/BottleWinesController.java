@@ -49,20 +49,35 @@ public class BottleWinesController {
     @FXML
     public void onBottleWineClick(){
         Wine selectedWine = wineComboBox.getSelectionModel().getSelectedItem();
+
         if (bottledWineWarehouseComboBox.getValue() == null ||
                 bottleWarehouseComboBox.getValue() == null ||
-                grapeWarehouseComboBox.getValue() == null)
-        {
+                grapeWarehouseComboBox.getValue() == null) {
             NavigationManager.showAlert(Alert.AlertType.ERROR,"Error!","You must select all three warehouses!");
             return;
         }
-        if (selectedWine != null) {
-            BottlingFactory factory = new BottlingFactory(bottledWineWarehouseComboBox.getValue(), bottleWarehouseComboBox.getValue(), grapeWarehouseComboBox.getValue());
+
+        if (selectedWine == null) {
+            NavigationManager.showAlert(Alert.AlertType.WARNING, "No wine", "Please select a wine to bottle.");
+            return;
+        }
+
+        try {
+            BottlingFactory factory = new BottlingFactory(
+                    bottledWineWarehouseComboBox.getValue(),
+                    bottleWarehouseComboBox.getValue(),
+                    grapeWarehouseComboBox.getValue()
+            );
+
             factory.bottleWine(selectedWine);
+
             List<BottledWine> results = bottledWineDAO.findByWine(selectedWine);
             bottledWinesTable.setItems(FXCollections.observableArrayList(results));
-        } else {
-            bottledWinesTable.getItems().clear();
+
+            NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "Bottling finished.");
+        } catch (Exception ex) {
+            NavigationManager.showAlert(Alert.AlertType.ERROR, "Bottling error", ex.getMessage());
+            ex.printStackTrace();
         }
     }
 }

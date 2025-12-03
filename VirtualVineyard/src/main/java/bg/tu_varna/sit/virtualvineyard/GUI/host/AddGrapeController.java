@@ -44,10 +44,9 @@ public class AddGrapeController {
             return;
         }
 
-        int quantity;
-        double wineYield;
+        double quantity, wineYield;
         try {
-            quantity = Integer.parseInt(quantityText);
+            quantity = Double.parseDouble(quantityText);
             wineYield = Double.parseDouble(yieldText);
         } catch (NumberFormatException e) {
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Invalid Input", "Quantity must be integer and wine yield must be a number.");
@@ -56,11 +55,27 @@ public class AddGrapeController {
 
         boolean isBlack = blackRadioButton.isSelected();
 
-        Grape grape = new Grape(name, quantity, isBlack, wineYield, warehouse);
-        grapeDAO.create(grape);
+        Grape existing = grapeDAO.findByWarehouseAndName(warehouse, name);
 
-        NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "Grape added successfully!");
+        if (existing != null) {
+            //update instead of creating
+            existing.setQuantity(existing.getQuantity() + quantity);
+            //existing.setWineYield(wineYield);
+            grapeDAO.update(existing);
 
+            NavigationManager.showAlert(Alert.AlertType.INFORMATION,
+                    "Updated",
+                    "Grape quantity updated successfully!");
+
+        } else {
+            //create new
+            Grape grape = new Grape(name, quantity, isBlack, wineYield, warehouse);
+            grapeDAO.create(grape);
+
+            NavigationManager.showAlert(Alert.AlertType.INFORMATION,
+                    "Success",
+                    "Grape added successfully!");
+        }
         warehouseComboBox.setValue(null);
         nameTextField.clear();
         quantityTextField.clear();

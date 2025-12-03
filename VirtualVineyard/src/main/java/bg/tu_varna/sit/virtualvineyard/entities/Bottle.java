@@ -7,13 +7,14 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table (name = "Bottle")
+@Table (name = "Bottle",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"warehouse_id", "volume"}))
 public class Bottle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bottle_id;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     @Convert(converter = BottleTypeConverter.class)
     protected BottleType volume;
 

@@ -17,7 +17,7 @@ public class CheckInventoryController {
     @FXML private TableView<Grape> grapesTable;
     @FXML private TableColumn<Grape, Long> grapeIdColumn;
     @FXML private TableColumn<Grape, String> grapeNameColumn;
-    @FXML private TableColumn<Grape, Integer> grapeQuantityColumn;
+    @FXML private TableColumn<Grape, Double> grapeQuantityColumn;
     @FXML private TableColumn<Grape, String> grapeColorColumn;
     @FXML private TableColumn<Grape, Double> grapeYieldColumn;
     @FXML private TableColumn<Grape, String> grapeWarehouseColumn;
@@ -60,7 +60,7 @@ public class CheckInventoryController {
                 new SimpleStringProperty(cellData.getValue().getName())
         );
         grapeQuantityColumn.setCellValueFactory(cellData ->
-                new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject()
+                new SimpleDoubleProperty(cellData.getValue().getQuantity()).asObject()
         );
         grapeColorColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().isBlack() ? "Black" : "White")

@@ -43,9 +43,23 @@ public class AddBottleController {
             return;
         }
 
-        Bottle bottle = new Bottle(volume, quantity, warehouse);
-        bottleDAO.create(bottle);
-        NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "Bottle added successfully!");
+        Bottle existingBottle = bottleDAO.findByWarehouseAndType(warehouse, volume);
+
+        if (existingBottle != null) {
+            existingBottle.setQuantity(existingBottle.getQuantity() + quantity);
+            bottleDAO.update(existingBottle);
+
+            NavigationManager.showAlert(Alert.AlertType.INFORMATION,
+                    "Updated",
+                    "Bottle already exists — quantity updated.");
+        } else {
+            Bottle bottle = new Bottle(volume, quantity, warehouse);
+            bottleDAO.create(bottle);
+
+            NavigationManager.showAlert(Alert.AlertType.INFORMATION,
+                    "Success",
+                    "Bottle added successfully!");
+        }
 
         warehouseComboBox.setValue(null);
         volumeComboBox.setValue(null);

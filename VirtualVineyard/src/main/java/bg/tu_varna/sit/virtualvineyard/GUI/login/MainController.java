@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class MainController {
     @FXML private TextField usernameTextField;
     @FXML private TextField passwordTextField;
-    @FXML private Label loggedText;
 
     @FXML
     public void initialize() {
@@ -34,8 +33,15 @@ public class MainController {
             ((Stage) usernameTextField.getScene().getWindow()).close(); //close login window
         }
         else {
-            loggedText.setText("Invalid username or password!");
+            NavigationManager.showAlert(Alert.AlertType.ERROR,
+                    "Error",
+                    "Invalid username or password!");
         }
+    }
+
+    @FXML
+    protected void onExitButtonClick() {
+        ((Stage) usernameTextField.getScene().getWindow()).close();
     }
 
     private void openAdminWindow() {

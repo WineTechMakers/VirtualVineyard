@@ -14,7 +14,7 @@ public class Wine {
     @Column (length = 60, nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "wine")
+    @OneToMany(mappedBy = "wine", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<WineGrape> wineGrapes;
 
     @OneToMany(mappedBy = "wine") //CascadeType.PERSIST?

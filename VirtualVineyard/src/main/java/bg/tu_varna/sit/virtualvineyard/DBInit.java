@@ -1,11 +1,8 @@
 package bg.tu_varna.sit.virtualvineyard;
 
-import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
-import bg.tu_varna.sit.virtualvineyard.dao.WarehouseDAO;
-import bg.tu_varna.sit.virtualvineyard.dao.WarehouseTypeDAO;
-import bg.tu_varna.sit.virtualvineyard.entities.Person;
-import bg.tu_varna.sit.virtualvineyard.entities.Warehouse;
-import bg.tu_varna.sit.virtualvineyard.entities.WarehouseType;
+import bg.tu_varna.sit.virtualvineyard.dao.*;
+import bg.tu_varna.sit.virtualvineyard.entities.*;
+import bg.tu_varna.sit.virtualvineyard.enums.BottleType;
 import bg.tu_varna.sit.virtualvineyard.enums.WarehouseContentType;
 import bg.tu_varna.sit.virtualvineyard.models.Administrator;
 
@@ -13,21 +10,46 @@ public class DBInit
 {
     public static void init()
     {
-        Person test = PersonDAO.authenticate("admin", "1234");
-        if(test != null) {
-            System.out.println("No need to create");
+        initAdmin();
+        initWarehouseTypes();
+        initBottlesTypes();
+    }
+
+    private static void initAdmin(){
+        Person testAdmin = PersonDAO.authenticate("admin", "1234");
+        if(testAdmin != null) {
+            System.out.println("Admin is already created");
             return;
         }
         PersonDAO pd = new PersonDAO();
-        test = new Administrator("admin", "0000000000", "admin", "1234");
-        pd.create(test);
-        System.out.println("Admin initialized with pass 1234");
+        testAdmin = new Administrator("admin", "0000000000", "admin", "1234");
+        pd.create(testAdmin);
+        System.out.println("Admin initialized with password 1234");
+    }
 
-        WarehouseTypeDAO wd = new WarehouseTypeDAO();
+    private static void initWarehouseTypes(){
+        WarehouseTypeDAO wtd = new WarehouseTypeDAO();
 
         for (WarehouseContentType type : WarehouseContentType.values())
         {
-            wd.create(new WarehouseType(type.toString()));
+            if (wtd.findByName(type.toString()) == null) {
+                wtd.create(new WarehouseType(type.toString()));
+            }
         }
+        System.out.println("Warehouse types initialized");
+    }
+
+    private static void initBottlesTypes(){
+        BottleDAO bd = new BottleDAO();
+        WarehouseDAO wd = new WarehouseDAO();
+
+        for (Warehouse w : wd.findByContentType(WarehouseContentType.BOTTLE_ONLY)) {
+            for (BottleType type : BottleType.values()) {
+                if (bd.findByWarehouseAndType(w, type) == null) {
+                    bd.create(new Bottle(type, 0, w));
+                }
+            }
+        }
+        System.out.println("Bottle types initialized");
     }
 }

@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.operator;
 
+import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.*;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -42,24 +43,6 @@ public class AddWineController {
         GrapeDAO grapeDAO = new GrapeDAO();
         List<Grape> grapes = grapeDAO.findAll();
         grapeComboBox.setItems(FXCollections.observableArrayList(grapes));
-
-        //displayed in the dropdown -> show usernames instead of toString()
-        grapeComboBox.setCellFactory(listView -> new javafx.scene.control.ListCell<>() {
-            @Override
-            protected void updateItem(Grape grape, boolean empty) {
-                super.updateItem(grape, empty);
-                setText(empty || grape == null ? null : grape.getName());
-            }
-        });
-
-        //displayed when selected
-        grapeComboBox.setButtonCell(new javafx.scene.control.ListCell<>() {
-            @Override
-            protected void updateItem(Grape grape, boolean empty) {
-                super.updateItem(grape, empty);
-                setText(empty || grape == null ? null : grape.getName());
-            }
-        });
     }
 
     @FXML
@@ -75,7 +58,7 @@ public class AddWineController {
         remainingPercentage -= pct;
 
         percentageSpinner.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, remainingPercentage, remainingPercentage)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, remainingPercentage, remainingPercentage, 5)
         );
 
         grapeComboBox.getSelectionModel().clearSelection();
@@ -104,9 +87,12 @@ public class AddWineController {
 
         recipeList.clear();
         remainingPercentage = 100;
+        nameTextField.setText("");
 
         percentageSpinner.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 100)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 100, 5)
         );
+
+        NavigationManager.showAlert(Alert.AlertType.CONFIRMATION, "Success", "Successfully created a new Wine!");
     }
 }

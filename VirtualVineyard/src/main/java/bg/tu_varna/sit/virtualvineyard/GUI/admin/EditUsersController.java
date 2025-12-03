@@ -25,26 +25,7 @@ public class EditUsersController {
         List<Person> users = personDAO.findAll();
         users.remove(admin);
         userComboBox.getItems().addAll(users);
-
         roleComboBox.getItems().addAll("Host", "Operator");
-
-        //displayed in the dropdown -> show usernames instead of toString()
-        userComboBox.setCellFactory(cb -> new ListCell<>() {
-            @Override
-            protected void updateItem(Person person, boolean empty) {
-                super.updateItem(person, empty);
-                setText(empty || person == null ? null : person.getUsername());
-            }
-        });
-
-        //displayed when selected
-        userComboBox.setButtonCell(new ListCell<>() {
-            @Override
-            protected void updateItem(Person person, boolean empty) {
-                super.updateItem(person, empty);
-                setText(empty || person == null ? null : person.getUsername());
-            }
-        });
     }
 
     @FXML
