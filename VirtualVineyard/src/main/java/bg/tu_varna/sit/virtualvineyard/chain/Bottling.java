@@ -22,22 +22,25 @@ public class Bottling implements BottlingInterface
     {
         List<BottledWine> res = new ArrayList<>();
 
-        int volume = bottle.getVolume().getVolume(); //ml
+        int volume = bottle.getVolume().getVolume(); //in ml
         int availableBottles = bottle.getQuantity();
 
         if(volume <= wineInML && availableBottles > 0)
         {
+            //bottles we can fill with the wine provided
             int possibleBottles = wineInML / volume;
+            //bottles we actually have in stock
             int usedBottles = Math.min(possibleBottles, availableBottles);
-
-            int remainingWine = wineInML - usedBottles * volume;
 
             if (usedBottles > 0) {
                 res.add(new BottledWine(wine, bottle, usedBottles));
                 bottle.setQuantity(availableBottles - usedBottles);
             }
 
-            if (next != null)
+            int usedVolume = usedBottles * volume;
+            int remainingWine = wineInML - usedVolume;
+
+            if (remainingWine > 0 && next != null)
                 res.addAll(next.handle(remainingWine, wine));
             return res;
         }

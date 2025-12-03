@@ -6,9 +6,7 @@ import bg.tu_varna.sit.virtualvineyard.dao.GrapeDAO;
 import bg.tu_varna.sit.virtualvineyard.dao.WarehouseDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class BottlingFactory {
     private final Warehouse wineWarehouse;
@@ -33,18 +31,31 @@ public class BottlingFactory {
 
         int totalML = (int) (liters * 1000);
 
-        consumeGrapesForProduction(wine.getWineGrapes());
-
         BottlingInterface chain = initChain();
         if (chain == null)
             throw new IllegalStateException("No bottles available.");
 
         List<BottledWine> bottled = chain.handle(totalML, wine);
 
+        if (bottled.isEmpty()) {
+            throw new IllegalStateException("Not enough bottle capacity for the produced wine.");
+        }
+
         for (BottledWine bw : bottled)
             bw.setWarehouse(wineWarehouse);
 
-        new BottledWineDAO().saveAll(bottled);
+        bottledWineDAO.saveAll(bottled);
+
+        Set<Bottle> usedBottles = new HashSet<>();
+        for (BottledWine bw : bottled) {
+            usedBottles.add(bw.getBottle());
+        }
+
+        for (Bottle b : usedBottles) {
+            //quantity was already reduced inside the Bottling.java handle() method
+            bottleDAO.update(b);
+        }
+        consumeGrapesForProduction(wine.getWineGrapes());
     }
 
     private BottlingInterface initChain() {
