@@ -2,6 +2,7 @@ package bg.tu_varna.sit.virtualvineyard.entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -26,6 +27,9 @@ public class Grape {
     @Column (nullable = false)
     private double wineYield;//how much wine can be made per 1kg of grape (in liters)
 
+    @Column(name = "date_received")
+    private LocalDate dateReceived;
+
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
@@ -41,6 +45,7 @@ public class Grape {
         this.isBlack = isBlack;
         this.wineYield = wineYield;
         this.warehouse = warehouse;
+        this.dateReceived = LocalDate.now();
     }
 
     public Long getGrape_id() {
@@ -100,6 +105,14 @@ public class Grape {
 
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
+    }
+
+    public LocalDate getDateReceived() {
+        return dateReceived;
+    }
+
+    public void setDateReceived(LocalDate dateReceived) {
+        this.dateReceived = dateReceived;
     }
 
     @Override

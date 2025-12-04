@@ -1,8 +1,12 @@
 package bg.tu_varna.sit.virtualvineyard.dao;
 
+import bg.tu_varna.sit.virtualvineyard.entities.BottledWine;
 import bg.tu_varna.sit.virtualvineyard.entities.Grape;
 import bg.tu_varna.sit.virtualvineyard.entities.Warehouse;
 import jakarta.persistence.NoResultException;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public class GrapeDAO extends AbstractDAO<Grape> {
     public GrapeDAO() {
@@ -19,5 +23,14 @@ public class GrapeDAO extends AbstractDAO<Grape> {
         } catch (NoResultException e) {
             return null;
         }
+    }
+
+    public List<Grape> findByDateRange(LocalDate startDate, LocalDate endDate) {
+        return entityManager.createQuery(
+                        "SELECT g FROM Grape g WHERE g.dateReceived BETWEEN :start AND :end",
+                        Grape.class)
+                .setParameter("start", startDate)
+                .setParameter("end", endDate)
+                .getResultList();
     }
 }

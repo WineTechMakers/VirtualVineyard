@@ -4,6 +4,8 @@ import bg.tu_varna.sit.virtualvineyard.models.BottledWineID;
 import bg.tu_varna.sit.virtualvineyard.models.WineGrapeID;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "BottledWine")
 @IdClass(BottledWineID.class)
@@ -21,6 +23,9 @@ public class BottledWine {
     @Column(nullable = false)
     private int quantity;
 
+    @Column(name = "production_date")
+    private LocalDate productionDate;
+
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
@@ -32,6 +37,7 @@ public class BottledWine {
         this.wine = wine;
         this.bottle = bottle;
         this.quantity = quantity;
+        this.productionDate = LocalDate.now();
     }
 
     public Wine getWine() {
@@ -64,5 +70,13 @@ public class BottledWine {
 
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
+    }
+
+    public LocalDate getProductionDate() {
+        return productionDate;
+    }
+
+    public void setProductionDate(LocalDate productionDate) {
+        this.productionDate = productionDate;
     }
 }

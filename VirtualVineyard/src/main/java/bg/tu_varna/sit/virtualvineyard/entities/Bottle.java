@@ -4,6 +4,7 @@ import bg.tu_varna.sit.virtualvineyard.GUI.BottleTypeConverter;
 import bg.tu_varna.sit.virtualvineyard.enums.BottleType;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -21,6 +22,9 @@ public class Bottle {
     @Column(nullable = false)
     protected int quantity;
 
+    @Column(name = "date_received")
+    private LocalDate dateReceived;
+
     @ManyToOne
     @JoinColumn(name = "warehouse_id", nullable = false)
     private Warehouse warehouse;
@@ -36,6 +40,7 @@ public class Bottle {
         this.volume = volume;
         this.quantity = quantity;
         this.warehouse = warehouse;
+        this.dateReceived = LocalDate.now();
     }
 
     public Warehouse getWarehouse() {
@@ -68,6 +73,14 @@ public class Bottle {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public LocalDate getDateReceived() {
+        return dateReceived;
+    }
+
+    public void setDateReceived(LocalDate dateReceived) {
+        this.dateReceived = dateReceived;
     }
 
     public List<BottledWine> getBottledWines() {

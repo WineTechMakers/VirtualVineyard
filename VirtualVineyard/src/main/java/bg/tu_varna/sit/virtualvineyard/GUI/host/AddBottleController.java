@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
+
 public class AddBottleController {
     @FXML private ComboBox<Warehouse> warehouseComboBox;
     @FXML private ComboBox<BottleType> volumeComboBox;
@@ -47,6 +49,7 @@ public class AddBottleController {
 
         if (existingBottle != null) {
             existingBottle.setQuantity(existingBottle.getQuantity() + quantity);
+            existingBottle.setDateReceived(LocalDate.now());
             bottleDAO.update(existingBottle);
 
             NavigationManager.showAlert(Alert.AlertType.INFORMATION,

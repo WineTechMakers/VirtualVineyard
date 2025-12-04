@@ -1,11 +1,15 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.host;
 
+import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.*;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
 import javafx.beans.property.*;
 import javafx.collections.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public class CheckInventoryController {
     @FXML public TableView<Warehouse> warehousesTable;
@@ -21,12 +25,17 @@ public class CheckInventoryController {
     @FXML private TableColumn<Grape, String> grapeColorColumn;
     @FXML private TableColumn<Grape, Double> grapeYieldColumn;
     @FXML private TableColumn<Grape, String> grapeWarehouseColumn;
+    @FXML private TableColumn<Grape, String> grapeDateColumn;
 
     @FXML private TableView<Bottle> bottlesTable;
     @FXML private TableColumn<Bottle, Long> bottleIdColumn;
     @FXML private TableColumn<Bottle, Integer> bottleVolumeColumn;
     @FXML private TableColumn<Bottle, Integer> bottleQuantityColumn;
     @FXML private TableColumn<Bottle, String> bottleWarehouseColumn;
+    @FXML private TableColumn<Bottle, String> bottleDateColumn;
+
+    @FXML private DatePicker startDatePicker;
+    @FXML private DatePicker endDatePicker;
 
     private final WarehouseDAO warehouseDAO = new WarehouseDAO();
     private final GrapeDAO grapeDAO = new GrapeDAO();
@@ -34,7 +43,12 @@ public class CheckInventoryController {
 
     @FXML
     public void initialize() {
-        //warehouses
+        setupWarehouses();
+        setupGrapes();
+        setupBottles();
+    }
+
+    private void setupWarehouses() {
         warehouseIdColumn.setCellValueFactory(cellData ->
                 new SimpleLongProperty(cellData.getValue().getWarehouse_id()).asObject()
         );
@@ -51,8 +65,9 @@ public class CheckInventoryController {
         );
         ObservableList<Warehouse> warehouses = FXCollections.observableArrayList(warehouseDAO.findAll());
         warehousesTable.setItems(warehouses);
+    }
 
-        //grapes
+    private void setupGrapes() {
         grapeIdColumn.setCellValueFactory(cellData ->
                 new SimpleLongProperty(cellData.getValue().getGrape_id()).asObject()
         );
@@ -72,10 +87,18 @@ public class CheckInventoryController {
                 new SimpleStringProperty(cellData.getValue().getWarehouse().getName())
         );
 
-        ObservableList<Grape> grapes = FXCollections.observableArrayList(grapeDAO.findAll());
-        grapesTable.setItems(grapes);
+        grapeDateColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(
+                        cellData.getValue().getDateReceived() != null
+                                ? cellData.getValue().getDateReceived().toString()
+                                : "N/A"
+                )
+        );
 
-        //bottles
+        loadAllGrapes();
+    }
+
+    private void setupBottles() {
         bottleIdColumn.setCellValueFactory(cellData ->
                 new SimpleLongProperty(cellData.getValue().getBottle_id()).asObject()
         );
@@ -89,7 +112,53 @@ public class CheckInventoryController {
                 new SimpleStringProperty(cellData.getValue().getWarehouse().getName())
         );
 
-        ObservableList<Bottle> bottles = FXCollections.observableArrayList(bottleDAO.findAll());
-        bottlesTable.setItems(bottles);
+        bottleDateColumn.setCellValueFactory(cellData ->
+                new SimpleStringProperty(
+                        cellData.getValue().getDateReceived() != null
+                                ? cellData.getValue().getDateReceived().toString()
+                                : "N/A"
+                )
+        );
+
+        loadAllBottles();
+    }
+
+    private void loadAllGrapes() {
+        grapesTable.setItems(FXCollections.observableArrayList(grapeDAO.findAll()));
+    }
+
+    private void loadAllBottles() {
+        bottlesTable.setItems(FXCollections.observableArrayList(bottleDAO.findAll()));
+    }
+
+    @FXML
+    public void onSearchClick(){
+        LocalDate start = startDatePicker.getValue();
+        LocalDate end = endDatePicker.getValue();
+
+        if (start == null || end == null) {
+            NavigationManager.showAlert(Alert.AlertType.WARNING,"Alert","Please choose a start and end date!");
+            return;
+        }
+
+        if (start.isAfter(end)) {
+            NavigationManager.showAlert(Alert.AlertType.WARNING,"Alert","Start date cannot be after end date!");
+            return;
+        }
+
+        List<Grape> filteredGrapes = grapeDAO.findByDateRange(start, end);
+        List<Bottle> filteredBottles = bottleDAO.findByDateRange(start, end);
+
+        grapesTable.setItems(FXCollections.observableArrayList(filteredGrapes));
+        bottlesTable.setItems(FXCollections.observableArrayList(filteredBottles));
+    }
+
+    @FXML
+    public void onClearClick(){
+        startDatePicker.setValue(null);
+        endDatePicker.setValue(null);
+
+        loadAllGrapes();
+        loadAllBottles();
     }
 }

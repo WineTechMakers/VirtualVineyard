@@ -9,6 +9,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
+import java.time.LocalDate;
+
 public class AddGrapeController {
     @FXML public ComboBox<Warehouse> warehouseComboBox;
     @FXML public TextField nameTextField;
@@ -60,6 +62,7 @@ public class AddGrapeController {
         if (existing != null) {
             //update instead of creating
             existing.setQuantity(existing.getQuantity() + quantity);
+            existing.setDateReceived(LocalDate.now());
             //existing.setWineYield(wineYield);
             grapeDAO.update(existing);
 

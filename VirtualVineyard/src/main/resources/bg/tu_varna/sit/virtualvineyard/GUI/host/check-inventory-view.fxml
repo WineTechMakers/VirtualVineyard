@@ -1,38 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="623.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.host.CheckInventoryController">
-    <Tab style="-fx-background-color: #BDCE8E;" text="Warehouses">
-        <TableView fx:id="warehousesTable" prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #BDCE8E;">
-            <columns>
-                <TableColumn fx:id="warehouseIdColumn" prefWidth="40.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="ID" />
-                <TableColumn fx:id="warehouseTypeColumn" prefWidth="140.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Type" />
-                <TableColumn fx:id="warehouseNameColumn" prefWidth="180.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Name" />
-                <TableColumn fx:id="warehouseAddressColumn" prefWidth="200.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Address" />
-            </columns>
-        </TableView>
-    </Tab>
-    <Tab style="-fx-background-color: #E7EEBA;" text="Grapes">
-        <TableView fx:id="grapesTable" prefHeight="371.0" prefWidth="793.0" style="-fx-background-color: #E7EEBA;">
-            <columns>
-                <TableColumn fx:id="grapeIdColumn" prefWidth="40.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="ID" />
-                <TableColumn fx:id="grapeNameColumn" prefWidth="150.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Name" />
-                <TableColumn fx:id="grapeQuantityColumn" prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Quantity" />
-                <TableColumn fx:id="grapeColorColumn" prefWidth="70.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Color" />
-                <TableColumn fx:id="grapeYieldColumn" prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Wine yield" />
-                <TableColumn fx:id="grapeWarehouseColumn" prefWidth="160.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Warehouse" />
-            </columns>
-        </TableView>
-    </Tab>
-    <Tab style="-fx-background-color: #F0F0A7;" text="Bottles">
-        <TableView fx:id="bottlesTable" prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #F0F0A7;">
-            <columns>
-                <TableColumn fx:id="bottleIdColumn" prefWidth="40.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="ID" />
-                <TableColumn fx:id="bottleVolumeColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Volume" />
-                <TableColumn fx:id="bottleQuantityColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Quantity" />
-                <TableColumn fx:id="bottleWarehouseColumn" prefWidth="160.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Warehouse" />
-            </columns>
-        </TableView>
-    </Tab>
-</TabPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.host.CheckInventoryController">
+
+    <TabPane prefHeight="400.0" prefWidth="623.0" tabClosingPolicy="UNAVAILABLE">
+        <Tab style="-fx-background-color: #BDCE8E;" text="Warehouses">
+            <TableView fx:id="warehousesTable" prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #BDCE8E;">
+                <columns>
+                    <TableColumn fx:id="warehouseIdColumn" prefWidth="40.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="ID" />
+                    <TableColumn fx:id="warehouseTypeColumn" prefWidth="140.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Type" />
+                    <TableColumn fx:id="warehouseNameColumn" prefWidth="180.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Name" />
+                    <TableColumn fx:id="warehouseAddressColumn" prefWidth="200.0" style="-fx-background-color: #BDCE8E; -fx-border-color: white;" text="Address" />
+                </columns>
+            </TableView>
+        </Tab>
+        <Tab style="-fx-background-color: #E7EEBA;" text="Grapes">
+            <TableView fx:id="grapesTable" prefHeight="371.0" prefWidth="793.0" style="-fx-background-color: #E7EEBA;">
+                <columns>
+                    <TableColumn fx:id="grapeIdColumn" prefWidth="40.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="ID" />
+                    <TableColumn fx:id="grapeNameColumn" prefWidth="150.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Name" />
+                    <TableColumn fx:id="grapeQuantityColumn" prefWidth="65.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Quantity" />
+                    <TableColumn fx:id="grapeColorColumn" prefWidth="70.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Color" />
+                    <TableColumn fx:id="grapeYieldColumn" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Wine yield" />
+                    <TableColumn fx:id="grapeWarehouseColumn" prefWidth="120.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Warehouse" />
+                    <TableColumn fx:id="grapeDateColumn" prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Date Received" />
+                </columns>
+            </TableView>
+        </Tab>
+        <Tab style="-fx-background-color: #F0F0A7;" text="Bottles">
+            <TableView fx:id="bottlesTable" prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #F0F0A7;">
+                <columns>
+                    <TableColumn fx:id="bottleIdColumn" prefWidth="40.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="ID" />
+                    <TableColumn fx:id="bottleVolumeColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Volume" />
+                    <TableColumn fx:id="bottleQuantityColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Quantity" />
+                    <TableColumn fx:id="bottleWarehouseColumn" prefWidth="160.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Warehouse" />
+                    <TableColumn fx:id="bottleDateColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Date Received" />
+                </columns>
+            </TableView>
+        </Tab>
+    </TabPane>
+    <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #f0f0f0;">
+        <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        </padding>
+        <Label text="Search for period from:" />
+        <DatePicker fx:id="startDatePicker" prefWidth="120.0" promptText="Begin" />
+        <Label text="to:" />
+        <DatePicker fx:id="endDatePicker" prefWidth="120.0" promptText="End" />
+        <Button mnemonicParsing="false" onAction="#onSearchClick" text="Search" />
+        <Button mnemonicParsing="false" onAction="#onClearClick" text="Clear" />
+    </HBox>
+</VBox>

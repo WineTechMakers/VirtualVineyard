@@ -23,8 +23,8 @@
          <Button maxWidth="Infinity" onAction="#onAddWarehouseClick" style="-fx-background-color: #84973B;" text="Add Warehouse" textFill="WHITE" />
          <Button maxWidth="Infinity" onAction="#onAddGrapeClick" style="-fx-background-color: #84973B;" text="Add Grape" textFill="WHITE" />
          <Button maxWidth="Infinity" onAction="#onAddBottleClick" style="-fx-background-color: #84973B;" text="Add Bottle" textFill="WHITE" />
-         <Button maxWidth="Infinity" onAction="#onCheckInventoryClick" style="-fx-background-color: #84973B;" text="Check Inventory" textFill="WHITE" />
          <Separator />
+         <Button maxWidth="Infinity" onAction="#onCheckInventoryClick" style="-fx-background-color: #6A8737;" text="Check Inventory" textFill="WHITE" />
       </VBox>
    </left>
    <center>
