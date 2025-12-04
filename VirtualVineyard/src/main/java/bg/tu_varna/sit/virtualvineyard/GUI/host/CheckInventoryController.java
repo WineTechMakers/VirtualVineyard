@@ -12,6 +12,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class CheckInventoryController {
+    //thresholds
+    private static final double GRAPE_CRITICAL_LIMIT = 50.0; // kg
+    private static final int BOTTLE_CRITICAL_LIMIT = 100;    // pieces
+
     @FXML public TableView<Warehouse> warehousesTable;
     @FXML public TableColumn<Warehouse, Long> warehouseIdColumn;
     @FXML public TableColumn<Warehouse, String> warehouseTypeColumn;
@@ -95,6 +99,24 @@ public class CheckInventoryController {
                 )
         );
 
+        grapesTable.setRowFactory(tv -> new TableRow<Grape>() {
+            @Override
+            protected void updateItem(Grape item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setStyle("");
+                } else if (item.getQuantity() <= 0) {
+                    //Red -> Empty
+                    setStyle("-fx-background-color: #ffcccc;");
+                } else if (item.getQuantity() < GRAPE_CRITICAL_LIMIT) {
+                    //Orange/Yellow -> Critically Low
+                    setStyle("-fx-background-color: #fff4cc;");
+                } else {
+                    setStyle("-fx-background-color: #E7EEBA;");
+                }
+            }
+        });
+
         loadAllGrapes();
     }
 
@@ -119,6 +141,24 @@ public class CheckInventoryController {
                                 : "N/A"
                 )
         );
+
+        bottlesTable.setRowFactory(tv -> new TableRow<Bottle>() {
+            @Override
+            protected void updateItem(Bottle item, boolean empty) {
+                super.updateItem(item, empty);
+                if (item == null || empty) {
+                    setStyle("");
+                } else if (item.getQuantity() <= 0) {
+                    //Red -> Empty
+                    setStyle("-fx-background-color: #ffcccc;");
+                } else if (item.getQuantity() < BOTTLE_CRITICAL_LIMIT) {
+                    //Orange/Yellow -> Critically Low
+                    setStyle("-fx-background-color: #fff4cc;");
+                } else {
+                    setStyle("-fx-background-color: #F0F0A7;");
+                }
+            }
+        });
 
         loadAllBottles();
     }

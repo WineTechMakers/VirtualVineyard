@@ -18,26 +18,26 @@
             </TableView>
         </Tab>
         <Tab style="-fx-background-color: #E7EEBA;" text="Grapes">
-            <TableView fx:id="grapesTable" prefHeight="371.0" prefWidth="793.0" style="-fx-background-color: #E7EEBA;">
+            <TableView fx:id="grapesTable" prefHeight="371.0" prefWidth="793.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;">
                 <columns>
-                    <TableColumn fx:id="grapeIdColumn" prefWidth="40.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="ID" />
-                    <TableColumn fx:id="grapeNameColumn" prefWidth="150.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Name" />
-                    <TableColumn fx:id="grapeQuantityColumn" prefWidth="65.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Quantity" />
-                    <TableColumn fx:id="grapeColorColumn" prefWidth="70.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Color" />
-                    <TableColumn fx:id="grapeYieldColumn" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Wine yield" />
-                    <TableColumn fx:id="grapeWarehouseColumn" prefWidth="120.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Warehouse" />
-                    <TableColumn fx:id="grapeDateColumn" prefWidth="100.0" style="-fx-background-color: #E7EEBA; -fx-border-color: white;" text="Date Received" />
+                    <TableColumn fx:id="grapeIdColumn" prefWidth="30.0" style="-fx-border-color: white;" text="ID" />
+                    <TableColumn fx:id="grapeNameColumn" prefWidth="150.0" style="-fx-border-color: white;" text="Name" />
+                    <TableColumn fx:id="grapeQuantityColumn" prefWidth="65.0" style="-fx-border-color: white;" text="Quantity" />
+                    <TableColumn fx:id="grapeColorColumn" prefWidth="70.0" style="-fx-border-color: white;" text="Color" />
+                    <TableColumn fx:id="grapeYieldColumn" style="-fx-border-color: white;" text="Wine yield" />
+                    <TableColumn fx:id="grapeWarehouseColumn" style="-fx-border-color: white;" text="Warehouse" />
+                    <TableColumn fx:id="grapeDateColumn" prefWidth="100.0" style="-fx-border-color: white;" text="Date Received" />
                 </columns>
             </TableView>
         </Tab>
         <Tab style="-fx-background-color: #F0F0A7;" text="Bottles">
             <TableView fx:id="bottlesTable" prefHeight="489.0" prefWidth="831.0" style="-fx-background-color: #F0F0A7;">
                 <columns>
-                    <TableColumn fx:id="bottleIdColumn" prefWidth="40.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="ID" />
-                    <TableColumn fx:id="bottleVolumeColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Volume" />
-                    <TableColumn fx:id="bottleQuantityColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Quantity" />
-                    <TableColumn fx:id="bottleWarehouseColumn" prefWidth="160.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Warehouse" />
-                    <TableColumn fx:id="bottleDateColumn" prefWidth="100.0" style="-fx-background-color: #F0F0A7; -fx-border-color: white;" text="Date Received" />
+                    <TableColumn fx:id="bottleIdColumn" prefWidth="40.0" style="-fx-border-color: white;" text="ID" />
+                    <TableColumn fx:id="bottleVolumeColumn" prefWidth="100.0" style="-fx-border-color: white;" text="Volume" />
+                    <TableColumn fx:id="bottleQuantityColumn" prefWidth="100.0" style="-fx-border-color: white;" text="Quantity" />
+                    <TableColumn fx:id="bottleWarehouseColumn" prefWidth="160.0" style="-fx-border-color: white;" text="Warehouse" />
+                    <TableColumn fx:id="bottleDateColumn" prefWidth="100.0" style="-fx-border-color: white;" text="Date Received" />
                 </columns>
             </TableView>
         </Tab>
