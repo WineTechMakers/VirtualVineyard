@@ -11,16 +11,14 @@ import java.util.*;
 public class BottlingFactory {
     private final Warehouse wineWarehouse;
     private final Warehouse bottleWarehouse;
-    private final Warehouse grapeWarehouse;
 
     private final GrapeDAO grapeDAO = new GrapeDAO();
     private final BottleDAO bottleDAO = new BottleDAO();
     private final BottledWineDAO bottledWineDAO = new BottledWineDAO();
 
-    public BottlingFactory(Warehouse wineWarehouse, Warehouse bottleWarehouse, Warehouse grapeWarehouse) {
+    public BottlingFactory(Warehouse wineWarehouse, Warehouse bottleWarehouse) {
         this.wineWarehouse = wineWarehouse;
         this.bottleWarehouse = bottleWarehouse;
-        this.grapeWarehouse = grapeWarehouse;
     }
 
     public void bottleWine(Wine wine) {
@@ -80,92 +78,66 @@ public class BottlingFactory {
         return first;
     }
 
-    //compute liters of wine that can be produced
-    public double computeTotalLitersAvailable(List<WineGrape> grapes) {
+    private double calculateMaxRawBatchKg(List<WineGrape> wineGrapes) {
+        double maxTotalMixKg = Double.MAX_VALUE;
+
+        for (WineGrape wg : wineGrapes) {
+            double requiredRatio = wg.getPercentage() / 100.0;
+            double availableStock = wg.getGrape().getQuantity();
+
+            if (requiredRatio > 0) {
+                // How much TOTAL mix could we make if this grape was the only limit?
+                // Example: Have 10kg, need 50% (0.5). Max mix = 10 / 0.5 = 20kg.
+                double maxPossibleWithThisGrape = availableStock / requiredRatio;
+
+                if (maxPossibleWithThisGrape < maxTotalMixKg) {
+                    maxTotalMixKg = maxPossibleWithThisGrape;
+                }
+            }
+        }
+
+        // If no grapes or logic failed, return 0
+        if (maxTotalMixKg == Double.MAX_VALUE) return 0;
+
+        return maxTotalMixKg;
+    }
+
+    public double computeTotalLitersAvailable(List<WineGrape> wineGrapes) {
+        // First, find out the maximum weight of the grape mixture we can form
+        double limitingBatchKg = calculateMaxRawBatchKg(wineGrapes);
         double totalLiters = 0;
 
-        for (WineGrape wg : grapes) {
-            Grape g = wg.getGrape();
+        for (WineGrape wg : wineGrapes) {
+            double ratio = wg.getPercentage() / 100.0;
 
-            double percentage = wg.getPercentage() / 100.0;
-            double kgUsed = g.getQuantity() * percentage;
+            // Calculate exact kg of THIS grape used in the batch
+            double kgUsedOfThisGrape = limitingBatchKg * ratio;
 
-            double liters = kgUsed * g.getWineYield(); // L = kg * yield
+            // Convert that specific grape's mass to liquid based on ITS specific yield
+            double liters = kgUsedOfThisGrape * wg.getGrape().getWineYield();
 
             totalLiters += liters;
         }
         return totalLiters;
     }
 
-    //subtract used grape quantity
-    public void consumeGrapesForProduction(List<WineGrape> grapes) {
-        for (WineGrape wg : grapes) {
+    public void consumeGrapesForProduction(List<WineGrape> wineGrapes) {
+        // Recalculate the limit to ensure we only subtract what is physically possible
+        // (Or you could pass this value in from the main method to save performance)
+        double limitingBatchKg = calculateMaxRawBatchKg(wineGrapes);
+
+        for (WineGrape wg : wineGrapes) {
             Grape g = wg.getGrape();
+            double ratio = wg.getPercentage() / 100.0;
 
-            double percentage = wg.getPercentage() / 100.0;
-            double kgUsed = g.getQuantity() * percentage;
+            // Only subtract the portion that fits in the limiting batch
+            double kgUsed = limitingBatchKg * ratio;
 
-            g.setQuantity(g.getQuantity() - kgUsed);
+            // Safety check to ensure we don't go below zero due to floating point rounding
+            double newQuantity = Math.max(0, g.getQuantity() - kgUsed);
 
+            g.setQuantity(newQuantity);
             grapeDAO.update(g);
         }
     }
-
-//    public void bottleWine(Wine wine)
-//    {
-//        for(WineGrape i: wine.getWineGrapes())
-//        {
-//            if(i.getGrape().getQuantity()<1)
-//                throw new IllegalArgumentException("Not enough grape");
-//        }
-//
-//        int wineInML = calcProduct(wine.getWineGrapes());
-//        BottlingInterface chain = initChain();
-//        if(chain == null)
-//            throw new IllegalStateException("No bottles available in warehouse");
-//
-//        List<BottledWine> bottled = chain.handle(wineInML, wine);
-//
-//        for (BottledWine bw : bottled) {
-//            bw.setWarehouse(wineWarehouse);
-//        }
-//
-//        BottledWineDAO bottledWineDAO = new BottledWineDAO();
-//        bottledWineDAO.saveAll(bottled);
-//    }
-//
-//    private BottlingInterface initChain()
-//    {
-//        List<Bottle> bottles = bottleWarehouse.getBottles();
-//        if(bottles == null || bottles.isEmpty())
-//            return null;
-//        //needs sorting -_-
-//        List<Bottle> sortedBottles = new ArrayList<>(bottles);
-//        sortedBottles.sort((b1, b2) ->
-//                Integer.compare(b2.getVolume().getVolume(), b1.getVolume().getVolume())
-//        );
-//
-//        BottlingInterface first = new Bottling(sortedBottles.getFirst());
-//        BottlingInterface current = first;
-//
-//        for(int i = 1; i < sortedBottles.size(); i++) {
-//            BottlingInterface next = new Bottling(sortedBottles.get(i));
-//            current.setNext(next);
-//            current = next;
-//        }
-//        return first;
-//    }
-//
-//    private int calcProduct(List<WineGrape> input)
-//    {
-//        int res=0;
-//        for(WineGrape i: input)
-//        {
-//            res += (int) (i.getPercentage() * i.getGrape().getWineYield() * 10);//*10 is result of *1000/100. *1000 is 'cause wineYield is in liters. /100 is because of the percentage
-//            i.getGrape().setQuantity(0);//delete quantity
-////            GrapeDAO grapeDAO = new GrapeDAO(); ??
-////            grapeDAO.update(i.getGrape());
-//        }
-//        return res;
-//    }
 }

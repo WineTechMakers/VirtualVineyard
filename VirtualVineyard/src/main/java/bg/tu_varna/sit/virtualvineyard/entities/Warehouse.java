@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
+import bg.tu_varna.sit.virtualvineyard.enums.WarehouseContentType;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class Warehouse { //<T>
 
     @Column (length = 140)
     private String address;
+
+    @Column (name = "critical_limit")
+    private int criticalLimit = 50;
 
     @ManyToOne
     @JoinColumn(name = "warehouse_type_id", nullable = false)
@@ -72,6 +76,14 @@ public class Warehouse { //<T>
         this.warehouseType = warehouseType;
     }
 
+    public int getCriticalLimit() {
+        return criticalLimit;
+    }
+
+    public void setCriticalLimit(int criticalLimit) {
+        this.criticalLimit = criticalLimit;
+    }
+
     public void addGrape(Grape grape)
     {
         grapes.add(grape);
@@ -100,6 +112,24 @@ public class Warehouse { //<T>
 
     public List<Bottle> getBottles(){
         return bottles;
+    }
+
+    public boolean isCriticalLimit(){
+        if(warehouseType.getType().equals(WarehouseContentType.GRAPE_ONLY.toString())) {
+            for (Grape grape : grapes) {
+                if(grape.getQuantity() < criticalLimit) {
+                    return true;
+                }
+            }
+        }
+        else if(warehouseType.getType().equals(WarehouseContentType.BOTTLE_ONLY.toString())) {
+            for (Bottle bottle : bottles) {
+                if(bottle.getQuantity() < criticalLimit) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override

@@ -16,7 +16,6 @@ public class BottleWinesController {
     @FXML private ComboBox<Wine> wineComboBox;
     @FXML private ComboBox<Warehouse> bottledWineWarehouseComboBox;
     @FXML private ComboBox<Warehouse> bottleWarehouseComboBox;
-    @FXML private ComboBox<Warehouse> grapeWarehouseComboBox;
 
     @FXML private TableView<BottledWine> bottledWinesTable;
     @FXML private TableColumn<BottledWine, Integer> bottleVolumeColumn;
@@ -34,8 +33,6 @@ public class BottleWinesController {
         bottledWineWarehouseComboBox.setItems(bottledWineWarehouses);
         ObservableList<Warehouse> bottleWarehouses = FXCollections.observableArrayList(warehouseDAO.findByContentType(WarehouseContentType.BOTTLE_ONLY));
         bottleWarehouseComboBox.setItems(bottleWarehouses);
-        ObservableList<Warehouse> grapeWarehouses = FXCollections.observableArrayList(warehouseDAO.findByContentType(WarehouseContentType.GRAPE_ONLY));
-        grapeWarehouseComboBox.setItems(grapeWarehouses);
 
         bottleVolumeColumn.setCellValueFactory(cellData ->
                 new SimpleIntegerProperty(cellData.getValue().getBottle().getVolume().getVolume()).asObject()
@@ -51,8 +48,7 @@ public class BottleWinesController {
         Wine selectedWine = wineComboBox.getSelectionModel().getSelectedItem();
 
         if (bottledWineWarehouseComboBox.getValue() == null ||
-                bottleWarehouseComboBox.getValue() == null ||
-                grapeWarehouseComboBox.getValue() == null) {
+                bottleWarehouseComboBox.getValue() == null) {
             NavigationManager.showAlert(Alert.AlertType.ERROR,"Error!","You must select all three warehouses!");
             return;
         }
@@ -65,19 +61,30 @@ public class BottleWinesController {
         try {
             BottlingFactory factory = new BottlingFactory(
                     bottledWineWarehouseComboBox.getValue(),
-                    bottleWarehouseComboBox.getValue(),
-                    grapeWarehouseComboBox.getValue()
+                    bottleWarehouseComboBox.getValue()
             );
 
             factory.bottleWine(selectedWine);
+            StringBuilder alerts = new StringBuilder();
+            for (Warehouse warehouse : warehouseDAO.findAll()){
+                if(warehouse.getWarehouseType().getType().equals(WarehouseContentType.GRAPE_ONLY.toString())
+                        && warehouse.isCriticalLimit()){
+                    alerts.append("\nGrape critical low limit reached in Warehouse ");
+                    alerts.append(warehouse.getName());
+                    alerts.append("!");
+                }
+            }
+
+            if(bottleWarehouseComboBox.getValue().isCriticalLimit()){
+                alerts.append("\nBottle critical low limit reached!");
+            }
 
             List<BottledWine> results = bottledWineDAO.findByWine(selectedWine);
             bottledWinesTable.setItems(FXCollections.observableArrayList(results));
 
-            NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "Bottling finished.");
+            NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "Bottling finished." + alerts);
         } catch (Exception ex) {
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Bottling error", ex.getMessage());
-            ex.printStackTrace();
         }
     }
 }

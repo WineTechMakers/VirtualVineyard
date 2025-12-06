@@ -41,7 +41,7 @@ public class Grape {
 
     public Grape(String name, double quantity, boolean isBlack, double wineYield, Warehouse warehouse) {
         this.name = name;
-        this.quantity = quantity;
+        setQuantity(quantity);
         this.isBlack = isBlack;
         this.wineYield = wineYield;
         this.warehouse = warehouse;
@@ -80,7 +80,7 @@ public class Grape {
     }
 
     public void setQuantity(double quantity) {
-        this.quantity = quantity;
+        this.quantity = Math.round(quantity * 100.0) / 100.0;
     }
 
     public boolean isBlack() {

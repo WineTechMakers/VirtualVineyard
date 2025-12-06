@@ -21,6 +21,7 @@ public class CheckInventoryController {
     @FXML public TableColumn<Warehouse, String> warehouseTypeColumn;
     @FXML public TableColumn<Warehouse, String> warehouseNameColumn;
     @FXML public TableColumn<Warehouse, String> warehouseAddressColumn;
+    @FXML public TableColumn<Warehouse, Integer> warehouseLimitColumn;
 
     @FXML private TableView<Grape> grapesTable;
     @FXML private TableColumn<Grape, Long> grapeIdColumn;
@@ -66,6 +67,9 @@ public class CheckInventoryController {
         );
         warehouseAddressColumn.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getAddress())
+        );
+        warehouseLimitColumn.setCellValueFactory(cellData ->
+                new SimpleIntegerProperty(cellData.getValue().getCriticalLimit()).asObject()
         );
         ObservableList<Warehouse> warehouses = FXCollections.observableArrayList(warehouseDAO.findAll());
         warehousesTable.setItems(warehouses);
