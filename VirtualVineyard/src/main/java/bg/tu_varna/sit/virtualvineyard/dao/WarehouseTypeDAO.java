@@ -4,6 +4,7 @@ import bg.tu_varna.sit.virtualvineyard.entities.WarehouseType;
 import jakarta.persistence.NoResultException;
 
 public class WarehouseTypeDAO extends AbstractDAO<WarehouseType>{
+
     public WarehouseTypeDAO() {
         setEntityClass(WarehouseType.class);
     }
@@ -15,6 +16,7 @@ public class WarehouseTypeDAO extends AbstractDAO<WarehouseType>{
                     .setParameter("type", type)
                     .getSingleResult();
         } catch (NoResultException e) {
+
             return null;
         }
     }

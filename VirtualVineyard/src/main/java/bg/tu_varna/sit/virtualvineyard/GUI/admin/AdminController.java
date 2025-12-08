@@ -1,12 +1,16 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.admin;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
+import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
 import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AdminController {
+    private static final Logger logger = LogManager.getLogger(AdminController.class);
     @FXML private StackPane contentPane;
     @FXML private Label adminLabel;
 
@@ -41,7 +45,7 @@ public class AdminController {
             NavigationManager.closeWindow(adminLabel);
             NavigationManager.openNewWindow(ViewType.LOGIN);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.error("Error!, Cannot open Login panel!");
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Cannot open Login panel!");
         }
     }

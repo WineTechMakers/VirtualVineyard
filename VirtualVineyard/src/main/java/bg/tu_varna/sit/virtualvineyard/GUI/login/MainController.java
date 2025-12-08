@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.login;
 
+import bg.tu_varna.sit.virtualvineyard.DBInit;
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.Person;
@@ -15,6 +16,7 @@ public class MainController {
 
     @FXML
     public void initialize() {
+        DBInit.init();
         usernameTextField.setText("admin");
         passwordTextField.setText("1234");
     }

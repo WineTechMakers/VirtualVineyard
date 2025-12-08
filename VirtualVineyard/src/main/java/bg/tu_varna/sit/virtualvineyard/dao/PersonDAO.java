@@ -9,8 +9,12 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PersonDAO extends AbstractDAO<Person> {
+    private static final Logger logger = LogManager.getLogger(PersonDAO.class);
+
     public PersonDAO() {
         setEntityClass(Person.class);
     }
@@ -24,9 +28,9 @@ public class PersonDAO extends AbstractDAO<Person> {
             Person retrieved = sus.createQuery(cq).getSingleResult();
             return retrieved;
         } catch (NoResultException e) {
-            System.out.println("No such user found");
+            logger.error("User '{}' isn't registered", username);
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            logger.error("Unknown error '{}'", e.toString());
         }
         return null;
     }
@@ -50,59 +54,17 @@ public class PersonDAO extends AbstractDAO<Person> {
     {
         try {
             Person retrieved = findByUsername(username);
-            if (!retrieved.passwordMatch(password)) {
+            if(retrieved == null)
+                throw new NoResultException("");
+            if (!retrieved.passwordMatch(password))
                 throw new Exception("wrong password");
-            }
+            logger.info("Authentication successful for user '{}'", username);
             return retrieved;
         } catch (NoResultException e) {
-            System.out.println("No such user found");
+            logger.error("User '{}' couldn't be found", username);
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            logger.error("During authentication for user '{}' password didn't verify", username);
         }
         return null;
     }
-
-//    public static void testwriting() {
-//        try {
-//            EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
-//            EntityManager sus = susf.createEntityManager();
-//            if (sus == null) {
-//                System.out.println("didnt work");
-//                return;
-//            }
-//            sus.getTransaction().begin();
-//            Person person = new Administrator("admin", "1234567890", "admin", "1234");
-//            //Person person = new Host("Jane Doe", "1212121212", "janedoehost", "1234567");
-//            sus.persist(person);
-//            sus.getTransaction().commit();
-//        } catch (Exception e) {
-//            System.out.println("NOpie");
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//    public static Person testreading(String user, String pass)
-//    {
-//        try {
-//            /*EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
-//            EntityManager sus = susf.createEntityManager();
-//            Administrator retrievedProduct = sus.find(Administrator.class, 2L);
-//            System.out.println(retrievedProduct.getEGN());
-//            return retrievedProduct;*/
-//            EntityManagerFactory susf = Persistence.createEntityManagerFactory("myPU");
-//            EntityManager sus = susf.createEntityManager();
-//            CriteriaBuilder cb = sus.getCriteriaBuilder();
-//            CriteriaQuery<Administrator> cq = cb.createQuery(Administrator.class);
-//            Root<Administrator> adminRoot = cq.from(Administrator.class);
-//
-//            cq.select(adminRoot).where(cb.equal(adminRoot.get("username"), user));
-//            Administrator retrievedAdmin = sus.createQuery(cq).getSingleResult();
-//            System.out.println(retrievedAdmin.getEGN());
-//            return retrievedAdmin;
-//        }
-//        catch(Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//        }
-//        return null;
-//    }
 }

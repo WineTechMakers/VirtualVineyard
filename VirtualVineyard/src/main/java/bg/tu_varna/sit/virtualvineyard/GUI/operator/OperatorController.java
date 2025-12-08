@@ -5,8 +5,11 @@ import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class OperatorController {
+    private static final Logger logger = LogManager.getLogger(OperatorController.class);
     @FXML public Label operatorLabel;
     @FXML private StackPane contentPane;
 
@@ -36,7 +39,7 @@ public class OperatorController {
             NavigationManager.closeWindow(operatorLabel);
             NavigationManager.openNewWindow(ViewType.LOGIN);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.error("Unknown error occured'{}'", e.toString());
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Cannot open Login panel!");
         }
     }

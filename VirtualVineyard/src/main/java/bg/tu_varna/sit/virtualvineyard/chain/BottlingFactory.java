@@ -5,13 +5,15 @@ import bg.tu_varna.sit.virtualvineyard.dao.BottledWineDAO;
 import bg.tu_varna.sit.virtualvineyard.dao.GrapeDAO;
 import bg.tu_varna.sit.virtualvineyard.dao.WarehouseDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
 public class BottlingFactory {
+    private static final Logger logger = LogManager.getLogger(BottlingFactory.class);
     private final Warehouse wineWarehouse;
     private final Warehouse bottleWarehouse;
-
     private final GrapeDAO grapeDAO = new GrapeDAO();
     private final BottleDAO bottleDAO = new BottleDAO();
     private final BottledWineDAO bottledWineDAO = new BottledWineDAO();
@@ -25,29 +27,36 @@ public class BottlingFactory {
         double liters = computeTotalLitersAvailable(wine.getWineGrapes());
 
         if (liters <= 0)
+        {
+            logger.error("Not enough grapes to produce wine");
             throw new IllegalArgumentException("Not enough grapes to produce wine.");
+        }
 
         int totalML = (int) (liters * 1000);
 
         BottlingInterface chain = initChain();
         if (chain == null)
+        {
+            logger.error("No bottles available in warehouse '{}'", bottleWarehouse.getName());
             throw new IllegalStateException("No bottles available.");
+        }
 
         List<BottledWine> bottled = chain.handle(totalML, wine);
 
         if (bottled.isEmpty()) {
-            throw new IllegalStateException("Not enough bottle capacity for the produced wine.");
+            logger.error("No wine produced due to unexpected error");
+            throw new IllegalStateException("No wine produced due to unexpected error");
         }
 
         for (BottledWine bw : bottled)
             bw.setWarehouse(wineWarehouse);
 
         bottledWineDAO.saveAll(bottled);
+        logger.info("Bottled Production of wine '{}' in warehouse '{}'", wine.getName(), wineWarehouse.getName());
 
         Set<Bottle> usedBottles = new HashSet<>();
-        for (BottledWine bw : bottled) {
+        for (BottledWine bw : bottled)
             usedBottles.add(bw.getBottle());
-        }
 
         for (Bottle b : usedBottles) {
             //quantity was already reduced inside the Bottling.java handle() method

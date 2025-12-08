@@ -5,8 +5,11 @@ import bg.tu_varna.sit.virtualvineyard.enums.ViewType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class HostController {
+    private static final Logger logger = LogManager.getLogger(HostController.class);
     @FXML private Label hostLabel;
     @FXML private StackPane contentPane;
 
@@ -36,7 +39,7 @@ public class HostController {
             NavigationManager.closeWindow(hostLabel);
             NavigationManager.openNewWindow(ViewType.LOGIN);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.error("Unknown error occurred '{}'", e.toString());
             NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Cannot open Login panel!");
         }
     }

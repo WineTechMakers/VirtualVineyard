@@ -1,10 +1,13 @@
 package bg.tu_varna.sit.virtualvineyard.dao;
 
 import jakarta.persistence.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public abstract class AbstractDAO<T> { // extends Serializable?
+    private static final Logger logger = LogManager.getLogger(AbstractDAO.class);
     private Class<T> entityClass;
 
     @PersistenceContext
@@ -64,6 +67,7 @@ public abstract class AbstractDAO<T> { // extends Serializable?
         } catch (Exception e) {
             if (transaction.isActive())
                 transaction.rollback();
+            logger.error("Couldn't establish connection to DB");
             throw new RuntimeException(e);
         }
     }
