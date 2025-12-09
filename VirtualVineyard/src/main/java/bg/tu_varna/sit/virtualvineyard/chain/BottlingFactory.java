@@ -95,8 +95,8 @@ public class BottlingFactory {
             double availableStock = wg.getGrape().getQuantity();
 
             if (requiredRatio > 0) {
-                // How much TOTAL mix could we make if this grape was the only limit?
-                // Example: Have 10kg, need 50% (0.5). Max mix = 10 / 0.5 = 20kg.
+                //how much TOTAL mix could we make if this grape was the only limit?
+                //example: Have 10kg, need 50% (0.5). Max mix = 10 / 0.5 = 20kg.
                 double maxPossibleWithThisGrape = availableStock / requiredRatio;
 
                 if (maxPossibleWithThisGrape < maxTotalMixKg) {
@@ -105,24 +105,24 @@ public class BottlingFactory {
             }
         }
 
-        // If no grapes or logic failed, return 0
+        //if no grapes or if logic failed
         if (maxTotalMixKg == Double.MAX_VALUE) return 0;
 
         return maxTotalMixKg;
     }
 
     public double computeTotalLitersAvailable(List<WineGrape> wineGrapes) {
-        // First, find out the maximum weight of the grape mixture we can form
+        //maximum weight of the grape mixture
         double limitingBatchKg = calculateMaxRawBatchKg(wineGrapes);
         double totalLiters = 0;
 
         for (WineGrape wg : wineGrapes) {
             double ratio = wg.getPercentage() / 100.0;
 
-            // Calculate exact kg of THIS grape used in the batch
+            //exact kg of curr grape used in the batch
             double kgUsedOfThisGrape = limitingBatchKg * ratio;
 
-            // Convert that specific grape's mass to liquid based on ITS specific yield
+            //convert curr grape's mass to liquid based on its specific yield
             double liters = kgUsedOfThisGrape * wg.getGrape().getWineYield();
 
             totalLiters += liters;
@@ -131,18 +131,18 @@ public class BottlingFactory {
     }
 
     public void consumeGrapesForProduction(List<WineGrape> wineGrapes) {
-        // Recalculate the limit to ensure we only subtract what is physically possible
-        // (Or you could pass this value in from the main method to save performance)
+        //recalculate the limit to ensure we only subtract what is physically possible
+        //could pass this value in from the main method?
         double limitingBatchKg = calculateMaxRawBatchKg(wineGrapes);
 
         for (WineGrape wg : wineGrapes) {
             Grape g = wg.getGrape();
             double ratio = wg.getPercentage() / 100.0;
 
-            // Only subtract the portion that fits in the limiting batch
+            //subtract only the portion that fits in the limiting batch
             double kgUsed = limitingBatchKg * ratio;
 
-            // Safety check to ensure we don't go below zero due to floating point rounding
+            //safety check -> if it goes below 0 due to rounding
             double newQuantity = Math.max(0, g.getQuantity() - kgUsed);
 
             g.setQuantity(newQuantity);
