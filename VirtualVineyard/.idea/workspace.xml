@@ -68,6 +68,7 @@
     "Application.Main.executor": "Run",
     "Application.MainApplication.executor": "Run",
     "JUnit.BottleTest.executor": "Run",
+    "JUnit.PersonDAOTest.executor": "Run",
     "JUnit.WineDAOTest.executor": "Run",
     "JUnit.WineDAOTest.testDeleteWine.executor": "Run",
     "JUnit.WineTest.executor": "Run",
@@ -101,7 +102,7 @@
       <recent name="bg.tu_varna.sit.virtualvineyard.GUI.Controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Launcher">
+  <component name="RunManager" selected="JUnit.PersonDAOTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bg.tu_varna.sit.virtualvineyard.GUI.Launcher" />
       <module name="VirtualVineyard" />
@@ -128,10 +129,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BottleTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PersonDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="VirtualVineyard" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BottleTest" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bg.tu_varna.sit.virtualvineyard.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="bg.tu_varna.sit.virtualvineyard.test" />
+      <option name="MAIN_CLASS_NAME" value="bg.tu_varna.sit.virtualvineyard.test.PersonDAOTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -158,11 +165,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.PersonDAOTest" />
         <item itemvalue="Application.Launcher" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.WineDAOTest.testDeleteWine" />
         <item itemvalue="JUnit.WineDAOTest" />
-        <item itemvalue="JUnit.BottleTest" />
       </list>
     </recent_temporary>
   </component>
