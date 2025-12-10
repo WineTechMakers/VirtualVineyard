@@ -1,6 +1,9 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
+import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
+import bg.tu_varna.sit.virtualvineyard.Normalizer;
 import jakarta.persistence.*;
+import javafx.scene.control.Alert;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Objects;
@@ -9,7 +12,7 @@ import java.util.Objects;
 @Table (name = "Person")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "PERSON_TYPE")
-public abstract class Person
+public abstract class Person implements Normalizer
 {
     //рефлекция - директно ползва без нужда от getter, setter и параметризирани конструктури
     @Id
@@ -34,9 +37,9 @@ public abstract class Person
     }
 
     public Person(String name, String EGN, String username, String password) {
-        this.name = name;
-        this.EGN = EGN;
-        this.username = username;
+        this.name = name.trim();
+        setEGN(EGN);
+        setUsername(username);
         setPassword(password);
     }
 
@@ -84,7 +87,11 @@ public abstract class Person
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        //validation of text fields
+        if(!isEnglishAndNumbersOnly(username)){
+            throw new IllegalArgumentException("Allowed latin characters and numbers only!");
+        }
+        this.username = username.trim();
     }
 
     public void setPassword(String password) {
@@ -96,17 +103,6 @@ public abstract class Person
     public String toString() {
         return this.username;
     }
-
-//    @Override
-//    public String toString() {
-//        final StringBuilder sb = new StringBuilder("Person: ");
-//        sb.append("person_id=").append(person_id);
-//        sb.append(", name=").append(name);
-//        sb.append(", EGN=").append(EGN);
-//        sb.append(", username=").append(username);
-//        sb.append(", password=").append(password);
-//        return sb.toString();
-//    }
 
     public boolean passwordMatch(String password)
     {

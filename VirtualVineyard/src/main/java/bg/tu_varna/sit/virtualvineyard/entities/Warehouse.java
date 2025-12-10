@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
+import bg.tu_varna.sit.virtualvineyard.Normalizer;
 import bg.tu_varna.sit.virtualvineyard.enums.WarehouseContentType;
 import jakarta.persistence.*;
 
@@ -7,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table (name = "Warehouse")
-public class Warehouse { //<T>
+public class Warehouse implements Normalizer { //<T>
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long warehouse_id;
@@ -39,8 +40,8 @@ public class Warehouse { //<T>
     }
 
     public Warehouse(String name, String address, WarehouseType warehouseType) {
-        this.name = name;
-        this.address = address;
+        setName(name);
+        this.address = address.trim();
         this.warehouseType = warehouseType;
     }
 
@@ -61,6 +62,10 @@ public class Warehouse { //<T>
     }
 
     public void setName(String name) {
+        normalize(name);
+        if(!isEnglishAndNumbersOnly(name)){
+            throw new IllegalArgumentException("Allowed latin characters and numbers only!");
+        }
         this.name = name;
     }
 

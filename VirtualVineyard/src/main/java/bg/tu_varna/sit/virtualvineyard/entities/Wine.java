@@ -1,12 +1,14 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
+import bg.tu_varna.sit.virtualvineyard.Normalizer;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table (name = "Wine")
-public class Wine {
+public class Wine implements Normalizer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long wine_id;
@@ -23,7 +25,7 @@ public class Wine {
     public Wine() {}
 
     public Wine(String name) {
-        this.name = name;
+        setName(name);
     }
 
     public Long getWine_id() {
@@ -39,6 +41,10 @@ public class Wine {
     }
 
     public void setName(String name) {
+        normalize(name);
+        if(!isEnglishAndNumbersOnly(name)){
+            throw new IllegalArgumentException("Allowed latin characters and numbers only!");
+        }
         this.name = name;
     }
 

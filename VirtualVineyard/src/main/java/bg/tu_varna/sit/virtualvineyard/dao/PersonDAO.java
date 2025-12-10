@@ -25,8 +25,7 @@ public class PersonDAO extends AbstractDAO<Person> {
             CriteriaQuery<Person> cq = cb.createQuery(Person.class);
             Root<Person> Root = cq.from(Person.class);
             cq.select(Root).where(cb.equal(Root.get("username"), username));
-            Person retrieved = sus.createQuery(cq).getSingleResult();
-            return retrieved;
+            return sus.createQuery(cq).getSingleResult();
         } catch (NoResultException e) {
             logger.error("User '{}' isn't registered", username);
         } catch (Exception e) {

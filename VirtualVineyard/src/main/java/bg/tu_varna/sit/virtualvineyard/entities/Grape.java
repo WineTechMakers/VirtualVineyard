@@ -1,5 +1,6 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
+import bg.tu_varna.sit.virtualvineyard.Normalizer;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -10,7 +11,7 @@ import java.util.List;
         name = "Grape",
         uniqueConstraints = @UniqueConstraint(columnNames = {"name", "warehouse_id"})
 )
-public class Grape {
+public class Grape implements Normalizer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long grape_id;
@@ -40,7 +41,7 @@ public class Grape {
     public Grape() {}
 
     public Grape(String name, double quantity, boolean isBlack, double wineYield, Warehouse warehouse) {
-        this.name = name;
+        setName(name);
         setQuantity(quantity);
         this.isBlack = isBlack;
         this.wineYield = wineYield;
@@ -72,6 +73,10 @@ public class Grape {
     }
 
     public void setName(String name) {
+        name=normalize(name);
+        if(!isEnglishAndNumbersOnly(name)){
+            throw new IllegalArgumentException("Allowed latin characters and numbers only!");
+        }
         this.name = name;
     }
 

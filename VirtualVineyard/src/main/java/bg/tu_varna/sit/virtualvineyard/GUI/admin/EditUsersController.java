@@ -63,13 +63,20 @@ public class EditUsersController {
         boolean roleChanged = false;
 
         String currentRole;
-        switch (selected) {
-            case Host host -> currentRole = "Host";
-            case Operator operator -> currentRole = "Operator";
-            default -> {
-                NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Unsupported current user role!");
-                return;
+        try {
+
+            switch (selected) {
+                case Host host -> currentRole = "Host";
+                case Operator operator -> currentRole = "Operator";
+                default -> {
+                    NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Unsupported current user role!");
+                    return;
+                }
             }
+        }
+        catch (Exception e) {
+            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Error: " + e.getMessage());
+            return;
         }
 
         if (!currentRole.equalsIgnoreCase(newRole)) {

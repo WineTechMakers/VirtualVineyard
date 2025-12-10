@@ -1,13 +1,15 @@
 package bg.tu_varna.sit.virtualvineyard.GUI.admin;
 
 import bg.tu_varna.sit.virtualvineyard.GUI.NavigationManager;
+import bg.tu_varna.sit.virtualvineyard.Normalizer;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
 import bg.tu_varna.sit.virtualvineyard.models.*;
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.apache.logging.log4j.LogManager;
 
-public class RegisterUserController {
+public class RegisterUserController{
     @FXML private TextField nameTextField;
     @FXML private TextField EGNTextField;
     @FXML private TextField usernameTextField;
@@ -32,19 +34,29 @@ public class RegisterUserController {
             return;
         }
 
-        Person person;
-        if ("Operator".equalsIgnoreCase(role)) {
-            person = new Operator(name, egn, username, password);
-        } else if ("Host".equalsIgnoreCase(role)) {
-            person = new Host(name, egn, username, password);
-        } else {
-            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Please select a role!");
+        Person person = null;
+        try {
+            if ("Operator".equalsIgnoreCase(role)) {
+                person = new Operator(name, egn, username, password);
+            } else if ("Host".equalsIgnoreCase(role)) {
+                person = new Host(name, egn, username, password);
+            } else {
+                NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", "Please select a role!");
+                return;
+            }
+        } catch (Exception e){
+            NavigationManager.showAlert(Alert.AlertType.ERROR, "Error!", e.getMessage());
             return;
-        } //validation of text fields!!
+        }
 
         //save in database
         PersonDAO personDAO = new PersonDAO();
-        boolean saved = personDAO.create(person);
+        boolean saved = false;
+        try {
+            saved = personDAO.create(person);
+        } catch (Exception e) {
+            LogManager.getLogger().error(e.getMessage());
+        }
 
         if (saved) {
             NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "User registered successfully!");

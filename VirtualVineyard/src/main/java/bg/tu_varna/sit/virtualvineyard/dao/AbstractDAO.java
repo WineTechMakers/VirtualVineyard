@@ -36,11 +36,10 @@ public abstract class AbstractDAO<T> { // extends Serializable?
         return true;
     }
 
-    public boolean update(T entity){
+    public void update(T entity){
         if(entity == null)
             throw new IllegalArgumentException("Entity cannot be null");
         completeAction(() -> entityManager.merge(entity));
-        return true;
     }
 
     public void delete(T entity){
