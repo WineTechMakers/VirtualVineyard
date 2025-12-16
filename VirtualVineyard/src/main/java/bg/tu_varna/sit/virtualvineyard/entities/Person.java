@@ -74,7 +74,7 @@ public abstract class Person implements Normalizer
     public String getPersonType() { return this.getClass().getSimpleName(); }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name.trim();
     }
 
     public void setEGN(String EGN) {

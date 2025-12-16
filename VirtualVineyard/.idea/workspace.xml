@@ -68,6 +68,8 @@
     "Application.Main.executor": "Run",
     "Application.MainApplication.executor": "Run",
     "JUnit.BottleTest.executor": "Run",
+    "JUnit.BottlingFactoryTest.executor": "Run",
+    "JUnit.EntityValidationTest.executor": "Run",
     "JUnit.PersonDAOTest.executor": "Run",
     "JUnit.WineDAOTest.executor": "Run",
     "JUnit.WineDAOTest.testDeleteWine.executor": "Run",
@@ -102,7 +104,7 @@
       <recent name="bg.tu_varna.sit.virtualvineyard.GUI.Controllers" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PersonDAOTest">
+  <component name="RunManager" selected="JUnit.EntityValidationTest">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="bg.tu_varna.sit.virtualvineyard.GUI.Launcher" />
       <module name="VirtualVineyard" />
@@ -129,6 +131,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BottlingFactoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VirtualVineyard" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bg.tu_varna.sit.virtualvineyard.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="bg.tu_varna.sit.virtualvineyard.test" />
+      <option name="MAIN_CLASS_NAME" value="bg.tu_varna.sit.virtualvineyard.test.BottlingFactoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EntityValidationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="VirtualVineyard" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bg.tu_varna.sit.virtualvineyard.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="bg.tu_varna.sit.virtualvineyard.test" />
+      <option name="MAIN_CLASS_NAME" value="bg.tu_varna.sit.virtualvineyard.test.EntityValidationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="PersonDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="VirtualVineyard" />
       <extension name="coverage">
@@ -144,32 +176,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="WineDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="VirtualVineyard" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WineDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="WineDAOTest.testDeleteWine" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="VirtualVineyard" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="WineDAOTest" />
-      <option name="METHOD_NAME" value="testDeleteWine" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PersonDAOTest" />
+        <item itemvalue="JUnit.EntityValidationTest" />
         <item itemvalue="Application.Launcher" />
+        <item itemvalue="JUnit.BottlingFactoryTest" />
+        <item itemvalue="JUnit.PersonDAOTest" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.WineDAOTest.testDeleteWine" />
-        <item itemvalue="JUnit.WineDAOTest" />
       </list>
     </recent_temporary>
   </component>

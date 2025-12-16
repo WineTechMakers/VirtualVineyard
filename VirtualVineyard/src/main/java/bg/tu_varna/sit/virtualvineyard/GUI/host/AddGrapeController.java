@@ -56,8 +56,8 @@ public class AddGrapeController {
         }
 
         boolean isBlack = blackRadioButton.isSelected();
-
-        Grape existing = grapeDAO.findByWarehouseAndName(warehouse, name);
+        Grape stafida = new Grape(name, 0, false, 0, warehouse);
+        Grape existing = grapeDAO.findByWarehouseAndName(warehouse, stafida.getName());
 
         if (existing != null) {
             //update instead of creating

@@ -14,13 +14,27 @@ public class BottlingFactory {
     private static final Logger logger = LogManager.getLogger(BottlingFactory.class);
     private final Warehouse wineWarehouse;
     private final Warehouse bottleWarehouse;
-    private final GrapeDAO grapeDAO = new GrapeDAO();
-    private final BottleDAO bottleDAO = new BottleDAO();
-    private final BottledWineDAO bottledWineDAO = new BottledWineDAO();
+    private final GrapeDAO grapeDAO;
+    private final BottleDAO bottleDAO;
+    private final BottledWineDAO bottledWineDAO;
 
-    public BottlingFactory(Warehouse wineWarehouse, Warehouse bottleWarehouse) {
+    public BottlingFactory(Warehouse wineWarehouse, Warehouse bottleWarehouse, GrapeDAO grapeDAO, BottleDAO bottleDAO, BottledWineDAO bottledWineDAO)
+    {
         this.wineWarehouse = wineWarehouse;
         this.bottleWarehouse = bottleWarehouse;
+        this.grapeDAO = grapeDAO;
+        this.bottleDAO = bottleDAO;
+        this.bottledWineDAO = bottledWineDAO;
+    }
+
+    public BottlingFactory(Warehouse wineWarehouse, Warehouse bottleWarehouse) {
+        this(
+                wineWarehouse,
+                bottleWarehouse,
+                new GrapeDAO(),
+                new BottleDAO(),
+                new BottledWineDAO()
+        );
     }
 
     public void bottleWine(Wine wine) {

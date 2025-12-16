@@ -2,6 +2,7 @@ package bg.tu_varna.sit.virtualvineyard.dao;
 
 import bg.tu_varna.sit.virtualvineyard.entities.BottledWine;
 import bg.tu_varna.sit.virtualvineyard.entities.Wine;
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,12 +19,22 @@ public class BottledWineDAO extends AbstractDAO<BottledWine> {
                 .getResultList();
     }
 
-    public void saveAll(List<BottledWine> list) {
-        completeAction(() -> {
-            for (BottledWine bw : list) {
-                entityManager.persist(bw);
-            }
-        });
+    public void saveAll(List<BottledWine> list)
+    {
+        try {
+            completeAction(() -> {
+                for (BottledWine bw : list) {
+                    entityManager.persist(bw);
+                }
+            });
+        }
+        catch (Exception e) {
+            completeAction(() -> {
+                for (BottledWine bw : list) {
+                    entityManager.merge(bw);
+                }
+            });
+        }
     }
 
     public List<BottledWine> findByDateRange(LocalDate startDate, LocalDate endDate) {

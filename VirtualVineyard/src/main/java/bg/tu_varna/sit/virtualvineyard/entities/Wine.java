@@ -41,7 +41,7 @@ public class Wine implements Normalizer {
     }
 
     public void setName(String name) {
-        normalize(name);
+        name=normalize(name);
         if(!isEnglishAndNumbersOnly(name)){
             throw new IllegalArgumentException("Allowed latin characters and numbers only!");
         }
