@@ -17,8 +17,8 @@ public class MainController {
     @FXML
     public void initialize() {
         DBInit.init();
-        usernameTextField.setText("admin");
-        passwordTextField.setText("1234");
+//        usernameTextField.setText("admin");
+//        passwordTextField.setText("1234");
     }
 
     @FXML

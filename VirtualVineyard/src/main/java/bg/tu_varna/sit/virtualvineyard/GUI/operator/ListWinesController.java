@@ -13,8 +13,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class ListWinesController {
     @FXML private TableView<Wine> winesTable;
     @FXML private TableColumn<Wine, String> wineNameColumn;
-    @FXML private TableColumn<Wine, Void> editColumn;
-    @FXML private TableColumn<Wine, Void> deleteColumn;
 
     private final WineDAO wineDAO = new WineDAO();
 
@@ -36,42 +34,6 @@ public class ListWinesController {
             });
             return row;
         });
-
-        //edit column
-        editColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button editButton = new Button("Edit");
-
-            {
-                editButton.setOnAction(event -> {
-                    Wine wine = getTableView().getItems().get(getIndex());
-                    openEditWine(wine);
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                setGraphic(empty ? null : editButton);
-            }
-        });
-
-        //delete column
-        deleteColumn.setCellFactory(col -> new TableCell<>() {
-            private final Button deleteButton = new Button("Delete");
-
-            {
-                deleteButton.setOnAction(event -> {
-                    Wine wine = getTableView().getItems().get(getIndex());
-                    deleteWine(wine);
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                setGraphic(empty ? null : deleteButton);
-            }
-        });
     }
 
     private void showGrapes(Wine wine) {
@@ -83,23 +45,5 @@ public class ListWinesController {
                     .append("%\n");
         }
         NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Grapes in " + wine.getName(), sb.toString());
-    }
-
-    private void openEditWine(Wine wine) {
-        //to do: modify AddWineController to accept an existing Wine object
-        NavigationManager.openNewWindow(ViewType.ADD_WINE); // + Wine wine
-    }
-
-    private void deleteWine(Wine wine) {
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Delete Wine");
-        confirm.setHeaderText(null);
-        confirm.setContentText("Are you sure you want to delete " + wine.getName() + "?");
-        confirm.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                wineDAO.delete(wine);
-                winesTable.getItems().remove(wine);
-            }
-        });
     }
 }
