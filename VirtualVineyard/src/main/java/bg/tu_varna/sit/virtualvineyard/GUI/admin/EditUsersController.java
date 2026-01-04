@@ -15,7 +15,7 @@ public class EditUsersController {
     @FXML public TextField nameTextField;
     @FXML public TextField EGNTextField;
     @FXML public TextField usernameTextField;
-    @FXML public TextField passwordTextField;
+    @FXML public PasswordField passwordTextField;
 
     @FXML
     public void initialize() {

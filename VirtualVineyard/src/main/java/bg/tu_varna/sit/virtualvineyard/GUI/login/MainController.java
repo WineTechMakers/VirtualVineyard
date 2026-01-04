@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class MainController {
     @FXML private TextField usernameTextField;
-    @FXML private TextField passwordTextField;
+    @FXML private PasswordField passwordTextField;
 
     @FXML
     public void initialize() {

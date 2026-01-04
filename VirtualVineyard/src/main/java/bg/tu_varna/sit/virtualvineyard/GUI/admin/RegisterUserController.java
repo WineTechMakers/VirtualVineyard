@@ -13,7 +13,7 @@ public class RegisterUserController{
     @FXML private TextField nameTextField;
     @FXML private TextField EGNTextField;
     @FXML private TextField usernameTextField;
-    @FXML private TextField passwordTextField;
+    @FXML private PasswordField passwordTextField;
     @FXML private ComboBox<String> roleComboBox;
 
     @FXML
