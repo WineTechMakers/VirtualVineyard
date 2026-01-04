@@ -14,6 +14,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -89,7 +90,7 @@ class BottlingFactoryTest {
         when(mockWineWarehouse.getName()).thenReturn("Wine Storage A");
 
         // --- ACT ---
-        bottlingFactory.bottleWine(mockWine);
+        bottlingFactory.bottleWine(mockWine, LocalDate.now());
 
         // --- ASSERT ---
 
@@ -126,7 +127,7 @@ class BottlingFactoryTest {
 
         // --- ACT & ASSERT ---
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            bottlingFactory.bottleWine(mockWine);
+            bottlingFactory.bottleWine(mockWine, LocalDate.now());
         });
 
         assertEquals("Not enough grapes to produce wine.", exception.getMessage());
@@ -155,7 +156,7 @@ class BottlingFactoryTest {
 
         // --- ACT & ASSERT ---
         IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-            bottlingFactory.bottleWine(mockWine);
+            bottlingFactory.bottleWine(mockWine, LocalDate.now());
         });
 
         assertEquals("No bottles available.", exception.getMessage());
@@ -230,7 +231,7 @@ class BottlingFactoryTest {
         when(mockWineWarehouse.getName()).thenReturn("Main Cellar");
 
         // --- ACT ---
-        bottlingFactory.bottleWine(mockWine);
+        bottlingFactory.bottleWine(mockWine, LocalDate.now());
 
         // --- ASSERT ---
 
