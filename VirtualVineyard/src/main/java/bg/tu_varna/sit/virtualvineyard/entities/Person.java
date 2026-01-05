@@ -88,7 +88,7 @@ public abstract class Person implements Normalizer
 
     public void setUsername(String username) {
         //validation of text fields
-        if(!isEnglishAndNumbersOnly(username)){
+        if(hasInvalidCharacters(username)){
             throw new IllegalArgumentException("Allowed latin characters and numbers only!");
         }
         this.username = username.trim();

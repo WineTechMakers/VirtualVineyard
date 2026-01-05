@@ -74,7 +74,7 @@ public class Grape implements Normalizer {
 
     public void setName(String name) {
         name=normalize(name);
-        if(!isEnglishAndNumbersOnly(name)){
+        if(hasInvalidCharacters(name)){
             throw new IllegalArgumentException("Allowed latin characters and numbers only!");
         }
         this.name = name;

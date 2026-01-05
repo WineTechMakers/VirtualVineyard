@@ -26,10 +26,10 @@ public interface Normalizer {
         return result.toString().trim();
     }
 
-    default boolean isEnglishAndNumbersOnly(String text) {
-        if (text == null) return false;
+    default boolean hasInvalidCharacters(String text) {
+        if (text == null) return true;
 
         //a-z, A-Z, 0-9, and -
-        return text.matches("^[a-zA-Z0-9- ]+$");
+        return !text.matches("^[a-zA-Z0-9- ]+$");
     }
 }
