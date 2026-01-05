@@ -1,10 +1,7 @@
-package bg.tu_varna.sit.virtualvineyard.test;
-
 import bg.tu_varna.sit.virtualvineyard.dao.PersonDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockedStatic;
 
@@ -27,7 +24,6 @@ public class PersonDAOTest {
     }
 
     @Test
-    @DisplayName("Successful Authentication")
     void authenticate_shouldReturnPerson_whenCredentialsAreCorrect() {
         String username = "testUser";
         String password = "correctPassword";
@@ -46,7 +42,6 @@ public class PersonDAOTest {
     }
 
     @Test
-    @DisplayName("Authentication Fails - Incorrect Password")
     void authenticate_shouldReturnNull_whenPasswordIsIncorrect() {
         String username = "testUser";
         String incorrectPassword = "wrongPassword";
@@ -65,7 +60,6 @@ public class PersonDAOTest {
     }
 
     @Test
-    @DisplayName("Authentication Fails - User Not Found")
     void authenticate_shouldReturnNull_whenUserNotFound() {
         String username = "unknownUser";
         String password = "anyPassword";

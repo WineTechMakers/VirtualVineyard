@@ -1,10 +1,6 @@
-package bg.tu_varna.sit.virtualvineyard.test;
-
-import bg.tu_varna.sit.virtualvineyard.entities.Bottle;
 import bg.tu_varna.sit.virtualvineyard.entities.Grape;
 import bg.tu_varna.sit.virtualvineyard.entities.Warehouse;
 import bg.tu_varna.sit.virtualvineyard.entities.WarehouseType;
-import bg.tu_varna.sit.virtualvineyard.enums.BottleType;
 import bg.tu_varna.sit.virtualvineyard.enums.WarehouseContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +30,7 @@ class WarehouseIntegrationTest {
     }
 
     @Test
-    @DisplayName("✅ Integration: Warehouse correctly tracks Grape quantities and limits")
+    @DisplayName("Integration: Warehouse correctly tracks Grape quantities and limits")
     void testWarehouseGrapeIntegration() {
         // --- ARRANGE ---
         // Създаваме истински обекти Грозде
@@ -62,7 +58,7 @@ class WarehouseIntegrationTest {
     }
 
     @Test
-    @DisplayName("✅ Integration: Warehouse stays safe when quantities are high")
+    @DisplayName("Integration: Warehouse stays safe when quantities are high")
     void testWarehouseSafetyCheck() {
         // --- ARRANGE ---
         Grape g1 = new Grape("Chardonnay", 0, false, 0, null);

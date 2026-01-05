@@ -1,10 +1,6 @@
-package bg.tu_varna.sit.virtualvineyard.test;
-
 import bg.tu_varna.sit.virtualvineyard.entities.Grape;
 import bg.tu_varna.sit.virtualvineyard.entities.Warehouse; // Assuming this exists
-import bg.tu_varna.sit.virtualvineyard.entities.WarehouseType;
 import bg.tu_varna.sit.virtualvineyard.entities.Wine;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class EntityValidationTest {
 
     @Test
-    @DisplayName("✅ Grape: Normalization & English/Number Validation")
     void grape_shouldNormalizeAndValidateNames() {
         // 1. Test Normalization (Mixed Case -> Title Case)
         Grape g1 = new Grape("Mavrud", 0, true, 0, null);
@@ -40,7 +35,6 @@ class EntityValidationTest {
     }
 
     @Test
-    @DisplayName("✅ Wine: Normalization & English/Number Validation")
     void wine_shouldNormalizeAndValidateNames() {
         // 1. Test Normalization
         Wine w1 = new Wine("Cabernet");
@@ -63,7 +57,6 @@ class EntityValidationTest {
     }
 
     @Test
-    @DisplayName("✅ Warehouse: Normalization & English/Number Validation")
     void warehouse_shouldNormalizeAndValidateNames() {
         // Assuming Warehouse has a constructor similar to: new Warehouse(name, location, capacity)
         // Or just a setter if you use the default constructor.

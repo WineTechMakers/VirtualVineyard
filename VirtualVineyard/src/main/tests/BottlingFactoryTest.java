@@ -1,5 +1,3 @@
-package bg.tu_varna.sit.virtualvineyard.test;
-
 import bg.tu_varna.sit.virtualvineyard.chain.BottlingFactory;
 import bg.tu_varna.sit.virtualvineyard.dao.BottleDAO;
 import bg.tu_varna.sit.virtualvineyard.dao.BottledWineDAO;
@@ -7,7 +5,6 @@ import bg.tu_varna.sit.virtualvineyard.dao.GrapeDAO;
 import bg.tu_varna.sit.virtualvineyard.entities.*;
 import bg.tu_varna.sit.virtualvineyard.enums.BottleType;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -24,11 +21,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class BottlingFactoryTest {
-
-    // The Class Under Test
     private BottlingFactory bottlingFactory;
 
-    // Mocks for dependencies
     @Mock
     private Warehouse mockWineWarehouse;
     @Mock
@@ -42,9 +36,6 @@ class BottlingFactoryTest {
 
     @BeforeEach
     void setUp() {
-        // --- THE CLEAN SETUP ---
-        // We inject the mocks directly via the constructor.
-        // No reflection or "hacking" required!
         bottlingFactory = new BottlingFactory(
                 mockWineWarehouse,
                 mockBottleWarehouse,
@@ -55,10 +46,8 @@ class BottlingFactoryTest {
     }
 
     @Test
-    @DisplayName("✅ Successful Bottling - Single Grape, Single Bottle Type")
     void bottleWine_shouldProduceBottledWine_whenResourcesAreSufficient() {
-        // --- ARRANGE ---
-
+        // ARRANGE
         // 1. Setup Data: 100kg of Grape, Yield 1.0 = 100 Liters of Wine
         Grape mockGrape = mock(Grape.class);
         when(mockGrape.getQuantity()).thenReturn(100.0);
@@ -89,21 +78,20 @@ class BottlingFactoryTest {
         when(mockBottleWarehouse.getBottles()).thenReturn(availableBottles);
         when(mockWineWarehouse.getName()).thenReturn("Wine Storage A");
 
-        // --- ACT ---
+        //ACT
         bottlingFactory.bottleWine(mockWine, LocalDate.now());
 
-        // --- ASSERT ---
+        //ASSERT
 
         // Verify BottledWine was saved
-        ArgumentCaptor<List<BottledWine>> captor = ArgumentCaptor.forClass(List.class);
-        verify(mockBottledWineDAO).saveAll(captor.capture());
+        ArgumentCaptor<BottledWine> captor = ArgumentCaptor.forClass(BottledWine.class);
+        verify(mockBottledWineDAO).create(captor.capture());
 
-        List<BottledWine> savedWines = captor.getValue();
-        assertFalse(savedWines.isEmpty(), "Should have produced bottled wine");
-        assertEquals(1, savedWines.size());
+        BottledWine savedWine = captor.getValue();
+        assertNotNull(savedWine, "Should have produced bottled wine");
 
         // 100L / 0.75L = 133.33 -> 133 bottles
-        assertEquals(133, savedWines.getFirst().getQuantity());
+        assertEquals(133, savedWine.getQuantity());
 
         // Verify updates
         verify(mockBottleDAO, times(1)).update(mockBottle);
@@ -111,7 +99,6 @@ class BottlingFactoryTest {
     }
 
     @Test
-    @DisplayName("❌ Bottling Fails - Not Enough Grapes")
     void bottleWine_shouldThrowException_whenNotEnoughGrapes() {
         // --- ARRANGE ---
         Grape mockGrape = mock(Grape.class);
@@ -135,7 +122,6 @@ class BottlingFactoryTest {
     }
 
     @Test
-    @DisplayName("❌ Bottling Fails - No Bottles in Warehouse")
     void bottleWine_shouldThrowException_whenNoBottlesAvailable() {
         // --- ARRANGE ---
         // Setup Grapes
@@ -164,7 +150,6 @@ class BottlingFactoryTest {
     }
 
     @Test
-    @DisplayName("✅ Complex Bottling - Mixed Grapes & Multiple Bottle Types")
     void bottleWine_shouldHandleMultipleResources_whenProcessingComplexBatch() {
         // --- ARRANGE ---
 
@@ -213,9 +198,9 @@ class BottlingFactoryTest {
         BottleType bigType = mock(BottleType.class);
         when(bigType.getVolume()).thenReturn(750);
         when(bigBottle.getVolume()).thenReturn(bigType);
-        when(bigBottle.getQuantity()).thenReturn(100); // Can hold 75,000ml max
+        when(bigBottle.getQuantity()).thenReturn(100);
 
-        // Small Bottle (187ml) - Plenty stock (1000 bottles)
+        // Small Bottle (0.187L) - Plenty stock (1000 bottles)
         Bottle smallBottle = mock(Bottle.class);
         BottleType smallType = mock(BottleType.class);
         when(smallType.getVolume()).thenReturn(187);
@@ -235,24 +220,24 @@ class BottlingFactoryTest {
 
         // --- ASSERT ---
 
-        // 1. Capture the list of saved bottled wines
-        ArgumentCaptor<List<BottledWine>> captor = ArgumentCaptor.forClass(List.class);
-        verify(mockBottledWineDAO).saveAll(captor.capture());
-        List<BottledWine> results = captor.getValue();
+        // 1. Capture the created bottled wines
+        ArgumentCaptor<BottledWine> captor = ArgumentCaptor.forClass(BottledWine.class);
+        verify(mockBottledWineDAO, times(2)).create(captor.capture());
+        List<BottledWine> results = captor.getAllValues();
 
         // We expect 2 items: one batch of 750s, one batch of 187s
         assertEquals(2, results.size(), "Should produce two types of bottled wine");
 
         /*
            VOLUME CHECK:
-           - Total Wine: 100,000 ml
-           - Step 1: Fill Big Bottles (750ml)
+           - Total Wine: 100 Liters
+           - Step 1: Fill Big Bottles (0.75L)
              - Available: 100 bottles
-             - Used: 100 * 750 = 75,000 ml
-             - Remaining Wine: 25,000 ml
+             - Used: 100 * 0.75 = 75 Liters
+             - Remaining Wine: 25 Liters
 
-           - Step 2: Fill Small Bottles (187ml) with remaining 25,000 ml
-             - 25,000 / 187 = 133.68 -> 133 Bottles
+           - Step 2: Fill Small Bottles (0.187L) with remaining 25 Liters
+             - 25 / 0.187 = 133.68 -> 133 Bottles
         */
 
         // Verify quantities (find specific bottles in list since order varies)
