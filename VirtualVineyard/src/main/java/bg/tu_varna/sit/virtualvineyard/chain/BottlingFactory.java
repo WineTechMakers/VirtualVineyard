@@ -8,6 +8,7 @@ import bg.tu_varna.sit.virtualvineyard.entities.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class BottlingFactory {
@@ -37,7 +38,7 @@ public class BottlingFactory {
         );
     }
 
-    public void bottleWine(Wine wine) {
+    public void bottleWine(Wine wine, LocalDate productionDate) {
         double liters = computeTotalLitersAvailable(wine.getWineGrapes());
 
         if (liters <= 0)
@@ -58,14 +59,21 @@ public class BottlingFactory {
         List<BottledWine> bottled = chain.handle(totalML, wine);
 
         if (bottled.isEmpty()) {
-            logger.error("No wine produced due to unexpected error");
-            throw new IllegalStateException("No wine produced due to unexpected error");
+            logger.error("No wine produced due to not sufficient quantity of grapes or bottles.");
+            throw new IllegalStateException("No wine produced due to not sufficient quantity of grapes or bottles");
         }
 
-        for (BottledWine bw : bottled)
+        for (BottledWine bw : bottled) {
+            bw.setProductionDate(productionDate);
             bw.setWarehouse(wineWarehouse);
-
-        bottledWineDAO.saveAll(bottled);
+            BottledWine existingBw = bottledWineDAO.findByWineAndBottleAndProductionDate(bw.getWine(), bw.getBottle(), bw.getProductionDate());
+            if (existingBw != null) {
+                existingBw.setQuantity(existingBw.getQuantity() + bw.getQuantity());
+                bottledWineDAO.update(existingBw);
+            } else {
+                bottledWineDAO.create(bw);
+            }
+        }
         logger.info("Bottled Production of wine '{}' in warehouse '{}'", wine.getName(), wineWarehouse.getName());
 
         Set<Bottle> usedBottles = new HashSet<>();

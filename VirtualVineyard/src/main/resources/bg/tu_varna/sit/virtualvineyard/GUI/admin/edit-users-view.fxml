@@ -24,11 +24,11 @@
          <Insets left="40.0" right="40.0" />
       </VBox.margin>
    </TextField>
-   <TextField fx:id="passwordTextField" promptText="Password">
+   <PasswordField fx:id="passwordTextField" promptText="Password">
       <VBox.margin>
          <Insets left="40.0" right="40.0" />
       </VBox.margin>
-   </TextField>
+   </PasswordField>
    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="20.0">
       <Button mnemonicParsing="false" onAction="#onSaveButtonClick" prefHeight="26.0" prefWidth="43.0" style="-fx-background-color: #5e1818;" text="Save" textFill="WHITE" />
    </HBox>

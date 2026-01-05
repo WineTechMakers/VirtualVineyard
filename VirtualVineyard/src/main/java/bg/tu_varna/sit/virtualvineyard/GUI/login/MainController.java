@@ -12,13 +12,13 @@ import javafx.stage.Stage;
 
 public class MainController {
     @FXML private TextField usernameTextField;
-    @FXML private TextField passwordTextField;
+    @FXML private PasswordField passwordTextField;
 
     @FXML
     public void initialize() {
         DBInit.init();
-//        usernameTextField.setText("admin");
-//        passwordTextField.setText("1234");
+        usernameTextField.setText("admin");
+        passwordTextField.setText("1234");
     }
 
     @FXML

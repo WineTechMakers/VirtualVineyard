@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import java.util.List;
 
 public class BottleWinesController {
+    @FXML public DatePicker sortingDate;
     @FXML private ComboBox<Wine> wineComboBox;
     @FXML private ComboBox<Warehouse> bottledWineWarehouseComboBox;
     @FXML private ComboBox<Warehouse> bottleWarehouseComboBox;
@@ -41,6 +42,10 @@ public class BottleWinesController {
         quantityColumn.setCellValueFactory(cellData ->
                 new SimpleIntegerProperty(cellData.getValue().getQuantity()).asObject()
         );
+
+        bottleVolumeColumn.setSortType(TableColumn.SortType.DESCENDING);
+        bottledWinesTable.getSortOrder().add(bottleVolumeColumn);
+        sortingDate.setValue(java.time.LocalDate.now());
     }
 
     @FXML
@@ -64,7 +69,7 @@ public class BottleWinesController {
                     bottleWarehouseComboBox.getValue()
             );
 
-            factory.bottleWine(selectedWine);
+            factory.bottleWine(selectedWine, sortingDate.getValue());
             StringBuilder alerts = new StringBuilder();
             for (Warehouse warehouse : warehouseDAO.findAll()){
                 if(warehouse.getWarehouseType().getType().equals(WarehouseContentType.GRAPE_ONLY.toString())
@@ -79,7 +84,7 @@ public class BottleWinesController {
                 alerts.append("\nBottle critical low limit reached!");
             }
 
-            List<BottledWine> results = bottledWineDAO.findByWine(selectedWine);
+            List<BottledWine> results = bottledWineDAO.findByWineAndProductionDate(selectedWine, sortingDate.getValue());
             bottledWinesTable.setItems(FXCollections.observableArrayList(results));
 
             NavigationManager.showAlert(Alert.AlertType.INFORMATION, "Success", "Bottling finished." + alerts);

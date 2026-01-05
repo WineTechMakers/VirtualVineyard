@@ -1,21 +1,22 @@
 package bg.tu_varna.sit.virtualvineyard.entities;
 
-import bg.tu_varna.sit.virtualvineyard.models.BottledWineID;
-import bg.tu_varna.sit.virtualvineyard.models.WineGrapeID;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "BottledWine")
-@IdClass(BottledWineID.class)
 public class BottledWine {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bottled_wine_id")
+    private Long bottledWineId;
+
     @ManyToOne
     @JoinColumn(name = "wine_id", nullable = false)
     private Wine wine;
 
-    @Id
     @ManyToOne
     @JoinColumn(name = "bottle_id", nullable = false)
     private Bottle bottle;
@@ -38,6 +39,13 @@ public class BottledWine {
         this.bottle = bottle;
         this.quantity = quantity;
         this.productionDate = LocalDate.now();
+    }
+
+    public BottledWine(Wine wine, Bottle bottle, int quantity, LocalDate productionDate) {
+        this.wine = wine;
+        this.bottle = bottle;
+        this.quantity = quantity;
+        this.productionDate = productionDate;
     }
 
     public Wine getWine() {
@@ -70,6 +78,14 @@ public class BottledWine {
 
     public void setWarehouse(Warehouse warehouse) {
         this.warehouse = warehouse;
+    }
+
+    public Long getId() {
+        return bottledWineId;
+    }
+
+    public void setId(Long id) {
+        this.bottledWineId = id;
     }
 
     public LocalDate getProductionDate() {
