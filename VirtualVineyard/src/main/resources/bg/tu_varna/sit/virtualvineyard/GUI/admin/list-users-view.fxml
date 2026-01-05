@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="486.0" prefWidth="566.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.admin.ListUsersController">
-    <TableView fx:id="personTableView" prefHeight="489.0" prefWidth="547.0" style="-fx-background-color: #C9F1FF;">
+<VBox prefHeight="486.0" prefWidth="736.0" style="-fx-background-color: #11869E;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.admin.ListUsersController">
+    <TableView fx:id="personTableView" prefHeight="489.0" prefWidth="566.0" style="-fx-background-color: #C9F1FF;">
       <columns>
           <TableColumn fx:id="idCol" prefWidth="40.0" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="ID" />
           <TableColumn fx:id="roleCol" prefWidth="100.0" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="Role" />
-          <TableColumn fx:id="nameCol" prefWidth="200.0" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="Name" />
-          <TableColumn fx:id="egnCol" prefWidth="90.0" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="EGN" />
-          <TableColumn fx:id="usernameCol" prefWidth="140.0" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="Username" />
+          <TableColumn fx:id="nameCol" prefWidth="219.00001525878906" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="Name" />
+          <TableColumn fx:id="egnCol" prefWidth="76.20001220703125" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="EGN" />
+          <TableColumn fx:id="usernameCol" prefWidth="215.0" style="-fx-background-color: #C9F1FF; -fx-border-color: white;" text="Username" />
       </columns>
+      <VBox.margin>
+         <Insets bottom="30.0" left="40.0" right="40.0" top="30.0" />
+      </VBox.margin>
     </TableView>
 </VBox>
