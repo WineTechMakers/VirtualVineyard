@@ -8,10 +8,10 @@
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bg.tu_varna.sit.virtualvineyard.GUI.operator.ListWinesController">
     <TableView fx:id="winesTable" prefHeight="342.0" prefWidth="270.0">
       <columns>
-          <TableColumn fx:id="wineNameColumn" prefWidth="214.3999786376953" text="Wine name" />
+          <TableColumn fx:id="wineNameColumn" prefWidth="235.20001220703125" text="Wine name" />
       </columns>
         <VBox.margin>
-          <Insets bottom="10.0" left="200.0" right="200.0" top="40.0" />
+          <Insets bottom="10.0" left="180.0" right="180.0" top="40.0" />
         </VBox.margin>
     </TableView>
    <Label text="Double click -&gt; opens grape information">

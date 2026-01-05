@@ -29,9 +29,6 @@ public class ListBottledWinesController {
     public void initialize() {
         setupTableColumns();
         loadData();
-        //bottledWineDateColumn.setSortType(TableColumn.SortType.DESCENDING);
-        bottleVolumeColumn.setSortType(TableColumn.SortType.DESCENDING);
-        bottledWinesTable.getSortOrder().addAll(bottledWineDateColumn, wineNameColumn, bottleVolumeColumn);
     }
 
     private void setupTableColumns() {
@@ -64,6 +61,8 @@ public class ListBottledWinesController {
 
         ObservableList<BottledWine> observableList = FXCollections.observableArrayList(data);
         bottledWinesTable.setItems(observableList);
+        bottleVolumeColumn.setSortType(TableColumn.SortType.DESCENDING);
+        bottledWinesTable.getSortOrder().addAll(bottledWineDateColumn, wineNameColumn, bottleVolumeColumn);
     }
 
     @FXML
@@ -88,6 +87,8 @@ public class ListBottledWinesController {
         }
 
         bottledWinesTable.setItems(FXCollections.observableArrayList(filteredData));
+        bottleVolumeColumn.setSortType(TableColumn.SortType.DESCENDING);
+        bottledWinesTable.getSortOrder().addAll(bottledWineDateColumn, wineNameColumn, bottleVolumeColumn);
     }
 
     @FXML
