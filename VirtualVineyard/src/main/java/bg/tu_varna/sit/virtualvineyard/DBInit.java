@@ -19,7 +19,7 @@ public class DBInit
     }
 
     private static void initAdmin(){
-        Person testAdmin = PersonDAO.authenticate("admin", "1234");
+        Person testAdmin = PersonDAO.findByUsername("admin");
         if(testAdmin != null)
             return;
         PersonDAO pd = new PersonDAO();

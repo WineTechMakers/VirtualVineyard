@@ -5,12 +5,16 @@
               fileName="C:/var/wineyard/logs/app-${date:dd-MM-yyyy}.log"
               append="true">
             <PatternLayout>
-                <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Pattern>
+                <Pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} [%t] %logger{36} - %msg%n</Pattern>
             </PatternLayout>
         </File>
     </Appenders>
 
     <Loggers>
+        <Logger name="org.hibernate" level="error"/>
+
+        <!-- 2. Silence specific classes from your own project if they are too noisy -->
+        <Logger name="bg.tu_varna.sit.virtualvineyard.DBInit" level="warn"/>
         <Root level="info">
             <AppenderRef ref="DailyFile"/>
         </Root>
